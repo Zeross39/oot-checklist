@@ -3,10 +3,11 @@ var itemList = [];
 var checkList = [];
 var locationList = [];
 var medallionList = [];
-var obtainableItemLook = "border-bottom:1pt dotted black; background-Color:#ffcccb;";
+var obtainableItemLook = "border-bottom:1pt dotted black; background-Color:#ffe7ea;";
 var obtainedItemLook = "border-bottom:1pt dotted black; background-Color:beige;"
 var visibleItemLook = "border-bottom:1pt dotted black;"
 var hiddenItemLook = "display:none;"
+var wohCheckLook = "background-Color:#FFD700; ";
 
 //current lists
 var checkedList = [];
@@ -204,6 +205,10 @@ function refreshList()
 					obj.setAttribute("style", visibleItemLook);
 				}
 			}
+			if 	(woh.indexOf(checkList[num].Location) > -1)
+			{
+				$("#item"+num)[0].setAttribute("style", wohCheckLook);
+			}
 		}
 		else
 		{
@@ -317,6 +322,7 @@ function addWoh(selectedWoh)
 		listText = listText + locationList.find(e => e.Id === v).Label + ", ";
 	}
 	$("#wohList")[0].innerHTML = listText;
+	refreshList();
 }
 
 function createWohList()
