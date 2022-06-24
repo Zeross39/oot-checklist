@@ -319,7 +319,7 @@ checkList = [
 			return HaveRequiredItem("235");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"deku"
    },
@@ -331,7 +331,7 @@ checkList = [
 			return accessDc() && obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -343,7 +343,7 @@ checkList = [
 			return accessJabu() && obtainedItems.boomerang;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"jabu"
    },
@@ -355,7 +355,7 @@ checkList = [
 			return HaveRequiredItem("296");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -367,7 +367,7 @@ checkList = [
 			return HaveRequiredItem("316");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -379,7 +379,7 @@ checkList = [
 			return HaveRequiredItem("332");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -391,7 +391,7 @@ checkList = [
 			return HaveRequiredItem("355");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -403,7 +403,7 @@ checkList = [
 			return HaveRequiredItem("380");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -415,7 +415,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "song"
+         "song", "child"
       ],
       "Location":"market"
    },
@@ -427,7 +427,7 @@ checkList = [
 			return obtainedItems.ocarina;
 		},
       "Tags":[
-         "song"
+         "song", "child"
       ],
       "Location":"ranch"
    },
@@ -439,7 +439,7 @@ checkList = [
 			return obtainedItems.ocarina;
 		},
       "Tags":[
-         "song"
+         "song", "child"
       ],
       "Location":"meadow"
    },
@@ -451,7 +451,7 @@ checkList = [
 			return obtainedItems.lullaby;
 		},
       "Tags":[
-         "song"
+         "song", "child", "adult"
       ],
       "Location":"kak"
    },
@@ -463,7 +463,7 @@ checkList = [
 			return obtainedItems.dekuStone && obtainedItems.dcStone && obtainedItems.jabuStone;
 		},
       "Tags":[
-         "song"
+         "song", "child"
       ],
       "Location":"tot"
    },
@@ -475,7 +475,7 @@ checkList = [
 			return obtainedItems.ocarina;
 		},
       "Tags":[
-         "song"
+         "song", "adult"
       ],
       "Location":"kak"
    },
@@ -487,7 +487,7 @@ checkList = [
 			return obtainedItems.saria || obtainedItems.minuet;
 		},
       "Tags":[
-         "song"
+         "song", "adult"
       ],
       "Location":"meadow"
    },
@@ -499,7 +499,7 @@ checkList = [
 			return obtainedItems.bolero || obtainedItems.hover || obtainedItems.hookshot;
 		},
       "Tags":[
-         "song"
+         "song", "adult"
       ],
       "Location":"crater"
    },
@@ -511,7 +511,7 @@ checkList = [
 			return HaveRequiredItem("384");
 		},
       "Tags":[
-         "song"
+         "song", "adult"
       ],
       "Location":"ice"
    },
@@ -523,7 +523,7 @@ checkList = [
 			return accessColossus();
 		},
       "Tags":[
-         "song"
+         "song", "adult"
       ],
       "Location":"colossus"
    },
@@ -535,7 +535,7 @@ checkList = [
 			return obtainedItems.forestMedallion && obtainedItems.waterMedallion && obtainedItems.fireMedallion;
 		},
       "Tags":[
-         "song"
+         "song", "adult"
       ],
       "Location":"kak"
    },
@@ -547,7 +547,7 @@ checkList = [
 			return obtainedItems.forestMedallion;
 		},
       "Tags":[
-         "song"
+         "song", "adult"
       ],
       "Location":"tot"
    },
@@ -559,7 +559,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"kokiri"
    },
@@ -571,7 +571,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"kokiri"
    },
@@ -583,7 +583,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"kokiri"
    },
@@ -595,7 +595,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"kokiri"
    },
@@ -607,7 +607,7 @@ checkList = [
 			return obtainedItems.storm;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kokiri"
    },
@@ -619,7 +619,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kokiri"
    },
@@ -631,7 +631,7 @@ checkList = [
 			return haveEmptyBottle();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kokiri"
    },
@@ -643,7 +643,7 @@ checkList = [
 			return obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"kokiri"
    },
@@ -655,7 +655,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"kokiri"
    },
@@ -667,7 +667,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"kokiri"
    },
@@ -679,7 +679,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"kokiri"
    },
@@ -691,7 +691,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"kokiri"
    },
@@ -703,7 +703,7 @@ checkList = [
 			return obtainedItems.ocarina;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"wood"
    },
@@ -715,7 +715,7 @@ checkList = [
 			return obtainedItems.slingshot;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"wood"
    },
@@ -727,7 +727,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"wood"
    },
@@ -739,7 +739,7 @@ checkList = [
 			return false;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"wood"
    },
@@ -751,7 +751,7 @@ checkList = [
 			return false;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"wood"
    },
@@ -763,7 +763,7 @@ checkList = [
 			return obtainedItems.saria;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"wood"
    },
@@ -775,7 +775,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"wood"
    },
@@ -787,7 +787,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"wood"
    },
@@ -799,7 +799,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"wood"
    },
@@ -811,7 +811,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"wood"
    },
@@ -823,7 +823,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"wood"
    },
@@ -835,7 +835,7 @@ checkList = [
 			return haveEmptyBottle();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"wood"
    },
@@ -847,7 +847,7 @@ checkList = [
 			return haveEmptyBottle();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"wood"
    },
@@ -859,7 +859,7 @@ checkList = [
 			return obtainedItems.bean && accessMeadowAdult();
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"wood"
    },
@@ -871,7 +871,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"meadow"
    },
@@ -883,7 +883,7 @@ checkList = [
 			return obtainedItems.storm;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"meadow"
    },
@@ -895,7 +895,7 @@ checkList = [
 			return obtainedItems.storm;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"meadow"
    },
@@ -907,7 +907,7 @@ checkList = [
 			return obtainedItems.hookshot && accessMeadowAdult();
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"meadow"
    },
@@ -919,7 +919,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"field"
    },
@@ -931,7 +931,7 @@ checkList = [
 			return obtainedItems.bomb && (obtainedItems.scale || obtainedItems.iron);
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"field"
    },
@@ -943,7 +943,7 @@ checkList = [
 			return obtainedItems.bomb
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"field"
    },
@@ -955,7 +955,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"field"
    },
@@ -967,7 +967,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"field"
    },
@@ -979,7 +979,7 @@ checkList = [
 			return obtainedItems.bomb && (obtainedItems.fireArrow || obtainedItems.dins) && obtainedItems.magic;
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"field"
    },
@@ -991,7 +991,7 @@ checkList = [
 			return obtainedItems.bomb && (obtainedItems.hookshot || obtainedItems.boomerang);
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"field"
    },
@@ -1003,7 +1003,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"market"
    },
@@ -1015,7 +1015,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"market"
    },
@@ -1027,7 +1027,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"market"
    },
@@ -1039,7 +1039,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"market"
    },
@@ -1051,7 +1051,7 @@ checkList = [
 			return obtainedItems.lens;
 },
       "Tags":[
-         
+         "child"
       ],
       "Location":"market"
    },
@@ -1063,7 +1063,7 @@ checkList = [
 			return haveEmptyBottle();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"market"
    },
@@ -1075,7 +1075,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"market"
    },
@@ -1087,7 +1087,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1099,7 +1099,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1111,7 +1111,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1123,7 +1123,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1135,7 +1135,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1147,7 +1147,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1159,7 +1159,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1171,7 +1171,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1183,7 +1183,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1195,7 +1195,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1207,7 +1207,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1219,7 +1219,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "child"
       ],
       "Location":"market"
    },
@@ -1231,7 +1231,7 @@ checkList = [
 			return obtainedItems.shadowMedallion && obtainedItems.spiritMedallion;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"tot"
    },
@@ -1243,7 +1243,7 @@ checkList = [
 			return obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"market"
    },
@@ -1255,7 +1255,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"market"
    },
@@ -1267,7 +1267,7 @@ checkList = [
 			return obtainedItems.storm && obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"market"
    },
@@ -1279,7 +1279,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"ranch"
    },
@@ -1291,7 +1291,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"ranch"
    },
@@ -1303,7 +1303,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child"
       ],
       "Location":"ranch"
    },
@@ -1315,7 +1315,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child"
       ],
       "Location":"ranch"
    },
@@ -1327,7 +1327,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child"
       ],
       "Location":"ranch"
    },
@@ -1339,7 +1339,7 @@ checkList = [
 			return obtainedItems.boomerang
 },
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"ranch"
    },
@@ -1351,7 +1351,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"ranch"
    },
@@ -1363,7 +1363,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"ranch"
    },
@@ -1375,7 +1375,7 @@ checkList = [
 			return obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"ranch"
    },
@@ -1387,7 +1387,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"kak"
    },
@@ -1399,7 +1399,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"kak"
    },
@@ -1411,7 +1411,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"kak"
    },
@@ -1423,7 +1423,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"kak"
    },
@@ -1435,7 +1435,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1447,7 +1447,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+        "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1459,7 +1459,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1471,7 +1471,7 @@ checkList = [
 			return obtainedItems.bow;
 },
       "Tags":[
-         
+         "adult"
       ],
       "Location":"kak"
    },
@@ -1483,7 +1483,7 @@ checkList = [
 			return false;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1495,7 +1495,7 @@ checkList = [
 			return false;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1507,7 +1507,7 @@ checkList = [
 			return false;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1519,7 +1519,7 @@ checkList = [
 			return false;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1531,7 +1531,7 @@ checkList = [
 			return false;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1543,7 +1543,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kak"
    },
@@ -1555,7 +1555,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kak"
    },
@@ -1567,7 +1567,7 @@ checkList = [
 			return obtainedItems.slingshot && obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kak"
    },
@@ -1579,7 +1579,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kak"
    },
@@ -1591,7 +1591,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kak"
    },
@@ -1603,7 +1603,7 @@ checkList = [
 			return obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"kak"
    },
@@ -1615,7 +1615,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1627,7 +1627,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1639,7 +1639,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1651,7 +1651,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1663,7 +1663,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1675,7 +1675,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1687,7 +1687,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1699,7 +1699,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "shop"
+         "shop", "adult"
       ],
       "Location":"kak"
    },
@@ -1711,7 +1711,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1723,7 +1723,7 @@ checkList = [
 			return obtainedItems.sun;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1735,7 +1735,7 @@ checkList = [
 			return obtainedItems.lullaby && obtainedItems.magic && (obtainedItems.fireArrow || obtainedItems.dins);
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"kak"
    },
@@ -1747,7 +1747,7 @@ checkList = [
 			return obtainedItems.hookshot === 2 || obtainedItems.bean;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"kak"
    },
@@ -1759,7 +1759,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"kak"
    },
@@ -1771,7 +1771,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"kak"
    },
@@ -1783,7 +1783,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"kak"
    },
@@ -1795,7 +1795,7 @@ checkList = [
 			return haveEmptyBottle();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kak"
    },
@@ -1807,7 +1807,7 @@ checkList = [
 			return obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"kak"
    },
@@ -1819,7 +1819,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dmt"
    },
@@ -1831,7 +1831,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dmt"
    },
@@ -1843,7 +1843,7 @@ checkList = [
 			return obtainedItems.storm;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dmt"
    },
@@ -1855,7 +1855,7 @@ checkList = [
 			return obtainedItems.lullaby && (obtainedItems.bomb || obtainedItems.hammer);
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dmt"
    },
@@ -1867,7 +1867,7 @@ checkList = [
 			return obtainedItems.claim;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"dmt"
    },
@@ -1879,7 +1879,7 @@ checkList = [
 			return obtainedItems.bomb || obtainedItems.hammer;
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"dmt"
    },
@@ -1891,7 +1891,7 @@ checkList = [
 			return haveEmptyBottle() && (obtainedItems.bomb || obtainedItems.strength);
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"dmt"
    },
@@ -1903,7 +1903,7 @@ checkList = [
 			return obtainedItems.hammer;
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"dmt"
    },
@@ -1915,7 +1915,7 @@ checkList = [
 			return obtainedItems.hammer;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"dmt"
    },
@@ -1927,7 +1927,7 @@ checkList = [
 			return obtainedItems.saria && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"goron"
    },
@@ -1939,7 +1939,7 @@ checkList = [
 			return obtainedItems.bomb && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"goron"
    },
@@ -1951,7 +1951,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"goron"
    },
@@ -1963,7 +1963,7 @@ checkList = [
 			return obtainedItems.bomb || obtainedItems.bow;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"goron"
    },
@@ -1975,7 +1975,7 @@ checkList = [
 			return obtainedItems.hammer;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"goron"
    },
@@ -1987,7 +1987,7 @@ checkList = [
 			return obtainedItems.hammer || obtainedItems.bomb;
 },
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"goron"
    },
@@ -1999,7 +1999,7 @@ checkList = [
 			return obtainedItems.hammer || obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"goron"
    },
@@ -2011,7 +2011,7 @@ checkList = [
 			return obtainedItems.time && obtainedItems.hookshot;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"goron"
    },
@@ -2023,7 +2023,7 @@ checkList = [
 			return obtainedItems.time && obtainedItems.hookshot;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"goron"
    },
@@ -2035,7 +2035,7 @@ checkList = [
 			return obtainedItems.time && obtainedItems.hookshot;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"goron"
    },
@@ -2047,7 +2047,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"goron"
    },
@@ -2059,7 +2059,7 @@ checkList = [
 			return obtainedItems.hammer || obtainedItems.bomb;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"goron"
    },
@@ -2071,7 +2071,7 @@ checkList = [
 			return obtainedItems.bomb || obtainedItems.lullaby;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"goron"
    },
@@ -2083,7 +2083,7 @@ checkList = [
 			return obtainedItems.bomb || obtainedItems.lullaby;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"goron"
    },
@@ -2095,7 +2095,7 @@ checkList = [
 			return obtainedItems.bomb || obtainedItems.lullaby;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"goron"
    },
@@ -2107,7 +2107,7 @@ checkList = [
 			return obtainedItems.bomb || obtainedItems.lullaby;
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"goron"
    },
@@ -2119,7 +2119,7 @@ checkList = [
 			return obtainedItems.hover || obtainedItems.bean;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"crater"
    },
@@ -2131,7 +2131,7 @@ checkList = [
 			return obtainedItems.hammer || obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"crater"
    },
@@ -2143,7 +2143,7 @@ checkList = [
 			return obtainedItems.hammer || obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"crater"
    },
@@ -2155,7 +2155,7 @@ checkList = [
 			return obtainedItems.hammer && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"crater"
    },
@@ -2167,7 +2167,7 @@ checkList = [
 			return HaveRequiredItem("158");
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child"
       ],
       "Location":"crater"
    },
@@ -2179,7 +2179,7 @@ checkList = [
 			return obtainedItems.hammer;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"crater"
    },
@@ -2191,7 +2191,7 @@ checkList = [
 			return obtainedItems.hammer;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"crater"
    },
@@ -2203,7 +2203,7 @@ checkList = [
 			return obtainedItems.hammer;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"crater"
    },
@@ -2215,7 +2215,7 @@ checkList = [
 			return obtainedItems.bomb;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"crater"
    },
@@ -2227,7 +2227,7 @@ checkList = [
 			return obtainedItems.bolero && haveEmptyBottle();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"crater"
    },
@@ -2239,7 +2239,7 @@ checkList = [
 			return accessRiver();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"river"
    },
@@ -2251,7 +2251,7 @@ checkList = [
 			return accessRiver();
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"river"
    },
@@ -2263,7 +2263,7 @@ checkList = [
 			return accessRiver();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"river"
    },
@@ -2275,7 +2275,7 @@ checkList = [
 			return accessRiver();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"river"
    },
@@ -2287,7 +2287,7 @@ checkList = [
 			return accessRiver();
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"river"
    },
@@ -2299,7 +2299,7 @@ checkList = [
 			return accessRiver();
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"river"
    },
@@ -2311,7 +2311,7 @@ checkList = [
 			return accessRiver() && obtainedItems.storm;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"river"
    },
@@ -2323,7 +2323,7 @@ checkList = [
 			return accessRiver() && obtainedItems.storm;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"river"
    },
@@ -2335,7 +2335,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"river"
    },
@@ -2347,7 +2347,7 @@ checkList = [
 			return accessRiver();
 },
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"river"
    },
@@ -2359,7 +2359,7 @@ checkList = [
 			return accessRiver() && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"river"
    },
@@ -2371,7 +2371,7 @@ checkList = [
 			return accessRiver() && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"river"
    },
@@ -2383,7 +2383,7 @@ checkList = [
 			return accessDomain();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"domain"
    },
@@ -2395,7 +2395,7 @@ checkList = [
 			return accessDomain();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"domain"
    },
@@ -2407,7 +2407,7 @@ checkList = [
 			return accessDomain() && haveEmptyBottle();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"domain"
    },
@@ -2419,7 +2419,7 @@ checkList = [
 			return accessDomain() && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"domain"
    },
@@ -2431,7 +2431,7 @@ checkList = [
 			return accessDomain();
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"domain"
    },
@@ -2443,7 +2443,7 @@ checkList = [
 			return accessDomain();
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"domain"
    },
@@ -2455,7 +2455,7 @@ checkList = [
 			return accessDomain();
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"domain"
    },
@@ -2467,7 +2467,7 @@ checkList = [
 			return accessDomain();
 		},
       "Tags":[
-         "shop"
+         "shop", "child", "adult"
       ],
       "Location":"domain"
    },
@@ -2479,7 +2479,7 @@ checkList = [
 			return accessFontain() && obtainedItems.bomb && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"fontain"
    },
@@ -2491,7 +2491,7 @@ checkList = [
 			return accessFontain();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fontain"
    },
@@ -2503,7 +2503,7 @@ checkList = [
 			return accessFontain() && obtainedItems.iron;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fontain"
    },
@@ -2515,7 +2515,7 @@ checkList = [
 			return accessFontain() && obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"fontain"
    },
@@ -2527,7 +2527,7 @@ checkList = [
 			return accessFontain();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"fontain"
    },
@@ -2539,7 +2539,7 @@ checkList = [
 			return accessFontain() && obtainedItems.strength >= 2;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fontain"
    },
@@ -2551,7 +2551,7 @@ checkList = [
 			return obtainedItems.scale;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"lake"
    },
@@ -2563,7 +2563,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"lake"
    },
@@ -2575,7 +2575,7 @@ checkList = [
 			return obtainedItems.hookshot;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"lake"
    },
@@ -2587,7 +2587,7 @@ checkList = [
 			return obtainedItems.scale === 2;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"lake"
    },
@@ -2599,7 +2599,7 @@ checkList = [
 			return obtainedItems.hookshot || obtainedItems.bean;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"lake"
    },
@@ -2611,7 +2611,7 @@ checkList = [
 			return obtainedItems.bow && checkedList.indexOf("5") > -1;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"lake"
    },
@@ -2623,7 +2623,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"lake"
    },
@@ -2635,7 +2635,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"lake"
    },
@@ -2647,7 +2647,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"lake"
    },
@@ -2659,7 +2659,7 @@ checkList = [
 			return haveEmptyBottle();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"lake"
    },
@@ -2671,7 +2671,7 @@ checkList = [
 			return obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"lake"
    },
@@ -2683,7 +2683,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"lake"
    },
@@ -2695,7 +2695,7 @@ checkList = [
 			return obtainedItems.iron && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"lake"
    },
@@ -2707,7 +2707,7 @@ checkList = [
 			return obtainedItems.hookshot === 2;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"lake"
    },
@@ -2719,7 +2719,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"valey"
    },
@@ -2731,7 +2731,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"valey"
    },
@@ -2743,7 +2743,7 @@ checkList = [
 			return obtainedItems.hammer && accessGerudoFortress();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"valey"
    },
@@ -2755,7 +2755,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.storm;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"valey"
    },
@@ -2767,7 +2767,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.storm;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"valey"
    },
@@ -2779,7 +2779,7 @@ checkList = [
 			return obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"valey"
    },
@@ -2803,7 +2803,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"valey"
    },
@@ -2815,7 +2815,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"valey"
    },
@@ -2827,7 +2827,7 @@ checkList = [
 			return accessGerudoFortress() && (obtainedItems.hookshot || obtainedItems.hover);
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fortress"
    },
@@ -2839,7 +2839,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.epona && obtainedItems.gerudoCard;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fortress"
    },
@@ -2851,7 +2851,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.epona && obtainedItems.gerudoCard;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fortress"
    },
@@ -2863,7 +2863,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fortress"
    },
@@ -2875,7 +2875,7 @@ checkList = [
 			return accessGerudoFortress() && obtainedItems.gerudoCard;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fortress"
    },
@@ -2887,7 +2887,7 @@ checkList = [
 			return accessWasteland() && (obtainedItems.hover || obtainedItems.hookshot === 2);
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"wasteland"
    },
@@ -2899,7 +2899,7 @@ checkList = [
 			return HaveRequiredItem("214") && obtainedItems.magic && (obtainedItems.dins || obtainedItems.fireArrow);
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"wasteland"
    },
@@ -2911,7 +2911,7 @@ checkList = [
 			return accessColossus() && obtainedItems.lullaby && obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"colossus"
    },
@@ -2923,7 +2923,7 @@ checkList = [
 			return accessColossus() && obtainedItems.bean;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"colossus"
    },
@@ -2935,7 +2935,7 @@ checkList = [
 			return accessColossus() && obtainedItems.strength >= 2;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"colossus"
    },
@@ -2947,7 +2947,7 @@ checkList = [
 			return accessColossus() && obtainedItems.strength >= 2;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"colossus"
    },
@@ -2971,7 +2971,7 @@ checkList = [
 			return accessColossus() && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"colossus"
    },
@@ -2983,7 +2983,7 @@ checkList = [
 			return accessColossus() && (obtainedItems.hookshot || obtainedItems.bean);
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"colossus"
    },
@@ -2995,7 +2995,7 @@ checkList = [
 			return obtainedItems.strength ===3 && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"outside"
    },
@@ -3007,7 +3007,7 @@ checkList = [
 			return obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"outside"
    },
@@ -3019,7 +3019,7 @@ checkList = [
 			return accessDeku();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"deku"
    },
@@ -3031,7 +3031,7 @@ checkList = [
 			return HaveRequiredItem("225");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"deku"
    },
@@ -3043,7 +3043,7 @@ checkList = [
 			return HaveRequiredItem("225");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"deku"
    },
@@ -3055,7 +3055,7 @@ checkList = [
 			return HaveRequiredItem("225");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"deku"
    },
@@ -3079,7 +3079,7 @@ checkList = [
 			return HaveRequiredItem("225");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"deku"
    },
@@ -3091,7 +3091,7 @@ checkList = [
 			return HaveRequiredItem("225");
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"deku"
    },
@@ -3103,7 +3103,7 @@ checkList = [
 			return HaveRequiredItem("225") && obtainedItems.slingshot || obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"deku"
    },
@@ -3115,7 +3115,7 @@ checkList = [
 			return HaveRequiredItem("225");
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"deku"
    },
@@ -3127,7 +3127,7 @@ checkList = [
 			return HaveRequiredItem("225") && obtainedItems.slingshot && obtainedItems.bomb;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"deku"
    },
@@ -3139,7 +3139,7 @@ checkList = [
 			return HaveRequiredItem("225") && obtainedItems.slingshot;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"deku"
    },
@@ -3151,7 +3151,7 @@ checkList = [
 			return accessDc() && obtainedItems.bomb || obtainedItems.strength || obtainedItems.hammer;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3163,7 +3163,7 @@ checkList = [
 			return HaveRequiredItem("236");
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3175,7 +3175,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3187,7 +3187,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3199,7 +3199,7 @@ checkList = [
 			return HaveRequiredItem("237");
 },
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3211,7 +3211,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3223,7 +3223,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3235,7 +3235,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3247,7 +3247,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3259,7 +3259,7 @@ checkList = [
 			return HaveRequiredItem("237") && (obtainedItems.hookshot || obtainedItems.boomerang);
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3271,7 +3271,7 @@ checkList = [
 			return HaveRequiredItem("237") && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"dc"
    },
@@ -3283,7 +3283,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3295,7 +3295,7 @@ checkList = [
 			return HaveRequiredItem("237");
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3307,7 +3307,7 @@ checkList = [
 			return HaveRequiredItem("237") && obtainedItems.bomb;
 		},
       "Tags":[
-         "gs"
+         "gs", "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3319,7 +3319,7 @@ checkList = [
 			return HaveRequiredItem("249");
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3331,7 +3331,7 @@ checkList = [
 			return HaveRequiredItem("249");
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"dc"
    },
@@ -3343,7 +3343,7 @@ checkList = [
 			return accessJabu();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"jabu"
    },
@@ -3355,7 +3355,7 @@ checkList = [
 			return accessJabu() && obtainedItems.boomerang;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"jabu"
    },
@@ -3367,7 +3367,7 @@ checkList = [
 			return HaveRequiredItem("253");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"jabu"
    },
@@ -3379,7 +3379,7 @@ checkList = [
 			return HaveRequiredItem("253");
 		},
       "Tags":[
-         "scrub"
+         "scrub", "child"
       ],
       "Location":"jabu"
    },
@@ -3391,7 +3391,7 @@ checkList = [
 			return HaveRequiredItem("253");
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"jabu"
    },
@@ -3403,7 +3403,7 @@ checkList = [
 			return HaveRequiredItem("253");
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"jabu"
    },
@@ -3415,7 +3415,7 @@ checkList = [
 			return HaveRequiredItem("253");
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"jabu"
    },
@@ -3427,7 +3427,7 @@ checkList = [
 			return HaveRequiredItem("253");
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"jabu"
    },
@@ -3439,7 +3439,7 @@ checkList = [
 			return HaveRequiredItem("253");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"jabu"
    },
@@ -3451,7 +3451,7 @@ checkList = [
 			return accessBotw();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3463,7 +3463,7 @@ checkList = [
 			return accessBotw() && obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3475,7 +3475,7 @@ checkList = [
 			return HaveRequiredItem("262");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3487,7 +3487,7 @@ checkList = [
 			return accessBotw() && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3499,7 +3499,7 @@ checkList = [
 			return accessBotw();
 },
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3511,7 +3511,7 @@ checkList = [
 			return accessBotw();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3523,7 +3523,7 @@ checkList = [
 			return accessBotw();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3535,7 +3535,7 @@ checkList = [
 			return accessBotw();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3547,7 +3547,7 @@ checkList = [
 			return accessBotw();
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3559,7 +3559,7 @@ checkList = [
 			return accessBotw() && obtainedItems.skBotw;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3571,7 +3571,7 @@ checkList = [
 			return HaveRequiredItem("262");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3583,7 +3583,7 @@ checkList = [
 			return HaveRequiredItem("264");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3595,7 +3595,7 @@ checkList = [
 			return HaveRequiredItem("264");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3607,7 +3607,7 @@ checkList = [
 			return HaveRequiredItem("264");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"botw"
    },
@@ -3619,7 +3619,7 @@ checkList = [
 			return accessBotw() && obtainedItems.skBotw;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"botw"
    },
@@ -3631,7 +3631,7 @@ checkList = [
 			return accessBotw() && obtainedItems.skBotw;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"botw"
    },
@@ -3643,7 +3643,7 @@ checkList = [
 			return accessBotw() && obtainedItems.skBotw;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"botw"
    },
@@ -3655,7 +3655,7 @@ checkList = [
 			return accessForestTemple()
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3667,7 +3667,7 @@ checkList = [
 			return HaveRequiredItem("278");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3679,7 +3679,7 @@ checkList = [
 			return HaveRequiredItem("278") && (obtainedItems.bow || obtainedItems.hover || obtainedItems.time);
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3691,7 +3691,7 @@ checkList = [
 			return (HaveRequiredItem("280") && obtainedItems.hover) || HaveRequiredItem("285");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3703,7 +3703,7 @@ checkList = [
 			return (HaveRequiredItem("280") && obtainedItems.iron) || HaveRequiredItem("281");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3715,7 +3715,7 @@ checkList = [
 			return HaveRequiredItem("278") && obtainedItems.skForest && obtainedItems.bow && obtainedItems.strength;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3727,7 +3727,7 @@ checkList = [
 			return HaveRequiredItem("278") && obtainedItems.skForest >= 2 && obtainedItems.bow && obtainedItems.strength;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3739,7 +3739,7 @@ checkList = [
 			return HaveRequiredItem("284");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3751,7 +3751,7 @@ checkList = [
 			return HaveRequiredItem("284") && obtainedItems.skForest >= 3;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3763,7 +3763,7 @@ checkList = [
 			return HaveRequiredItem("278") && obtainedItems.skForest >= 3 && obtainedItems.strength;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3775,7 +3775,7 @@ checkList = [
 			return HaveRequiredItem("286");
 },
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3787,7 +3787,7 @@ checkList = [
 			return HaveRequiredItem("286") && obtainedItems.skForest >= 5;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3799,7 +3799,7 @@ checkList = [
 			return HaveRequiredItem("289");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3811,7 +3811,7 @@ checkList = [
 			return HaveRequiredItem("278");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"forest"
    },
@@ -3823,7 +3823,7 @@ checkList = [
 			return HaveRequiredItem("278");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"forest"
    },
@@ -3835,7 +3835,7 @@ checkList = [
 			return HaveRequiredItem("280");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"forest"
    },
@@ -3847,7 +3847,7 @@ checkList = [
 			return HaveRequiredItem("285");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"forest"
    },
@@ -3859,7 +3859,7 @@ checkList = [
 			return HaveRequiredItem("289");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"forest"
    },
@@ -3871,7 +3871,7 @@ checkList = [
 			return HaveRequiredItem("289");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"forest"
    },
@@ -3883,7 +3883,7 @@ checkList = [
 			return accessFireTemple();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3895,7 +3895,7 @@ checkList = [
 			return accessFireTemple() && obtainedItems.hammer && obtainedItems.skFire >= 1;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3907,7 +3907,7 @@ checkList = [
 			return HaveRequiredItem("298");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3919,7 +3919,7 @@ checkList = [
 			return accessFireTemple() && obtainedItems.skFire >= 1;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3931,7 +3931,7 @@ checkList = [
 			return HaveRequiredItem("300") && obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3943,7 +3943,7 @@ checkList = [
 			return HaveRequiredItem("300") && obtainedItems.skFire >= 3
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3955,7 +3955,7 @@ checkList = [
 			return HaveRequiredItem("302");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3967,7 +3967,7 @@ checkList = [
 			return HaveRequiredItem("302") && obtainedItems.skFire >= 4 && obtainedItems.bow;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3979,7 +3979,7 @@ checkList = [
 			return HaveRequiredItem("302") && obtainedItems.skFire >= 5 &&obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -3991,7 +3991,7 @@ checkList = [
 			return HaveRequiredItem("302") && obtainedItems.skFire >= 5;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -4003,7 +4003,7 @@ checkList = [
 			return HaveRequiredItem("306") && obtainedItems.hookshot;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -4015,7 +4015,7 @@ checkList = [
 			return HaveRequiredItem("306") && obtainedItems.skFire >= 6;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -4027,7 +4027,7 @@ checkList = [
 			return HaveRequiredItem("308");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -4039,7 +4039,7 @@ checkList = [
 			return HaveRequiredItem("308") && obtainedItems.time;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -4051,7 +4051,7 @@ checkList = [
 			return HaveRequiredItem("298");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fire"
    },
@@ -4063,7 +4063,7 @@ checkList = [
 			return HaveRequiredItem("300") && obtainedItems.time;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fire"
    },
@@ -4075,7 +4075,7 @@ checkList = [
 			return HaveRequiredItem("302") && obtainedItems.bomb;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fire"
    },
@@ -4087,7 +4087,7 @@ checkList = [
 			return HaveRequiredItem("307");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fire"
    },
@@ -4099,7 +4099,7 @@ checkList = [
 			return HaveRequiredItem("307");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"fire"
    },
@@ -4111,7 +4111,7 @@ checkList = [
 			return accessFireTemple() && obtainedItems.hammer && obtainedItems.bkFire && (obtainedItems.hover || obtainedItems.skFire >= 6);
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"fire"
    },
@@ -4123,7 +4123,7 @@ checkList = [
 			return accessWaterTemple();
 },
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4135,7 +4135,7 @@ checkList = [
 			return accessWaterTemple() && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4147,7 +4147,7 @@ checkList = [
 			return HaveRequiredItem("318") && obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4159,7 +4159,7 @@ checkList = [
 			return HaveRequiredItem("318") &&  obtainedItems.bow;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4171,7 +4171,7 @@ checkList = [
 			return HaveRequiredItem("318") && obtainedItems.skWater >= 2;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4183,7 +4183,7 @@ checkList = [
 			return HaveRequiredItem("318") && (obtainedItems.skWater >= 1 || obtainedItems.bow || (obtainedItems.magic && obtainedItems.dins));
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4193,9 +4193,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("320") && obtainedItems.hookshot === 2;
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4207,7 +4207,7 @@ checkList = [
 			return accessWaterTemple() && obtainedItems.skWater >= 2;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4219,7 +4219,7 @@ checkList = [
 			return HaveRequiredItem("324") && obtainedItems.time;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4231,7 +4231,7 @@ checkList = [
 			return HaveRequiredItem("318");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4243,7 +4243,7 @@ checkList = [
 			return HaveRequiredItem("318");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"water"
    },
@@ -4255,7 +4255,7 @@ checkList = [
 			return HaveRequiredItem("321");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"water"
    },
@@ -4267,7 +4267,7 @@ checkList = [
 			return HaveRequiredItem("322") && obtainedItems.hookshot === 2;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"water"
    },
@@ -4279,7 +4279,7 @@ checkList = [
 			return accessWaterTemple() && obtainedItems.skWater >= 1 && obtainedItems.hookshot === 2;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"water"
    },
@@ -4291,7 +4291,7 @@ checkList = [
 			return HaveRequiredItem("325");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"water"
    },
@@ -4303,7 +4303,7 @@ checkList = [
 			return accessWaterTemple() && obtainedItems.hookshot === 2 && obtainedItems.bkWater;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"water"
    },
@@ -4315,7 +4315,7 @@ checkList = [
 			return accessShadowTemple();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4327,7 +4327,7 @@ checkList = [
 			return HaveRequiredItem("333");
 },
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4339,7 +4339,7 @@ checkList = [
 			return HaveRequiredItem("333") && obtainedItems.hover && obtainedItems.lens;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4351,7 +4351,7 @@ checkList = [
 			return HaveRequiredItem("335");
 },
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4363,7 +4363,7 @@ checkList = [
 			return HaveRequiredItem("335") && obtainedItems.bomb && obtainedItems.skShadow >= 1;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4375,7 +4375,7 @@ checkList = [
 			return HaveRequiredItem("337");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4387,7 +4387,7 @@ checkList = [
 			return HaveRequiredItem("337");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4399,7 +4399,7 @@ checkList = [
 			return HaveRequiredItem("337");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4411,7 +4411,7 @@ checkList = [
 			return HaveRequiredItem("337");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4423,7 +4423,7 @@ checkList = [
 			return HaveRequiredItem("337") && obtainedItems.skShadow >= 2;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4435,7 +4435,7 @@ checkList = [
 			return HaveRequiredItem("342");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4447,7 +4447,7 @@ checkList = [
 			return HaveRequiredItem("342") && obtainedItems.skShadow >= 3 && obtainedItems.hookshot;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4459,7 +4459,7 @@ checkList = [
 			return HaveRequiredItem("344");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4471,7 +4471,7 @@ checkList = [
 			return HaveRequiredItem("344");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4483,7 +4483,7 @@ checkList = [
 			return HaveRequiredItem("344") && obtainedItems.skShadow >= 4 && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4495,7 +4495,7 @@ checkList = [
 			return HaveRequiredItem("347");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4505,9 +4505,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("347");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4519,7 +4519,7 @@ checkList = [
 			return HaveRequiredItem("335");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"shadow"
    },
@@ -4531,7 +4531,7 @@ checkList = [
 			return HaveRequiredItem("339");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"shadow"
    },
@@ -4543,7 +4543,7 @@ checkList = [
 			return HaveRequiredItem("343");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"shadow"
    },
@@ -4555,7 +4555,7 @@ checkList = [
 			return HaveRequiredItem("344") && obtainedItems.skShadow >= 4 && obtainedItems.hookshot === 2;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"shadow"
    },
@@ -4567,7 +4567,7 @@ checkList = [
 			return HaveRequiredItem("347");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"shadow"
    },
@@ -4579,7 +4579,7 @@ checkList = [
 			return HaveRequiredItem("347") && obtainedItems.skShadow >= 4 && obtainedItems.bkShadow;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"shadow"
    },
@@ -4591,7 +4591,7 @@ checkList = [
 			return accessSpiritTempleChild() && obtainedItems.boomerang || obtainedItems.slingshot;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"spirit"
    },
@@ -4603,7 +4603,7 @@ checkList = [
 			return HaveRequiredItem("356");
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"spirit"
    },
@@ -4615,7 +4615,7 @@ checkList = [
 			return accessSpiritTempleChild() && obtainedItems.skSpirit >= 1;
 		},
       "Tags":[
-         
+         "child"
       ],
       "Location":"spirit"
    },
@@ -4627,7 +4627,7 @@ checkList = [
 			return HaveRequiredItem("358");
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"spirit"
    },
@@ -4639,7 +4639,7 @@ checkList = [
 			return HaveRequiredItem("358");
 },
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"spirit"
    },
@@ -4651,7 +4651,7 @@ checkList = [
 			return HaveRequiredItem("358");
 },
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"spirit"
    },
@@ -4663,7 +4663,7 @@ checkList = [
 			return HaveRequiredItem("358") && obtainedItems.skSpirit >= 2;
 		},
       "Tags":[
-         
+         "child", "adult"
       ],
       "Location":"spirit"
    },
@@ -4675,7 +4675,7 @@ checkList = [
 			return accessSpiritTempleAdult() && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4687,7 +4687,7 @@ checkList = [
 			return accessSpiritTempleAdult();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4699,7 +4699,7 @@ checkList = [
 			return HaveRequiredItem("364") && obtainedItems.skSpirit >= 1;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4711,7 +4711,7 @@ checkList = [
 			return HaveRequiredItem("365");
 	},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4723,7 +4723,7 @@ checkList = [
 			return HaveRequiredItem("365") && obtainedItems.lullaby && obtainedItems.hookshot;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4735,7 +4735,7 @@ checkList = [
 			return HaveRequiredItem("367");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4747,7 +4747,7 @@ checkList = [
 			return HaveRequiredItem("365") && obtainedItems.skSpirit >= 2 && obtainedItems.mirror;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4759,7 +4759,7 @@ checkList = [
 			return HaveRequiredItem("365") && obtainedItems.skSpirit >= 2;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4769,9 +4769,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("370");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4783,7 +4783,7 @@ checkList = [
 			return HaveRequiredItem("370");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4795,7 +4795,7 @@ checkList = [
 			return HaveRequiredItem("370") && obtainedItems.skSpirit >= 3 && obtainedItems.hookshot && obtainedItems.bow && obtainedItems.lullaby;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4807,7 +4807,7 @@ checkList = [
 			return HaveRequiredItem("370") && obtainedItems.skSpirit >= 3 && obtainedItems.mirror;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4831,7 +4831,7 @@ checkList = [
 			return HaveRequiredItem("358");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"spirit"
    },
@@ -4843,7 +4843,7 @@ checkList = [
 			return HaveRequiredItem("358");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"spirit"
    },
@@ -4855,7 +4855,7 @@ checkList = [
 			return HaveRequiredItem("365") && obtainedItems.hookshot === 2;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"spirit"
    },
@@ -4867,7 +4867,7 @@ checkList = [
 			return accessSpiritTempleAdult() && obtainedItems.time;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"spirit"
    },
@@ -4879,7 +4879,7 @@ checkList = [
 			return HaveRequiredItem("374");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"spirit"
    },
@@ -4891,7 +4891,7 @@ checkList = [
 			return accessFontain() && haveEmptyBottle();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ice"
    },
@@ -4903,7 +4903,7 @@ checkList = [
 			return HaveRequiredItem("381");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ice"
    },
@@ -4915,7 +4915,7 @@ checkList = [
 			return HaveRequiredItem("381");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ice"
    },
@@ -4927,7 +4927,7 @@ checkList = [
 			return HaveRequiredItem("381");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ice"
    },
@@ -4939,7 +4939,7 @@ checkList = [
 			return HaveRequiredItem("381") && obtainedItems.hookshot;
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"ice"
    },
@@ -4951,7 +4951,7 @@ checkList = [
 			return HaveRequiredItem("385");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"ice"
    },
@@ -4963,7 +4963,7 @@ checkList = [
 			return HaveRequiredItem("385");
 		},
       "Tags":[
-         "gs"
+         "gs", "adult"
       ],
       "Location":"ice"
    },
@@ -4975,7 +4975,7 @@ checkList = [
 			return accessGtg() && obtainedItems.bow;
 },
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -4985,9 +4985,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("388");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -4999,7 +4999,7 @@ checkList = [
 			return accessGtg();
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5011,7 +5011,7 @@ checkList = [
 			return accessGtg() && obtainedItems.hookshot;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5023,7 +5023,7 @@ checkList = [
 			return HaveRequiredItem("391") && obtainedItems.strength >= 2;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5035,7 +5035,7 @@ checkList = [
 			return HaveRequiredItem("392");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5047,7 +5047,7 @@ checkList = [
 			return HaveRequiredItem("392");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5059,7 +5059,7 @@ checkList = [
 			return HaveRequiredItem("392");
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5071,7 +5071,7 @@ checkList = [
 			return obtainedItems.bow && (HaveRequiredItem("391") || HaveRequiredItem("399"));
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5083,7 +5083,7 @@ checkList = [
 			return HaveRequiredItem("396") && obtainedItems.hookshot
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5093,9 +5093,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return accessGtg() && (obtainedItems.hookshot === 2 || obtainedItems.hover);
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5107,7 +5107,7 @@ checkList = [
 			return HaveRequiredItem("398") && obtainedItems.hammer;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5117,9 +5117,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return accessGtg() && obtainedItems.skGtg >= 2
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5129,9 +5129,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("400");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5141,9 +5141,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("400");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5155,7 +5155,7 @@ checkList = [
 			return accessGtg() && obtainedItems.time && obtainedItems.iron && obtainedItems.hover;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5167,7 +5167,7 @@ checkList = [
 			return accessGtg() && obtainedItems.bomb;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5179,7 +5179,7 @@ checkList = [
 			return accessGtg() && obtainedItems.skGtg >= 1;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5189,9 +5189,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return accessGtg() && obtainedItems.skGtg >= 2
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5201,9 +5201,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return accessGtg() && obtainedItems.skGtg >= 4
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5213,9 +5213,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return accessGtg() && obtainedItems.skGtg >= 5
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5225,9 +5225,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return accessGtg() && obtainedItems.skGtg >= 7
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"gtg"
    },
@@ -5239,7 +5239,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5251,7 +5251,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5263,7 +5263,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5275,7 +5275,7 @@ checkList = [
 			return obtainedItems.hookshot;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5287,7 +5287,7 @@ checkList = [
 			return obtainedItems.hookshot && obtainedItems.fireArrow && obtainedItems.magic;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5299,7 +5299,7 @@ checkList = [
 			return obtainedItems.strength === 3;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5309,9 +5309,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("415");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5321,9 +5321,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("415");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5333,9 +5333,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("415");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5345,9 +5345,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("415");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5357,9 +5357,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("415");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5369,9 +5369,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("415");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5381,9 +5381,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("415") && obtainedItems.skGanon >= 1 && obtainedItems.lullaby;
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5393,9 +5393,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return obtainedItems.hookshot;
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5405,9 +5405,9 @@ checkList = [
       "Requirements":function ()
 		{
 			return HaveRequiredItem("423");
-},
+		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    },
@@ -5419,7 +5419,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"ganon"
    },
@@ -5431,7 +5431,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"ganon"
    },
@@ -5443,7 +5443,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"ganon"
    },
@@ -5455,7 +5455,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         "scrub"
+         "scrub", "adult"
       ],
       "Location":"ganon"
    },
@@ -5467,7 +5467,7 @@ checkList = [
 			return true;
 		},
       "Tags":[
-         
+         "adult"
       ],
       "Location":"ganon"
    }

@@ -2,8 +2,6 @@
 var checkedList = [];
 var woh = [];
 var startingItems = [];
-var filterChecked = "All";
-var filterLocation = "All";
 var obtainedItems = {};
 
 function accessForestTemple()
@@ -157,6 +155,10 @@ function init()
 	
 	$("[name='checkedFilter']").each(function (i, obj) {
 	obj.addEventListener("change", changeFilterChecked);
+	});
+	
+	$("[name='ageFilter']").each(function (i, obj) {
+	obj.addEventListener("change", changeFilterAge);
 	});
 
 	$("#filterLocationList")[0].addEventListener("change", changeFilterLocation);

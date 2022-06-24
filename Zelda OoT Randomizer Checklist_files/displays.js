@@ -1,6 +1,16 @@
+var filterChecked = "All";
+var filterAge = "All";
+var filterLocation = "All";
+
 function changeFilterChecked(e)
 {
 	filterChecked = e.srcElement.value;
+	refreshList();
+}
+
+function changeFilterAge(e)
+{
+	filterAge = e.srcElement.value;
 	refreshList();
 }
 
@@ -15,34 +25,41 @@ function refreshList()
 	var num = 0;
 	$(".linecheck").each(function (i, obj) {
 		var shouldDisplay = true;
-		if(filterLocation !== "All" && checkList[i].Location !== filterLocation)
+		if (filterLocation !== "All" && checkList[i].Location !== filterLocation)
 		{
 			shouldDisplay = false;
 		}
-		if(filterChecked !== "All")
+		if (filterChecked !== "All")
 		{
-			if(filterChecked === "Available" && !HaveRequiredItem(num))
+			if (filterChecked === "Available" && !HaveRequiredItem(num))
 			{
 				shouldDisplay = false;
 			}
 			else
 			{
 				var expectChecked = filterChecked === "Checked";
-				if(expectChecked !== (obj.children[0].innerText !== ""))
+				if (expectChecked !== (obj.children[0].innerText !== ""))
 				{
 					shouldDisplay = false;
 				}
 			}
 		}
-		if(shouldDisplay)
+		if (filterAge !== "All")
 		{
-			if($("#checkMark"+num)[0].innerText !== "")
+			if (checkList[i].Tags.indexOf(filterAge.toLowerCase()) === -1)
+			{
+				shouldDisplay = false;
+			}
+		}
+		if (shouldDisplay)
+		{
+			if ($("#checkMark"+num)[0].innerText !== "")
 			{
 				obj.setAttribute("style", obtainedItemLook);
 			}
 			else
 			{
-				if(HaveRequiredItem(num))
+				if (HaveRequiredItem(num))
 				{
 					obj.setAttribute("style", obtainableItemLook);
 				}
@@ -51,7 +68,7 @@ function refreshList()
 					obj.setAttribute("style", visibleItemLook);
 				}
 			}
-			if 	(woh.indexOf(checkList[num].Location) > -1)
+			if (woh.indexOf(checkList[num].Location) > -1)
 			{
 				$("#item"+num)[0].setAttribute("style", wohCheckLook);
 			}
@@ -192,7 +209,16 @@ function DrawList()
 		line.appendChild(current);
 
 		current = document.createElement("td");
-		current.textContent = checkList[i].Label;
+		var childAdultText = "";
+		if (checkList[i].Tags.indexOf("child") > -1)
+		{
+			childAdultText += " <b>C</b>";
+		}
+		if (checkList[i].Tags.indexOf("adult") > -1)
+		{
+			childAdultText += " <b>A</b>";
+		}
+		current.innerHTML = checkList[i].Label + childAdultText;
 		line.appendChild(current);
 		current = document.createElement("td");
 		current.textContent = locationList.find(e => e.Id === checkList[i].Location).Label;
