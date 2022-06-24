@@ -26,26 +26,93 @@
 			<button id="Load" class="button" onclick="Load()"/>Load</button>
 			<!--<button id="Conf" class="button" onclick="Conf()"/>Load conf</button>-->
 		</div>
-         <div >
-            <div>
-			<b>Way of the hero :</b> <span id="wohList">None</span><br/>
-				<b>Add way of the hero :</b> <select id="addWohList"></select>
-				<button id="addWohButton" class="button" onClick="addWoh()">+</button>
-			</div>
-         </div>
-		 <div >
-            <div>
-			<b>Starting items :</b> <span id="startItemList">None</span><br/>
-				<b>Add starting items :</b> <select id="addStartItemList"></select>
-				<button id="addStartItemButton" class="button" onClick="addStartItem()">+</button>
-			</div>
-         </div>
-		 <div >
-            <div>
-				<b>Barren location : </b> <select id="barrenLocationList"></select>
-				<button id="addStartItemButton" class="button" onClick="doBarren()">+</button>
-			</div>
-         </div>
+		<table>
+			<tr >
+				<td style="width:33%">
+					 <div >
+						<div>
+						<b>Way of the hero :</b> <span id="wohList">None</span><br/>
+							<b>Add way of the hero :</b> <select id="addWohList"></select>
+							<button id="addWohButton" class="button" onClick="addWoh()">+</button>
+						</div>
+					 </div>
+					 <div >
+						<div>
+						<b>Starting items :</b> <span id="startItemList">None</span><br/>
+							<b>Add starting items :</b> <select id="addStartItemList"></select>
+							<button id="addStartItemButton" class="button" onClick="addStartItem()">+</button>
+						</div>
+					 </div>
+					 <div >
+						<div>
+							<b>Barren location : </b> <select id="barrenLocationList"></select>
+							<button id="addStartItemButton" class="button" onClick="doBarren()">+</button>
+						</div>
+					 </div>
+				</td>
+				<td style="width:33%">
+					<div>
+						<table>
+							<tr>
+								<td>
+								<b>Deku</b> is : <select class="dungeonErSelection" id="dekuIs"></select>
+								</td>
+								<td>
+								<b>Water</b> is : <select class="dungeonErSelection" id="waterIs"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<b>DC</b> is : <select class="dungeonErSelection" id="dcIs"></select>
+								</td>
+								<td>
+								<b>Fire</b> is : <select class="dungeonErSelection" id="fireIs"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<b>Jabu</b> is : <select class="dungeonErSelection" id="jabuIs"></select>
+								</td>
+								<td>
+								<b>Spirit</b> is : <select class="dungeonErSelection" id="spiritIs"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<b>Forest</b> is : <select class="dungeonErSelection" id="forestIs"></select>
+								</td>
+								<td>
+								<b>Shadow</b> is : <select class="dungeonErSelection" id="shadowIs"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<b>Botw</b> is : <select class="dungeonErSelection" id="botwIs"></select>
+								</td>
+								<td>
+								<b>Gtg</b> is : <select class="dungeonErSelection" id="gtgIs"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<b>Ice</b> is : <select class="dungeonErSelection" id="iceIs"></select>
+								</td>
+								<td>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td style="width:33%">
+					<b>Minuet</b> warp to : <select class="warpDestinationList" id="minuetWarpDestination"></select><br/>
+					<b>Bolero</b> warp to : <select class="warpDestinationList" id="boleroWarpDestination"></select><br/>
+					<b>Serenade</b> warp to : <select class="warpDestinationList" id="serenadeWarpDestination"></select><br/>
+					<b>Requiem</b> warp to : <select class="warpDestinationList" id="requiemWarpDestination"></select><br/>
+					<b>Nocturne</b> warp to : <select class="warpDestinationList" id="nocturneWarpDestination"></select><br/>
+					<b>Prelude</b> warp to : <select class="warpDestinationList" id="preludeWarpDestination"></select><br/>
+				</td>
+			</tr>			
+		 </table>
 		 <div style="border:solid black 1pt;">
             <div>
 				<b>Filters</b></br>
