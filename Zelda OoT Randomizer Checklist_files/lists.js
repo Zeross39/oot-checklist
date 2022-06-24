@@ -3,527 +3,13 @@ var itemList = [];
 var checkList = [];
 var locationList = [];
 var medallionList = [];
-var obtainableItem = "border-bottom:1pt dotted black; background-Color:#ffcccb;";
-var obtainedItem = "border-bottom:1pt dotted black; background-Color:beige;"
-var visibleItem = "border-bottom:1pt dotted black;"
-var hiddenItem = "display:none;"
+var dungeonList = [];
+var obtainableItemLook = "border-bottom:1pt dotted black; background-Color:#ffe7ea;";
+var obtainedItemLook = "border-bottom:1pt dotted black; background-Color:beige;"
+var visibleItemLook = "border-bottom:1pt dotted black;"
+var hiddenItemLook = "display:none;"
+var wohCheckLook = "background-Color:#FFD700; ";
 
-//current lists
-var checkedList = [];
-var woh = [];
-var startingItems = [];
-var filterChecked = "All";
-var filterLocation = "All";
-var obtainedItems = {};
-
-function accessForestTemple()
-{
-	return (obtainedItems.saria || obtainedItems.minuet) && obtainedItems.hookshot;
-}
-
-function accessWaterTemple()
-{
-}
-
-function accessFireTemple()
-{
-}
-
-function accessSpiritTempleChild()
-{
-}
-
-function accessSpiritTempleAdult()
-{
-}
-
-function accessShadowTemple()
-{
-}
-
-function accessBotw()
-{
-}
-
-function accessGtg()
-{
-}
-
-function accessDeku()
-{
-}
-
-function accessDc()
-{
-}
-
-function accessJabu()
-{
-}
-
-function accessMeadowAdult()
-{
-}
-
-function accessGerudoFortress()
-{
-}
-
-function accessWasteland()
-{
-}
-
-function accessDomain()
-{
-}
-
-function accessRiver()
-{
-}
-
-function accessColossus()
-{
-}
-
-function accessFontain()
-{
-}
-
-function refreshObtainedItemList()
-{
-	for(var i = 0; i < medallionList.length; i++)
-	{
-		obtainedItems[medallionList[i].Id] = HaveItem(medallionList[i].Id);
-	}
-	for(var i = 0; i < itemList.length; i++)
-	{
-		obtainedItems[itemList[i].Id] = HaveItem(itemList[i].Id);
-	}
-	for(var i = 0; i < startingItems.length; i++)
-	{
-		obtainedItems[startingItems[i]]++;
-	}
-	refreshList();
-}
-
-function HaveItem(item)
-{
-	var num = 0;
-	var numberGot = 0;
-	$(".linecheck").each(function (i, obj) {
-		if(obj.children[0].innerText !== "")
-		{
-			if($("#item"+num).find("option:selected")[0].value === item)
-			{
-				numberGot++;
-			}
-		}
-		num++;
-	});
-	return numberGot;
-}
-
-function HaveRequiredItem(checkId)
-{
-	return checkList[checkId].Requirements();
-}
-
-function changeFilterChecked(e)
-{
-	filterChecked = e.srcElement.value;
-	refreshList();
-}
-
-function changeFilterLocation(e)
-{
-	filterLocation = $("#filterLocationList").find("option:selected")[0].value;
-	refreshList();
-}
-
-function refreshList()
-{
-	var num = 0;
-	$(".linecheck").each(function (i, obj) {
-		var shouldDisplay = true;
-		if(filterLocation !== "All" && checkList[i].Location !== filterLocation)
-		{
-			shouldDisplay = false;
-		}
-		if(filterChecked !== "All")
-		{
-			if(filterChecked === "Available" && !HaveRequiredItem(num))
-			{
-				shouldDisplay = false;
-			}
-			else
-			{
-				var expectChecked = filterChecked === "Checked";
-				if(expectChecked !== (obj.children[0].innerText !== ""))
-				{
-					shouldDisplay = false;
-				}
-			}
-		}
-		if(shouldDisplay)
-		{
-			if($("#checkMark"+num)[0].innerText !== "")
-			{
-				obj.setAttribute("style", obtainedItem);
-			}
-			else
-			{
-				if(HaveRequiredItem(num))
-				{
-					obj.setAttribute("style", obtainableItem);
-				}
-				else
-				{
-					obj.setAttribute("style", visibleItem);
-				}
-			}
-		}
-		else
-		{
-			obj.setAttribute("style", hiddenItem);
-		}
-		num++;
-	});
-}
-
-function KeyUsed(loc)
-{
-	return 0;
-}
-
-function init()
-{	
-	DrawList();
-	createWohList();
-	createStartItemList();
-	refreshObtainedItemList();
-	
-	$("[name='checkedFilter']").each(function (i, obj) {
-	obj.addEventListener("change", changeFilterChecked);
-	});
-
-	$("#filterLocationList")[0].addEventListener("change", changeFilterLocation);
-
-	$("[name='item']").each(function (i, obj) {
-		obj.addEventListener("change", refreshObtainedItemList);
-	});
-}
-
-function addStartItem(selectedItem)
-{
-	if(selectedItem)
-	{
-		startingItems.push(selectedItem);
-	}
-	else
-	{
-		var select = $("#addStartItemList")[0];
-		var val;
-		for(var v of select.options)
-		{
-			if(v.selected)
-			{
-				val = v.value;
-			}
-		}
-		startingItems.push(val);
-		refreshObtainedItemList();
-	}
-	var listText = "";
-	for(var v of startingItems)
-	{
-		listText = listText + itemList.find(e => e.Id === v).Label + ", ";
-	}
-	$("#startItemList")[0].innerHTML = listText;
-}
-
-function createStartItemList()
-{
-	var select = $("#addStartItemList")[0];
- 
-	for (var i = 0; i < itemList.length -1; i++)
-	{
-		var option = document.createElement("option");
-		option.value = itemList[i].Id;
-		option.text = itemList[i].Label;
-		select.appendChild(option);
-	}
-}
-
-function addWoh(selectedWoh)
-{
-	if(selectedWoh)
-	{
-		woh.push(selectedWoh);
-	}
-	else
-	{
-		var select = $("#addWohList")[0];
-		var val;
-		for(var v of select.options)
-		{
-			if(v.selected)
-			{
-				val = v.value;
-			}
-		}
-		
-		woh.push(val);
-	}
-	
-	var listText = "";
-	for(var v of woh)
-	{
-		listText = listText + locationList.find(e => e.Id === v).Label + ", ";
-	}
-	$("#wohList")[0].innerHTML = listText;
-}
-
-function createWohList()
-{
-	var selectWoh = $("#addWohList")[0];
-	var barrenList = $("#barrenLocationList")[0];
-	var filterLocationList = $("#filterLocationList")[0];
-	var option = document.createElement("option");
-	option.value = "All";
-	option.text = "All";
-	filterLocationList.appendChild(option);
- 
-	for (var i = 0; i < locationList.length; i++)
-	{
-		var option = document.createElement("option");
-		option.value = locationList[i].Id;
-		option.text = locationList[i].Label;
-		selectWoh.appendChild(option);
-		option = document.createElement("option");
-		option.value = locationList[i].Id;
-		option.text = locationList[i].Label;
-		barrenList.appendChild(option);
-		option = document.createElement("option");
-		option.value = locationList[i].Id;
-		option.text = locationList[i].Label;
-		filterLocationList.appendChild(option);
-	}
-}
-
-function Conf()
-{
-}
-
-function DrawList()
-{
-	var list = $(".listTop");
-	var table = document.createElement("table");
-	table.setAttribute('id', 'checkList');
-	table.setAttribute("style", "width:100%");
-	var header = document.createElement("tr");
-	header.setAttribute("style", visibleItem);
-	
-	var current = document.createElement("th");
-	current.textContent = "";
-	current.setAttribute("style", "width:1%");
-	//current.setAttribute('onclick', 'sortTable(0)');
-	header.appendChild(current);
-	
-	current = document.createElement("th");
-	current.textContent = "Name";
-	//current.setAttribute("style", "width:40%");
-	//current.setAttribute('onclick', 'sortTable(0)');
-	header.appendChild(current);
-	
-	current = document.createElement("th");
-	current.textContent = "Location";
-	current.setAttribute("style", "width:20%");
-	//current.setAttribute('onclick', 'sortTable(1)');
-	header.appendChild(current);
-	
-	current = document.createElement("th");
-	current.textContent = "Item";
-	current.setAttribute("style", "width:10%");
-	//current.setAttribute('onclick', 'sortTable(1)');
-	header.appendChild(current);
-	
-	current = document.createElement("th");
-	current.textContent = "";
-	header.appendChild(current);
-	
-	table.appendChild(header);
-	
-	var line;
-	
-	for (var i = 0; i < checkList.length; i++)
-	{
-		line = document.createElement("tr");
-		line.setAttribute("style", visibleItem);
-		line.setAttribute("id", "line"+i);
-		line.setAttribute("class", "linecheck");
-		
-		current = document.createElement("td")
-		current.setAttribute("id", "checkMark"+i);
-		line.appendChild(current);
-
-		current = document.createElement("td");
-		current.textContent = checkList[i].Label;
-		line.appendChild(current);
-		current = document.createElement("td");
-		current.textContent = locationList.find(e => e.Id === checkList[i].Location).Label;
-		line.appendChild(current);
-		current = document.createElement("td");
-
-		var select = document.createElement("select");
-		select.name = "item";
-		select.id = "item"+ i;
-		select.setAttribute("class", "itemSelection");
-	 
-		var listToUse;
-		if (i < 8)
-		{
-			listToUse = medallionList;
-		}
-		else
-		{
-			listToUse = itemList;
-		}
-
-		for (const val of listToUse)
-		{
-			var option = document.createElement("option");
-			option.value = val.Id;
-			option.text = val.Label;
-			select.appendChild(option);
-		}
-	 
-	 
-		current.appendChild(select);
-		line.appendChild(current);
-			
-		current = document.createElement("td");
-		var but = document.createElement("button");
-		but.innerText = "Check";
-		but.setAttribute("onclick", "toggleCheck("+checkList[i].Id+")");
-		current.appendChild(but);
-		
-		line.appendChild(current);
-		
-
-		table.appendChild(line);
-	}
-	
-	list[0].appendChild(table);
-}
-
-function Save ()
-{
-	var checked = [];
-	
-	var num = 0;
-	$(".linecheck").each(function (i, obj) {
-		var tds = obj.children;
-		$("#item"+num).find("option:selected");
-		checked.push({ checked: tds[0].innerText !== "", item: $("#item"+num).find("option:selected")[0].value});
-		num++;
-	});
-	var myFile = new File([JSON.stringify(checked)+JSON.stringify(woh)+JSON.stringify(startingItems)], "save.txt", {type: "text/plain;charset=utf-8"});
-	saveAs(myFile);
-}
-
-function Load()
-{
-	navigator.clipboard.readText().then(clipText =>
-	loadInternal(clipText)
-  );
-}
-
-function doBarren()
-{
-	var barren = $("#barrenLocationList").find("option:selected")[0].value;
-	
-	for(var i = 0; i < checkList.length; i++)
-	{
-		if(checkList[i].Location === barren)
-		{
-			addMark(i, true);
-		}
-	}
-}
-
-function loadInternal(text)
-{
-	var begin = text.indexOf("[");
-	var end = text.indexOf("]");
-	var length = end+1 - begin;
-	var checkedText = text.substr(begin, length);
-	var checked = JSON.parse(checkedText);
-	for(var i=0;i<checked.length; i++)
-	{
-		var id = "#item"+i;
-		var elem = $(id);
-		elem.children("option").each(function (j, obj){
-			if(obj.value === checked[i].item)
-			{
-				obj.selected = true;
-			}
-		});
-		if(checked[i].checked)
-		{
-			addMark(i, false);
-		}
-	}
-	var remainingText = text.substr(end+1);
-	begin = remainingText.indexOf("[");
-	end = remainingText.indexOf("]");
-	length = end+1 - begin;
-	wohTxt = remainingText.substr(begin, length);
-	wohJson = JSON.parse(wohTxt);
-	for(var i=0;i<wohJson.length; i++)
-	{
-		addWoh(wohJson[i]);
-	}
-	remainingText = remainingText.substr(end+1);
-	begin = remainingText.indexOf("[");
-	end = remainingText.indexOf("]");
-	length = end+1 - begin;
-	startItemTxt = remainingText.substr(begin, length);
-	startItemJson = JSON.parse(startItemTxt);
-	for(var i=0;i<startItemJson.length; i++)
-	{
-		addStartItem(startItemJson[i]);
-	}
-	refreshObtainedItemList();
-}
-
-function toggleCheck(checkId)
-{
-	if(checkedList.indexOf(checkId) > -1)
-	{
-		checkedList = checkedList.filter(e => e !== checkId);
-		removeMark(checkId);
-	}
-	else
-	{
-		checkedList.push(checkId);
-		addMark(checkId, true);
-	}
-}
-
-function addMark(checkId, refresh)
-{
-	$("#checkMark"+checkId)[0].innerText = "✓";
-	if(refresh)
-	{
-		refreshObtainedItemList();
-	}
-}
-
-function removeMark(checkId)
-{
-	$("#checkMark"+checkId)[0].innerText = "";
-	refreshObtainedItemList();
-}
 
 // LISTS
 medallionList = [
@@ -830,7 +316,7 @@ checkList = [
       "Label":"Queen Gohma",
       "Requirements":function ()
 		{
-			return accessDeku() && obtainedItem.slingshot;
+			return HaveRequiredItem("235");
 		},
       "Tags":[
          
@@ -842,7 +328,7 @@ checkList = [
       "Label":"King Dodongo",
       "Requirements":function ()
 		{
-			return accessDc() && obtainedItem.bomb;
+			return accessDc() && obtainedItems.bomb;
 		},
       "Tags":[
          
@@ -854,7 +340,7 @@ checkList = [
       "Label":"Barinade",
       "Requirements":function ()
 		{
-			return accessJabu() && obtainedItem.boomerang;
+			return accessJabu() && obtainedItems.boomerang;
 		},
       "Tags":[
          
@@ -878,7 +364,7 @@ checkList = [
       "Label":"Volvagia",
       "Requirements":function ()
 		{
-			return accessFireTemple() && obtainedItem.bkFire && obtainedItem.hammer && (obtainedItem.skFire > 5 | obtainedItem.hover);
+			return HaveRequiredItem("316");
 		},
       "Tags":[
          
@@ -889,8 +375,9 @@ checkList = [
       "Id":"5",
       "Label":"Morpha",
       "Requirements":function ()
-{accessWaterTemple,hookshot:2,bkWater
-},
+		{
+			return HaveRequiredItem("332");
+		},
       "Tags":[
          
       ],
@@ -900,8 +387,9 @@ checkList = [
       "Id":"6",
       "Label":"Bongo Bongo",
       "Requirements":function ()
-{accessShadowTemple,skShadow:5,bkShadow,hover,hookshot,lullaby,bow
-},
+		{
+			return HaveRequiredItem("355");
+		},
       "Tags":[
          
       ],
@@ -911,8 +399,9 @@ checkList = [
       "Id":"7",
       "Label":"Twinrova",
       "Requirements":function ()
-{bkSpirit,mirror,strength:2,hookshot|bow|bomb,skSpirit:3,requiem|hover,requiem|lens,requiem|hookshot:2
-},
+		{
+			return HaveRequiredItem("380");
+		},
       "Tags":[
          
       ],
@@ -923,8 +412,8 @@ checkList = [
       "Label":"Song from Impa",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "song"
       ],
@@ -934,8 +423,9 @@ checkList = [
       "Id":"9",
       "Label":"Song from Malon",
       "Requirements":function ()
-{ocarina
-},
+		{
+			return obtainedItems.ocarina;
+		},
       "Tags":[
          "song"
       ],
@@ -945,8 +435,9 @@ checkList = [
       "Id":"10",
       "Label":"Song from Saria",
       "Requirements":function ()
-{ocarina
-},
+		{
+			return obtainedItems.ocarina;
+		},
       "Tags":[
          "song"
       ],
@@ -956,8 +447,9 @@ checkList = [
       "Id":"11",
       "Label":"Song from Royal Familys Tomb",
       "Requirements":function ()
-{lullaby
-},
+		{
+			return obtainedItems.lullaby;
+		},
       "Tags":[
          "song"
       ],
@@ -967,8 +459,9 @@ checkList = [
       "Id":"12",
       "Label":"Song from Ocarina of Time",
       "Requirements":function ()
-{dekuStone,dcStone,jabuStone
-},
+		{
+			return obtainedItems.dekuStone && obtainedItems.dcStone && obtainedItems.jabuStone;
+		},
       "Tags":[
          "song"
       ],
@@ -978,8 +471,9 @@ checkList = [
       "Id":"13",
       "Label":"Song from Windmill",
       "Requirements":function ()
-{ocarina
-},
+		{
+			return obtainedItems.ocarina;
+		},
       "Tags":[
          "song"
       ],
@@ -989,8 +483,9 @@ checkList = [
       "Id":"14",
       "Label":"Sheik in Forest",
       "Requirements":function ()
-{saria|minuet
-},
+		{
+			return obtainedItems.saria || obtainedItems.minuet;
+		},
       "Tags":[
          "song"
       ],
@@ -1000,8 +495,9 @@ checkList = [
       "Id":"15",
       "Label":"Sheik in Crater",
       "Requirements":function ()
-{bolero|hover|hookshot
-},
+		{
+			return obtainedItems.bolero || obtainedItems.hover || obtainedItems.hookshot;
+		},
       "Tags":[
          "song"
       ],
@@ -1011,8 +507,9 @@ checkList = [
       "Id":"16",
       "Label":"Sheik in Ice Cavern",
       "Requirements":function ()
-{emptyBottle
-},
+		{
+			return HaveRequiredItem("384");
+		},
       "Tags":[
          "song"
       ],
@@ -1022,8 +519,9 @@ checkList = [
       "Id":"17",
       "Label":"Sheik at Colossus",
       "Requirements":function ()
-{requiem|hover,requiem|lens,requiem|hookshot:2
-},
+		{
+			return accessColossus();
+		},
       "Tags":[
          "song"
       ],
@@ -1033,8 +531,9 @@ checkList = [
       "Id":"18",
       "Label":"Sheik in Kakariko",
       "Requirements":function ()
-{forestMedallion,waterMedallion,fireMedallion
-},
+		{
+			return obtainedItems.forestMedallion && obtainedItems.waterMedallion && obtainedItems.fireMedallion;
+		},
       "Tags":[
          "song"
       ],
@@ -1044,8 +543,9 @@ checkList = [
       "Id":"19",
       "Label":"Sheik at Temple",
       "Requirements":function ()
-{forestMedallion
-},
+		{
+			return obtainedItems.forestMedallion;
+		},
       "Tags":[
          "song"
       ],
@@ -1056,8 +556,8 @@ checkList = [
       "Label":"KF Midos Top Left Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1068,8 +568,8 @@ checkList = [
       "Label":"KF Midos Top Right Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1080,8 +580,8 @@ checkList = [
       "Label":"KF Midos Bottom Left Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1092,8 +592,8 @@ checkList = [
       "Label":"KF Midos Bottom Right Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1103,8 +603,9 @@ checkList = [
       "Id":"24",
       "Label":"KF Storms Grotto Chest",
       "Requirements":function ()
-{storm
-},
+		{
+			return obtainedItems.storm;
+		},
       "Tags":[
          
       ],
@@ -1115,8 +616,8 @@ checkList = [
       "Label":"KF GS Know It All House",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -1126,8 +627,9 @@ checkList = [
       "Id":"26",
       "Label":"KF GS Bean Patch",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -1137,8 +639,9 @@ checkList = [
       "Id":"27",
       "Label":"KF GS House of Twins",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -1149,8 +652,8 @@ checkList = [
       "Label":"KF Shop Item 1",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1161,8 +664,8 @@ checkList = [
       "Label":"KF Shop Item 2",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1173,8 +676,8 @@ checkList = [
       "Label":"KF Shop Item 3",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1185,8 +688,8 @@ checkList = [
       "Label":"KF Shop Item 4",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1196,8 +699,9 @@ checkList = [
       "Id":"32",
       "Label":"LW Ocarina Memory Game",
       "Requirements":function ()
-{ocarina
-},
+		{
+			return obtainedItems.ocarina;
+		},
       "Tags":[
          
       ],
@@ -1207,8 +711,9 @@ checkList = [
       "Id":"33",
       "Label":"LW Target in Woods",
       "Requirements":function ()
-{slingshot
-},
+		{
+			return obtainedItems.slingshot;
+		},
       "Tags":[
          
       ],
@@ -1219,8 +724,8 @@ checkList = [
       "Label":"LW Near Shortcuts Grotto Chest",
       "Requirements":function ()
 		{
-		
-},
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -1231,8 +736,8 @@ checkList = [
       "Label":"Deku Theater Skull Mask",
       "Requirements":function ()
 		{
-		
-},
+			return false;
+		},
       "Tags":[
          
       ],
@@ -1243,8 +748,8 @@ checkList = [
       "Label":"Deku Theater Mask of Truth",
       "Requirements":function ()
 		{
-		
-},
+			return false;
+		},
       "Tags":[
          
       ],
@@ -1254,8 +759,9 @@ checkList = [
       "Id":"37",
       "Label":"LW Skull Kid",
       "Requirements":function ()
-{saria
-},
+		{
+			return obtainedItems.saria;
+		},
       "Tags":[
          
       ],
@@ -1266,8 +772,8 @@ checkList = [
       "Label":"LW Deku Scrub Near Bridge",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1278,8 +784,8 @@ checkList = [
       "Label":"LW Deku Scrub Near Deku Theater Left",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1290,8 +796,8 @@ checkList = [
       "Label":"LW Deku Scrub Near Deku Theater Right",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1301,8 +807,9 @@ checkList = [
       "Id":"41",
       "Label":"LW Deku Scrub Grotto Front",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1312,8 +819,9 @@ checkList = [
       "Id":"42",
       "Label":"LW Deku Scrub Grotto Rear",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1323,8 +831,9 @@ checkList = [
       "Id":"43",
       "Label":"LW GS Bean Patch Near Bridge",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -1334,8 +843,9 @@ checkList = [
       "Id":"44",
       "Label":"LW GS Bean Patch Near Theater",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -1345,8 +855,9 @@ checkList = [
       "Id":"45",
       "Label":"LW GS Above Theater",
       "Requirements":function ()
-{bean,minuet|saria
-},
+		{
+			return obtainedItems.bean && accessMeadowAdult();
+		},
       "Tags":[
          "gs"
       ],
@@ -1356,8 +867,9 @@ checkList = [
       "Id":"46",
       "Label":"SFM Wolfos Grotto Chest",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -1367,8 +879,9 @@ checkList = [
       "Id":"47",
       "Label":"SFM Deku Scrub Grotto Front",
       "Requirements":function ()
-{storm
-},
+		{
+			return obtainedItems.storm;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1378,8 +891,9 @@ checkList = [
       "Id":"48",
       "Label":"SFM Deku Scrub Grotto Rear",
       "Requirements":function ()
-{storm
-},
+		{
+			return obtainedItems.storm;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1389,8 +903,9 @@ checkList = [
       "Id":"49",
       "Label":"SFM GS",
       "Requirements":function ()
-{hookshot,saria|minuet
-},
+		{
+			return obtainedItems.hookshot && accessMeadowAdult();
+		},
       "Tags":[
          "gs"
       ],
@@ -1400,8 +915,9 @@ checkList = [
       "Id":"50",
       "Label":"HF Near Market Grotto Chest",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -1411,8 +927,9 @@ checkList = [
       "Id":"51",
       "Label":"HF Tektite Grotto Freestanding PoH",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb && (obtainedItems.scale || obtainedItems.iron);
+		},
       "Tags":[
          
       ],
@@ -1422,8 +939,9 @@ checkList = [
       "Id":"52",
       "Label":"HF Southeast Grotto Chest",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb
+		},
       "Tags":[
          
       ],
@@ -1434,8 +952,8 @@ checkList = [
       "Label":"HF Open Grotto Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1445,8 +963,9 @@ checkList = [
       "Id":"54",
       "Label":"HF Deku Scrub Grotto",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1456,8 +975,9 @@ checkList = [
       "Id":"55",
       "Label":"HF GS Cow Grotto",
       "Requirements":function ()
-{bomb,fireArrow|dins,magic
-},
+		{
+			return obtainedItems.bomb && (obtainedItems.fireArrow || obtainedItems.dins) && obtainedItems.magic;
+		},
       "Tags":[
          "gs"
       ],
@@ -1467,8 +987,9 @@ checkList = [
       "Id":"56",
       "Label":"HF GS Near Kak Grotto",
       "Requirements":function ()
-{bomb,hookshot|boomerang
-},
+		{
+			return obtainedItems.bomb && (obtainedItems.hookshot || obtainedItems.boomerang);
+		},
       "Tags":[
          "gs"
       ],
@@ -1479,8 +1000,8 @@ checkList = [
       "Label":"Market Shooting Gallery Reward",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1490,8 +1011,9 @@ checkList = [
       "Id":"58",
       "Label":"Market Bombchu Bowling First Prize",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -1501,8 +1023,9 @@ checkList = [
       "Id":"59",
       "Label":"Market Bombchu Bowling Second Prize",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -1513,8 +1036,8 @@ checkList = [
       "Label":"Market Lost Dog",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1524,7 +1047,8 @@ checkList = [
       "Id":"61",
       "Label":"Market Treasure Chest Game Reward",
       "Requirements":function ()
-{lens
+		{
+			return obtainedItems.lens;
 },
       "Tags":[
          
@@ -1535,8 +1059,9 @@ checkList = [
       "Id":"62",
       "Label":"Market 10 Big Poes",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle();
+		},
       "Tags":[
          
       ],
@@ -1547,8 +1072,8 @@ checkList = [
       "Label":"Market GS Guard House",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -1559,10 +1084,10 @@ checkList = [
       "Label":"Market Bazaar Item 1",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"market"
    },
@@ -1571,10 +1096,10 @@ checkList = [
       "Label":"Market Bazaar Item 2",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"market"
    },
@@ -1583,10 +1108,10 @@ checkList = [
       "Label":"Market Bazaar Item 3",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"market"
    },
@@ -1595,10 +1120,10 @@ checkList = [
       "Label":"Market Bazaar Item 4",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"market"
    },
@@ -1607,8 +1132,8 @@ checkList = [
       "Label":"Market Potion Shop Item 1",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1619,8 +1144,8 @@ checkList = [
       "Label":"Market Potion Shop Item 2",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1631,8 +1156,8 @@ checkList = [
       "Label":"Market Potion Shop Item 3",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1643,8 +1168,8 @@ checkList = [
       "Label":"Market Potion Shop Item 4",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1655,8 +1180,8 @@ checkList = [
       "Label":"Market Bombchu Shop Item 1",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1667,8 +1192,8 @@ checkList = [
       "Label":"Market Bombchu Shop Item 2",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1679,8 +1204,8 @@ checkList = [
       "Label":"Market Bombchu Shop Item 3",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1691,8 +1216,8 @@ checkList = [
       "Label":"Market Bombchu Shop Item 4",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -1702,8 +1227,9 @@ checkList = [
       "Id":"76",
       "Label":"ToT Light Arrows Cutscene",
       "Requirements":function ()
-{shadowMedallion,spiritMedallion
-},
+		{
+			return obtainedItems.shadowMedallion && obtainedItems.spiritMedallion;
+		},
       "Tags":[
          
       ],
@@ -1713,8 +1239,9 @@ checkList = [
       "Id":"77",
       "Label":"HC Great Fairy Reward",
       "Requirements":function ()
-{lullaby
-},
+		{
+			return obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -1725,8 +1252,8 @@ checkList = [
       "Label":"HC GS Tree",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -1736,8 +1263,9 @@ checkList = [
       "Id":"79",
       "Label":"HC GS Storms Grotto",
       "Requirements":function ()
-{storm,boomerang
-},
+		{
+			return obtainedItems.storm && obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -1748,8 +1276,8 @@ checkList = [
       "Label":"LLR Talons Chickens",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1760,8 +1288,8 @@ checkList = [
       "Label":"LLR Freestanding PoH",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1771,8 +1299,9 @@ checkList = [
       "Id":"82",
       "Label":"LLR Deku Scrub Grotto Left",
       "Requirements":function ()
-{bomb
-},
+		{
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1782,8 +1311,9 @@ checkList = [
       "Id":"83",
       "Label":"LLR Deku Scrub Grotto Center",
       "Requirements":function ()
-{bomb
-},
+		{
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1793,8 +1323,9 @@ checkList = [
       "Id":"84",
       "Label":"LLR Deku Scrub Grotto Right",
       "Requirements":function ()
-{bomb
-},
+		{
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -1804,7 +1335,8 @@ checkList = [
       "Id":"85",
       "Label":"LLR GS House Window",
       "Requirements":function ()
-{boomerang
+		{
+			return obtainedItems.boomerang
 },
       "Tags":[
          "gs"
@@ -1816,8 +1348,8 @@ checkList = [
       "Label":"LLR GS Tree",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -1828,8 +1360,8 @@ checkList = [
       "Label":"LLR GS Rain Shed",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -1839,8 +1371,9 @@ checkList = [
       "Id":"88",
       "Label":"LLR GS Back Wall",
       "Requirements":function ()
-{boomerang
-},
+		{
+			return obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -1851,8 +1384,8 @@ checkList = [
       "Label":"Kak Anju as Child",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1863,8 +1396,8 @@ checkList = [
       "Label":"Kak Anju as Adult",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1875,8 +1408,8 @@ checkList = [
       "Label":"Kak Impas House Freestanding PoH",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1887,8 +1420,8 @@ checkList = [
       "Label":"Kak Windmill Freestanding PoH",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1899,8 +1432,8 @@ checkList = [
       "Label":"Kak Man on Roof",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1910,8 +1443,9 @@ checkList = [
       "Id":"94",
       "Label":"Kak Open Grotto Chest",
       "Requirements":function ()
-{bomb
-},
+		{
+			return true;
+		},
       "Tags":[
          
       ],
@@ -1921,8 +1455,9 @@ checkList = [
       "Id":"95",
       "Label":"Kak Redead Grotto Chest",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -1932,7 +1467,8 @@ checkList = [
       "Id":"96",
       "Label":"Kak Shooting Gallery Reward",
       "Requirements":function ()
-{bow
+		{
+			return obtainedItems.bow;
 },
       "Tags":[
          
@@ -1944,8 +1480,8 @@ checkList = [
       "Label":"Kak 10 Gold Skulltula Reward",
       "Requirements":function ()
 		{
-		
-},
+			return false;
+		},
       "Tags":[
          
       ],
@@ -1956,8 +1492,8 @@ checkList = [
       "Label":"Kak 20 Gold Skulltula Reward",
       "Requirements":function ()
 		{
-		
-},
+			return false;
+		},
       "Tags":[
          
       ],
@@ -1968,8 +1504,8 @@ checkList = [
       "Label":"Kak 30 Gold Skulltula Reward",
       "Requirements":function ()
 		{
-		
-},
+			return false;
+		},
       "Tags":[
          
       ],
@@ -1980,8 +1516,8 @@ checkList = [
       "Label":"Kak 40 Gold Skulltula Reward",
       "Requirements":function ()
 		{
-		
-},
+			return false;
+		},
       "Tags":[
          
       ],
@@ -1992,8 +1528,8 @@ checkList = [
       "Label":"Kak 50 Gold Skulltula Reward",
       "Requirements":function ()
 		{
-		
-},
+			return false;
+		},
       "Tags":[
          
       ],
@@ -2004,8 +1540,8 @@ checkList = [
       "Label":"Kak GS Tree",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -2016,8 +1552,8 @@ checkList = [
       "Label":"Kak GS Guards House",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -2027,8 +1563,9 @@ checkList = [
       "Id":"104",
       "Label":"Kak GS Watchtower",
       "Requirements":function ()
-{slingshot,boomerang
-},
+		{
+			return obtainedItems.slingshot && obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -2039,8 +1576,8 @@ checkList = [
       "Label":"Kak GS Skulltula House",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -2051,8 +1588,8 @@ checkList = [
       "Label":"Kak GS House Under Construction",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -2062,8 +1599,9 @@ checkList = [
       "Id":"107",
       "Label":"Kak GS Above Impas House",
       "Requirements":function ()
-{hookshot:2
-},
+		{
+			return obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -2074,10 +1612,10 @@ checkList = [
       "Label":"Kak Bazaar Item 1",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"kak"
    },
@@ -2086,10 +1624,10 @@ checkList = [
       "Label":"Kak Bazaar Item 2",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"kak"
    },
@@ -2098,10 +1636,10 @@ checkList = [
       "Label":"Kak Bazaar Item 3",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"kak"
    },
@@ -2110,10 +1648,10 @@ checkList = [
       "Label":"Kak Bazaar Item 4",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
-         
+         "shop"
       ],
       "Location":"kak"
    },
@@ -2122,8 +1660,8 @@ checkList = [
       "Label":"Kak Potion Shop Item 1",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -2134,8 +1672,8 @@ checkList = [
       "Label":"Kak Potion Shop Item 2",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -2146,8 +1684,8 @@ checkList = [
       "Label":"Kak Potion Shop Item 3",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -2158,8 +1696,8 @@ checkList = [
       "Label":"Kak Potion Shop Item 4",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "shop"
       ],
@@ -2170,8 +1708,8 @@ checkList = [
       "Label":"Graveyard Shield Grave Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -2182,8 +1720,8 @@ checkList = [
       "Label":"Graveyard Heart Piece Grave Chest",
       "Requirements":function ()
 		{
-		
-},
+			return obtainedItems.sun;
+		},
       "Tags":[
          
       ],
@@ -2193,8 +1731,9 @@ checkList = [
       "Id":"118",
       "Label":"Graveyard Royal Familys Tomb Chest",
       "Requirements":function ()
-{lullaby,magic,fireArrow|dins
-},
+		{
+			return obtainedItems.lullaby && obtainedItems.magic && (obtainedItems.fireArrow || obtainedItems.dins);
+		},
       "Tags":[
          
       ],
@@ -2204,8 +1743,9 @@ checkList = [
       "Id":"119",
       "Label":"Graveyard Freestanding PoH",
       "Requirements":function ()
-{hookshot:2|bean
-},
+		{
+			return obtainedItems.hookshot === 2 || obtainedItems.bean;
+		},
       "Tags":[
          
       ],
@@ -2216,8 +1756,8 @@ checkList = [
       "Label":"Graveyard Dampe Gravedigging Tour",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -2228,8 +1768,8 @@ checkList = [
       "Label":"Graveyard Hookshot Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -2240,8 +1780,8 @@ checkList = [
       "Label":"Graveyard Dampe Race Freestanding PoH",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -2251,8 +1791,9 @@ checkList = [
       "Id":"123",
       "Label":"Graveyard GS Bean Patch",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -2262,8 +1803,9 @@ checkList = [
       "Id":"124",
       "Label":"Graveyard GS Wall",
       "Requirements":function ()
-{boomerang
-},
+		{
+			return obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -2274,8 +1816,8 @@ checkList = [
       "Label":"DMT Freestanding PoH",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -2285,8 +1827,9 @@ checkList = [
       "Id":"126",
       "Label":"DMT Chest",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -2296,8 +1839,9 @@ checkList = [
       "Id":"127",
       "Label":"DMT Storms Grotto Chest",
       "Requirements":function ()
-{storm
-},
+		{
+			return obtainedItems.storm;
+		},
       "Tags":[
          
       ],
@@ -2307,8 +1851,9 @@ checkList = [
       "Id":"128",
       "Label":"DMT Great Fairy Reward",
       "Requirements":function ()
-{lullaby,bomb|hammer
-},
+		{
+			return obtainedItems.lullaby && (obtainedItems.bomb || obtainedItems.hammer);
+		},
       "Tags":[
          
       ],
@@ -2318,8 +1863,9 @@ checkList = [
       "Id":"129",
       "Label":"DMT Biggoron",
       "Requirements":function ()
-{claim
-},
+		{
+			return obtainedItems.claim;
+		},
       "Tags":[
          
       ],
@@ -2329,8 +1875,9 @@ checkList = [
       "Id":"130",
       "Label":"DMT GS Near Kak",
       "Requirements":function ()
-{bomb|hammer
-},
+		{
+			return obtainedItems.bomb || obtainedItems.hammer;
+		},
       "Tags":[
          "gs"
       ],
@@ -2340,8 +1887,9 @@ checkList = [
       "Id":"131",
       "Label":"DMT GS Bean Patch",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle() && (obtainedItems.bomb || obtainedItems.strength);
+		},
       "Tags":[
          "gs"
       ],
@@ -2351,8 +1899,9 @@ checkList = [
       "Id":"132",
       "Label":"DMT GS Above Dodongos Cavern",
       "Requirements":function ()
-{hammer
-},
+		{
+			return obtainedItems.hammer;
+		},
       "Tags":[
          "gs"
       ],
@@ -2362,8 +1911,9 @@ checkList = [
       "Id":"133",
       "Label":"DMT GS Falling Rocks Path",
       "Requirements":function ()
-{hammer
-},
+		{
+			return obtainedItems.hammer;
+		},
       "Tags":[
          "gs"
       ],
@@ -2373,8 +1923,9 @@ checkList = [
       "Id":"134",
       "Label":"GC Darunias Joy",
       "Requirements":function ()
-{saria,lullaby
-},
+		{
+			return obtainedItems.saria && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -2384,8 +1935,9 @@ checkList = [
       "Id":"135",
       "Label":"GC Pot Freestanding PoH",
       "Requirements":function ()
-{bomb,lullaby
-},
+		{
+			return obtainedItems.bomb && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -2395,8 +1947,9 @@ checkList = [
       "Id":"136",
       "Label":"GC Rolling Goron as Child",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -2406,8 +1959,9 @@ checkList = [
       "Id":"137",
       "Label":"GC Rolling Goron as Adult",
       "Requirements":function ()
-{bomb|bow
-},
+		{
+			return obtainedItems.bomb || obtainedItems.bow;
+		},
       "Tags":[
          
       ],
@@ -2417,8 +1971,9 @@ checkList = [
       "Id":"138",
       "Label":"GC Maze Left Chest",
       "Requirements":function ()
-{hammer
-},
+		{
+			return obtainedItems.hammer;
+		},
       "Tags":[
          
       ],
@@ -2428,7 +1983,8 @@ checkList = [
       "Id":"139",
       "Label":"GC Maze Right Chest",
       "Requirements":function ()
-{hammer|bomb
+		{
+			return obtainedItems.hammer || obtainedItems.bomb;
 },
       "Tags":[
          
@@ -2439,8 +1995,9 @@ checkList = [
       "Id":"140",
       "Label":"GC Maze Center Chest",
       "Requirements":function ()
-{hammer|bomb
-},
+		{
+			return obtainedItems.hammer || obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -2450,8 +2007,9 @@ checkList = [
       "Id":"141",
       "Label":"GC Deku Scrub Grotto Left",
       "Requirements":function ()
-{time,hookshot
-},
+		{
+			return obtainedItems.time && obtainedItems.hookshot;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2461,8 +2019,9 @@ checkList = [
       "Id":"142",
       "Label":"GC Deku Scrub Grotto Center",
       "Requirements":function ()
-{time,hookshot
-},
+		{
+			return obtainedItems.time && obtainedItems.hookshot;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2472,8 +2031,9 @@ checkList = [
       "Id":"143",
       "Label":"GC Deku Scrub Grotto Right",
       "Requirements":function ()
-{time,hookshot
-},
+		{
+			return obtainedItems.time && obtainedItems.hookshot;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2484,8 +2044,8 @@ checkList = [
       "Label":"GC GS Center Platform",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -2495,8 +2055,9 @@ checkList = [
       "Id":"145",
       "Label":"GC GS Boulder Maze",
       "Requirements":function ()
-{hammer|bomb
-},
+		{
+			return obtainedItems.hammer || obtainedItems.bomb;
+		},
       "Tags":[
          "gs"
       ],
@@ -2506,8 +2067,9 @@ checkList = [
       "Id":"146",
       "Label":"GC Shop Item 1",
       "Requirements":function ()
-{bomb|lullaby
-},
+		{
+			return obtainedItems.bomb || obtainedItems.lullaby;
+		},
       "Tags":[
          "shop"
       ],
@@ -2517,8 +2079,9 @@ checkList = [
       "Id":"147",
       "Label":"GC Shop Item 2",
       "Requirements":function ()
-{bomb|lullaby
-},
+		{
+			return obtainedItems.bomb || obtainedItems.lullaby;
+		},
       "Tags":[
          "shop"
       ],
@@ -2528,8 +2091,9 @@ checkList = [
       "Id":"148",
       "Label":"GC Shop Item 3",
       "Requirements":function ()
-{bomb|lullaby
-},
+		{
+			return obtainedItems.bomb || obtainedItems.lullaby;
+		},
       "Tags":[
          "shop"
       ],
@@ -2539,8 +2103,9 @@ checkList = [
       "Id":"149",
       "Label":"GC Shop Item 4",
       "Requirements":function ()
-{bomb|lullaby
-},
+		{
+			return obtainedItems.bomb || obtainedItems.lullaby;
+		},
       "Tags":[
          "shop"
       ],
@@ -2550,8 +2115,9 @@ checkList = [
       "Id":"150",
       "Label":"DMC Volcano Freestanding PoH",
       "Requirements":function ()
-{hover|bean
-},
+		{
+			return obtainedItems.hover || obtainedItems.bean;
+		},
       "Tags":[
          
       ],
@@ -2561,8 +2127,9 @@ checkList = [
       "Id":"151",
       "Label":"DMC Wall Freestanding PoH",
       "Requirements":function ()
-{hammer|bomb
-},
+		{
+			return obtainedItems.hammer || obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -2572,8 +2139,9 @@ checkList = [
       "Id":"152",
       "Label":"DMC Upper Grotto Chest",
       "Requirements":function ()
-{hammer|bomb
-},
+		{
+			return obtainedItems.hammer || obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -2583,8 +2151,9 @@ checkList = [
       "Id":"153",
       "Label":"DMC Great Fairy Reward",
       "Requirements":function ()
-{hammer,lullaby
-},
+		{
+			return obtainedItems.hammer && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -2594,8 +2163,9 @@ checkList = [
       "Id":"154",
       "Label":"DMC Deku Scrub",
       "Requirements":function ()
-{hammer,storm
-},
+		{
+			return HaveRequiredItem("158");
+		},
       "Tags":[
          "scrub"
       ],
@@ -2605,8 +2175,9 @@ checkList = [
       "Id":"155",
       "Label":"DMC Deku Scrub Grotto Left",
       "Requirements":function ()
-{hammer
-},
+		{
+			return obtainedItems.hammer;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2616,8 +2187,9 @@ checkList = [
       "Id":"156",
       "Label":"DMC Deku Scrub Grotto Center",
       "Requirements":function ()
-{hammer
-},
+		{
+			return obtainedItems.hammer;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2627,8 +2199,9 @@ checkList = [
       "Id":"157",
       "Label":"DMC Deku Scrub Grotto Right",
       "Requirements":function ()
-{hammer
-},
+		{
+			return obtainedItems.hammer;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2638,8 +2211,9 @@ checkList = [
       "Id":"158",
       "Label":"DMC GS Crate",
       "Requirements":function ()
-{bomb
-},
+		{
+			return obtainedItems.bomb;
+		},
       "Tags":[
          "gs"
       ],
@@ -2649,8 +2223,9 @@ checkList = [
       "Id":"159",
       "Label":"DMC GS Bean Patch",
       "Requirements":function ()
-{bolero,emptyBottle,bottle|lullaby
-},
+		{
+			return obtainedItems.bolero && haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -2660,8 +2235,9 @@ checkList = [
       "Id":"160",
       "Label":"ZR Magic Bean Salesman",
       "Requirements":function ()
-{bomb|scale
-},
+		{
+			return accessRiver();
+		},
       "Tags":[
          
       ],
@@ -2671,8 +2247,9 @@ checkList = [
       "Id":"161",
       "Label":"ZR Open Grotto Chest",
       "Requirements":function ()
-{bomb|scale
-},
+		{
+			return accessRiver();
+		},
       "Tags":[
          
       ],
@@ -2683,8 +2260,8 @@ checkList = [
       "Label":"ZR Frogs in the Rain",
       "Requirements":function ()
 		{
-		
-},
+			return accessRiver();
+		},
       "Tags":[
          
       ],
@@ -2695,8 +2272,8 @@ checkList = [
       "Label":"ZR Frogs Ocarina Game",
       "Requirements":function ()
 		{
-		
-},
+			return accessRiver();
+		},
       "Tags":[
          
       ],
@@ -2706,8 +2283,9 @@ checkList = [
       "Id":"164",
       "Label":"ZR Near Open Grotto Freestanding PoH",
       "Requirements":function ()
-{bomb|scale
-},
+		{
+			return accessRiver();
+		},
       "Tags":[
          
       ],
@@ -2717,8 +2295,9 @@ checkList = [
       "Id":"165",
       "Label":"ZR Near Domain Freestanding PoH",
       "Requirements":function ()
-{bomb|scale
-},
+		{
+			return accessRiver();
+		},
       "Tags":[
          
       ],
@@ -2728,8 +2307,9 @@ checkList = [
       "Id":"166",
       "Label":"ZR Deku Scrub Grotto Front",
       "Requirements":function ()
-{bomb|scale,storm
-},
+		{
+			return accessRiver() && obtainedItems.storm;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2739,8 +2319,9 @@ checkList = [
       "Id":"167",
       "Label":"ZR Deku Scrub Grotto Rear",
       "Requirements":function ()
-{bomb|scale,storm
-},
+		{
+			return accessRiver() && obtainedItems.storm;
+		},
       "Tags":[
          "scrub"
       ],
@@ -2751,8 +2332,8 @@ checkList = [
       "Label":"ZR GS Tree",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -2762,7 +2343,8 @@ checkList = [
       "Id":"169",
       "Label":"ZR GS Ladder",
       "Requirements":function ()
-{bomb|scale
+		{
+			return accessRiver();
 },
       "Tags":[
          "gs"
@@ -2773,8 +2355,9 @@ checkList = [
       "Id":"170",
       "Label":"ZR GS Near Raised Grottos",
       "Requirements":function ()
-{bomb|scale,hookshot
-},
+		{
+			return accessRiver() && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -2784,8 +2367,9 @@ checkList = [
       "Id":"171",
       "Label":"ZR GS Above Bridge",
       "Requirements":function ()
-{bomb|scale,hookshot
-},
+		{
+			return accessRiver() && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -2795,8 +2379,9 @@ checkList = [
       "Id":"172",
       "Label":"ZD Diving Minigame",
       "Requirements":function ()
-{bomb|scale,lullaby
-},
+		{
+			return accessDomain();
+		},
       "Tags":[
          
       ],
@@ -2806,8 +2391,9 @@ checkList = [
       "Id":"173",
       "Label":"ZD Chest",
       "Requirements":function ()
-{bomb|scale,lullaby
-},
+		{
+			return accessDomain();
+		},
       "Tags":[
          
       ],
@@ -2817,8 +2403,9 @@ checkList = [
       "Id":"174",
       "Label":"ZD King Zora Thawed",
       "Requirements":function ()
-{bomb|scale,lullaby,bottle
-},
+		{
+			return accessDomain() && haveEmptyBottle();
+		},
       "Tags":[
          
       ],
@@ -2828,8 +2415,9 @@ checkList = [
       "Id":"175",
       "Label":"ZD GS Frozen Waterfall",
       "Requirements":function ()
-{lullaby
-},
+		{
+			return accessDomain() && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -2839,8 +2427,9 @@ checkList = [
       "Id":"176",
       "Label":"ZD Shop Item 1",
       "Requirements":function ()
-{bomb|scale,lullaby
-},
+		{
+			return accessDomain();
+		},
       "Tags":[
          "shop"
       ],
@@ -2850,8 +2439,9 @@ checkList = [
       "Id":"177",
       "Label":"ZD Shop Item 2",
       "Requirements":function ()
-{bomb|scale,lullaby
-},
+		{
+			return accessDomain();
+		},
       "Tags":[
          "shop"
       ],
@@ -2861,8 +2451,9 @@ checkList = [
       "Id":"178",
       "Label":"ZD Shop Item 3",
       "Requirements":function ()
-{bomb|scale,lullaby
-},
+		{
+			return accessDomain();
+		},
       "Tags":[
          "shop"
       ],
@@ -2872,8 +2463,9 @@ checkList = [
       "Id":"179",
       "Label":"ZD Shop Item 4",
       "Requirements":function ()
-{bomb|scale,lullaby
-},
+		{
+			return accessDomain();
+		},
       "Tags":[
          "shop"
       ],
@@ -2883,8 +2475,9 @@ checkList = [
       "Id":"180",
       "Label":"ZF Great Fairy Reward",
       "Requirements":function ()
-{bomb|scale,lullaby
-},
+		{
+			return accessFontain() && obtainedItems.bomb && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -2894,8 +2487,9 @@ checkList = [
       "Id":"181",
       "Label":"ZF Iceberg Freestanding PoH",
       "Requirements":function ()
-{lullaby
-},
+		{
+			return accessFontain();
+		},
       "Tags":[
          
       ],
@@ -2905,8 +2499,9 @@ checkList = [
       "Id":"182",
       "Label":"ZF Bottom Freestanding PoH",
       "Requirements":function ()
-{lullaby
-},
+		{
+			return accessFontain() && obtainedItems.iron;
+		},
       "Tags":[
          
       ],
@@ -2916,8 +2511,9 @@ checkList = [
       "Id":"183",
       "Label":"ZF GS Above the Log",
       "Requirements":function ()
-{lullaby,letter,boomerang
-},
+		{
+			return accessFontain() && obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -2927,8 +2523,9 @@ checkList = [
       "Id":"184",
       "Label":"ZF GS Tree",
       "Requirements":function ()
-{bomb|scale,lullaby,letter
-},
+		{
+			return accessFontain();
+		},
       "Tags":[
          "gs"
       ],
@@ -2938,8 +2535,9 @@ checkList = [
       "Id":"185",
       "Label":"ZF GS Hidden Cave",
       "Requirements":function ()
-{bomb|scale,lullaby,strength:2
-},
+		{
+			return accessFontain() && obtainedItems.strength >= 2;
+		},
       "Tags":[
          "gs"
       ],
@@ -2949,8 +2547,9 @@ checkList = [
       "Id":"186",
       "Label":"LH Underwater Item",
       "Requirements":function ()
-{scale
-},
+		{
+			return obtainedItems.scale;
+		},
       "Tags":[
          
       ],
@@ -2961,8 +2560,8 @@ checkList = [
       "Label":"LH Child Fishing",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -2972,8 +2571,9 @@ checkList = [
       "Id":"188",
       "Label":"LH Adult Fishing",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return obtainedItems.hookshot;
+		},
       "Tags":[
          
       ],
@@ -2983,8 +2583,9 @@ checkList = [
       "Id":"189",
       "Label":"LH Lab Dive",
       "Requirements":function ()
-{scale:2
-},
+		{
+			return obtainedItems.scale === 2;
+		},
       "Tags":[
          
       ],
@@ -2994,8 +2595,9 @@ checkList = [
       "Id":"190",
       "Label":"LH Freestanding PoH",
       "Requirements":function ()
-{hookshot|bean
-},
+		{
+			return obtainedItems.hookshot || obtainedItems.bean;
+		},
       "Tags":[
          
       ],
@@ -3005,8 +2607,9 @@ checkList = [
       "Id":"191",
       "Label":"LH Sun",
       "Requirements":function ()
-{bow
-},
+		{
+			return obtainedItems.bow && checkedList.indexOf("5") > -1;
+		},
       "Tags":[
          
       ],
@@ -3017,8 +2620,8 @@ checkList = [
       "Label":"LH Deku Scrub Grotto Left",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -3029,8 +2632,8 @@ checkList = [
       "Label":"LH Deku Scrub Grotto Center",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -3041,8 +2644,8 @@ checkList = [
       "Label":"LH Deku Scrub Grotto Right",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -3052,8 +2655,9 @@ checkList = [
       "Id":"195",
       "Label":"LH GS Bean Patch",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -3063,8 +2667,9 @@ checkList = [
       "Id":"196",
       "Label":"LH GS Lab Wall",
       "Requirements":function ()
-{boomerang
-},
+		{
+			return obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -3075,8 +2680,8 @@ checkList = [
       "Label":"LH GS Small Island",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "gs"
       ],
@@ -3086,8 +2691,9 @@ checkList = [
       "Id":"198",
       "Label":"LH GS Lab Crate",
       "Requirements":function ()
-{iron,hookshot
-},
+		{
+			return obtainedItems.iron && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -3097,8 +2703,9 @@ checkList = [
       "Id":"199",
       "Label":"LH GS Tree",
       "Requirements":function ()
-{hookshot:2
-},
+		{
+			return obtainedItems.hookshot === 2;
+		},
       "Tags":[
          "gs"
       ],
@@ -3109,8 +2716,8 @@ checkList = [
       "Label":"GV Crate Freestanding PoH",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -3121,8 +2728,8 @@ checkList = [
       "Label":"GV Waterfall Freestanding PoH",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -3132,8 +2739,9 @@ checkList = [
       "Id":"202",
       "Label":"GV Chest",
       "Requirements":function ()
-{hammer
-},
+		{
+			return obtainedItems.hammer && accessGerudoFortress();
+		},
       "Tags":[
          
       ],
@@ -3143,8 +2751,9 @@ checkList = [
       "Id":"203",
       "Label":"GV Deku Scrub Grotto Front",
       "Requirements":function ()
-{storm
-},
+		{
+			return accessGerudoFortress() && obtainedItems.storm;
+		},
       "Tags":[
          "scrub"
       ],
@@ -3154,8 +2763,9 @@ checkList = [
       "Id":"204",
       "Label":"GV Deku Scrub Grotto Rear",
       "Requirements":function ()
-{storm
-},
+		{
+			return accessGerudoFortress() && obtainedItems.storm;
+		},
       "Tags":[
          "scrub"
       ],
@@ -3165,8 +2775,9 @@ checkList = [
       "Id":"205",
       "Label":"GV GS Small Bridge",
       "Requirements":function ()
-{boomerang
-},
+		{
+			return obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -3176,8 +2787,9 @@ checkList = [
       "Id":"206",
       "Label":"GV GS Bean Patch",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -3187,8 +2799,9 @@ checkList = [
       "Id":"207",
       "Label":"GV GS Behind Tent",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return accessGerudoFortress() && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -3198,8 +2811,9 @@ checkList = [
       "Id":"208",
       "Label":"GV GS Pillar",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return accessGerudoFortress() && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -3209,8 +2823,9 @@ checkList = [
       "Id":"209",
       "Label":"GF Chest",
       "Requirements":function ()
-{hookshot:2|hover
-},
+		{
+			return accessGerudoFortress() && (obtainedItems.hookshot || obtainedItems.hover);
+		},
       "Tags":[
          
       ],
@@ -3220,8 +2835,9 @@ checkList = [
       "Id":"210",
       "Label":"GF HBA 1000 Points",
       "Requirements":function ()
-{epona,gerudoCard
-},
+		{
+			return accessGerudoFortress() && obtainedItems.epona && obtainedItems.gerudoCard;
+		},
       "Tags":[
          
       ],
@@ -3231,8 +2847,9 @@ checkList = [
       "Id":"211",
       "Label":"GF HBA 1500 Points",
       "Requirements":function ()
-{epona,gerudoCard
-},
+		{
+			return accessGerudoFortress() && obtainedItems.epona && obtainedItems.gerudoCard;
+		},
       "Tags":[
          
       ],
@@ -3242,8 +2859,9 @@ checkList = [
       "Id":"212",
       "Label":"GF GS Top Floor",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return accessGerudoFortress() && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -3253,8 +2871,9 @@ checkList = [
       "Id":"213",
       "Label":"GF GS Archery Range",
       "Requirements":function ()
-{gerudoCard
-},
+		{
+			return accessGerudoFortress() && obtainedItems.gerudoCard;
+		},
       "Tags":[
          "gs"
       ],
@@ -3264,8 +2883,9 @@ checkList = [
       "Id":"214",
       "Label":"Wasteland Chest",
       "Requirements":function ()
-{hover|hookshot:2
-},
+		{
+			return accessWasteland() && (obtainedItems.hover || obtainedItems.hookshot === 2);
+		},
       "Tags":[
          
       ],
@@ -3275,8 +2895,9 @@ checkList = [
       "Id":"215",
       "Label":"Wasteland GS",
       "Requirements":function ()
-{hover|hookshot:2,magic,dins|fireArrow
-},
+		{
+			return HaveRequiredItem("214") && obtainedItems.magic && (obtainedItems.dins || obtainedItems.fireArrow);
+		},
       "Tags":[
          "gs"
       ],
@@ -3286,8 +2907,9 @@ checkList = [
       "Id":"216",
       "Label":"Colossus Great Fairy Reward",
       "Requirements":function ()
-{lullaby,bomb
-},
+		{
+			return accessColossus() && obtainedItems.lullaby && obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -3297,8 +2919,9 @@ checkList = [
       "Id":"217",
       "Label":"Colossus Freestanding PoH",
       "Requirements":function ()
-{requiem,bean
-},
+		{
+			return accessColossus() && obtainedItems.bean;
+		},
       "Tags":[
          
       ],
@@ -3308,8 +2931,9 @@ checkList = [
       "Id":"218",
       "Label":"Colossus Deku Scrub Grotto Front",
       "Requirements":function ()
-{strength:2
-},
+		{
+			return accessColossus() && obtainedItems.strength >= 2;
+		},
       "Tags":[
          "scrub"
       ],
@@ -3319,8 +2943,9 @@ checkList = [
       "Id":"219",
       "Label":"Colossus Deku Scrub Grotto Rear",
       "Requirements":function ()
-{strength:2
-},
+		{
+			return accessColossus() && obtainedItems.strength >= 2;
+		},
       "Tags":[
          "scrub"
       ],
@@ -3330,8 +2955,9 @@ checkList = [
       "Id":"220",
       "Label":"Colossus GS Bean Patch",
       "Requirements":function ()
-{emptyBottle,bottle|lullaby
-},
+		{
+			return accessColossus() && haveEmptyBottle();
+		},
       "Tags":[
          "gs"
       ],
@@ -3341,8 +2967,9 @@ checkList = [
       "Id":"221",
       "Label":"Colossus GS Tree",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return accessColossus() && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -3352,8 +2979,9 @@ checkList = [
       "Id":"222",
       "Label":"Colossus GS Hill",
       "Requirements":function ()
-{hookshot|bean
-},
+		{
+			return accessColossus() && (obtainedItems.hookshot || obtainedItems.bean);
+		},
       "Tags":[
          "gs"
       ],
@@ -3363,8 +2991,9 @@ checkList = [
       "Id":"223",
       "Label":"OGC Great Fairy Reward",
       "Requirements":function ()
-{strength:3,lullaby
-},
+		{
+			return obtainedItems.strength ===3 && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -3374,8 +3003,9 @@ checkList = [
       "Id":"224",
       "Label":"OGC GS",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -3386,8 +3016,8 @@ checkList = [
       "Label":"Deku Tree Map Chest",
       "Requirements":function ()
 		{
-		
-},
+			return accessDeku();
+		},
       "Tags":[
          
       ],
@@ -3398,8 +3028,8 @@ checkList = [
       "Label":"Deku Tree Slingshot Room Side Chest",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("225");
+		},
       "Tags":[
          
       ],
@@ -3410,8 +3040,8 @@ checkList = [
       "Label":"Deku Tree Slingshot Chest",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("225");
+		},
       "Tags":[
          
       ],
@@ -3422,8 +3052,8 @@ checkList = [
       "Label":"Deku Tree Compass Chest",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("225");
+		},
       "Tags":[
          
       ],
@@ -3434,8 +3064,8 @@ checkList = [
       "Label":"Deku Tree Compass Room Side Chest",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("225");
+		},
       "Tags":[
          
       ],
@@ -3446,8 +3076,8 @@ checkList = [
       "Label":"Deku Tree Basement Chest",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("225");
+		},
       "Tags":[
          
       ],
@@ -3458,8 +3088,8 @@ checkList = [
       "Label":"Deku Tree GS Compass Room",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("225");
+		},
       "Tags":[
          "gs"
       ],
@@ -3469,8 +3099,9 @@ checkList = [
       "Id":"232",
       "Label":"Deku Tree GS Basement Vines",
       "Requirements":function ()
-{slingshot|boomerang
-},
+		{
+			return HaveRequiredItem("225") && obtainedItems.slingshot || obtainedItems.boomerang;
+		},
       "Tags":[
          "gs"
       ],
@@ -3481,8 +3112,8 @@ checkList = [
       "Label":"Deku Tree GS Basement Gate",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("225");
+		},
       "Tags":[
          "gs"
       ],
@@ -3492,8 +3123,9 @@ checkList = [
       "Id":"234",
       "Label":"Deku Tree GS Basement Back Room",
       "Requirements":function ()
-{slingshot,bomb
-},
+		{
+			return HaveRequiredItem("225") && obtainedItems.slingshot && obtainedItems.bomb;
+		},
       "Tags":[
          "gs"
       ],
@@ -3503,8 +3135,9 @@ checkList = [
       "Id":"235",
       "Label":"Deku Tree Queen Gohma Heart",
       "Requirements":function ()
-{slingshot
-},
+		{
+			return HaveRequiredItem("225") && obtainedItems.slingshot;
+		},
       "Tags":[
          
       ],
@@ -3514,8 +3147,9 @@ checkList = [
       "Id":"236",
       "Label":"Dodongos Cavern Map Chest",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return accessDc() && obtainedItems.bomb || obtainedItems.strength || obtainedItems.hammer;
+		},
       "Tags":[
          
       ],
@@ -3525,8 +3159,9 @@ checkList = [
       "Id":"237",
       "Label":"Dodongos Cavern Compass Chest",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return HaveRequiredItem("236");
+		},
       "Tags":[
          
       ],
@@ -3534,10 +3169,11 @@ checkList = [
    },
    {
       "Id":"238",
-      "Label":"Dodongos Cavern Bomb Flower Platform Chest",
+      "Label":"Dodongos Cavern bomb Flower Platform Chest",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          
       ],
@@ -3545,10 +3181,11 @@ checkList = [
    },
    {
       "Id":"239",
-      "Label":"Dodongos Cavern Bomb Bag Chest",
+      "Label":"Dodongos Cavern bomb Bag Chest",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          
       ],
@@ -3558,7 +3195,8 @@ checkList = [
       "Id":"240",
       "Label":"Dodongos Cavern End of Bridge Chest",
       "Requirements":function ()
-{bomb|strength:1
+		{
+			return HaveRequiredItem("237");
 },
       "Tags":[
          
@@ -3569,8 +3207,9 @@ checkList = [
       "Id":"241",
       "Label":"Dodongos Cavern Deku Scrub Side Room Near Dodongos",
       "Requirements":function ()
-{bomb
-},
+		{
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          "scrub"
       ],
@@ -3581,8 +3220,8 @@ checkList = [
       "Label":"Dodongos Cavern Deku Scrub Lobby",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          "scrub"
       ],
@@ -3590,10 +3229,11 @@ checkList = [
    },
    {
       "Id":"243",
-      "Label":"Dodongos Cavern Deku Scrub Near Bomb Bag Left",
+      "Label":"Dodongos Cavern Deku Scrub Near bomb Bag Left",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          "scrub"
       ],
@@ -3601,10 +3241,11 @@ checkList = [
    },
    {
       "Id":"244",
-      "Label":"Dodongos Cavern Deku Scrub Near Bomb Bag Right",
+      "Label":"Dodongos Cavern Deku Scrub Near bomb Bag Right",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          "scrub"
       ],
@@ -3614,8 +3255,9 @@ checkList = [
       "Id":"245",
       "Label":"Dodongos Cavern GS Side Room Near Lower Lizalfos",
       "Requirements":function ()
-{hookshot|boomerang,bomb|strength:1
-},
+		{
+			return HaveRequiredItem("237") && (obtainedItems.hookshot || obtainedItems.boomerang);
+		},
       "Tags":[
          "gs"
       ],
@@ -3625,8 +3267,9 @@ checkList = [
       "Id":"246",
       "Label":"Dodongos Cavern GS Scarecrow",
       "Requirements":function ()
-{bomb|strength:1,hookshot
-},
+		{
+			return HaveRequiredItem("237") && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -3636,8 +3279,9 @@ checkList = [
       "Id":"247",
       "Label":"Dodongos Cavern GS Alcove Above Stairs",
       "Requirements":function ()
-{bomb|strength:1,hookshot|boomerang
-},
+		{
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          "gs"
       ],
@@ -3647,8 +3291,9 @@ checkList = [
       "Id":"248",
       "Label":"Dodongos Cavern GS Vines Above Stairs",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return HaveRequiredItem("237");
+		},
       "Tags":[
          "gs"
       ],
@@ -3658,8 +3303,9 @@ checkList = [
       "Id":"249",
       "Label":"Dodongos Cavern GS Back Room",
       "Requirements":function ()
-{bomb|strength:1
-},
+		{
+			return HaveRequiredItem("237") && obtainedItems.bomb;
+		},
       "Tags":[
          "gs"
       ],
@@ -3669,8 +3315,9 @@ checkList = [
       "Id":"250",
       "Label":"Dodongos Cavern Boss Room Chest",
       "Requirements":function ()
-{bomb
-},
+		{
+			return HaveRequiredItem("249");
+		},
       "Tags":[
          
       ],
@@ -3680,8 +3327,9 @@ checkList = [
       "Id":"251",
       "Label":"Dodongos Cavern King Dodongo Heart",
       "Requirements":function ()
-{bomb
-},
+		{
+			return HaveRequiredItem("249");
+		},
       "Tags":[
          
       ],
@@ -3689,10 +3337,11 @@ checkList = [
    },
    {
       "Id":"252",
-      "Label":"Jabu Jabus Belly Boomerang Chest",
+      "Label":"Jabu Jabus Belly boomerang Chest",
       "Requirements":function ()
-{letter,lullaby
-},
+		{
+			return accessJabu();
+		},
       "Tags":[
          
       ],
@@ -3702,8 +3351,9 @@ checkList = [
       "Id":"253",
       "Label":"Jabu Jabus Belly Map Chest",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return accessJabu() && obtainedItems.boomerang;
+		},
       "Tags":[
          
       ],
@@ -3713,8 +3363,9 @@ checkList = [
       "Id":"254",
       "Label":"Jabu Jabus Belly Compass Chest",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return HaveRequiredItem("253");
+		},
       "Tags":[
          
       ],
@@ -3724,8 +3375,9 @@ checkList = [
       "Id":"255",
       "Label":"Jabu Jabus Belly Deku Scrub",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return HaveRequiredItem("253");
+		},
       "Tags":[
          "scrub"
       ],
@@ -3735,8 +3387,9 @@ checkList = [
       "Id":"256",
       "Label":"Jabu Jabus Belly GS Water Switch Room",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return HaveRequiredItem("253");
+		},
       "Tags":[
          "gs"
       ],
@@ -3746,8 +3399,9 @@ checkList = [
       "Id":"257",
       "Label":"Jabu Jabus Belly GS Lobby Basement Lower",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return HaveRequiredItem("253");
+		},
       "Tags":[
          "gs"
       ],
@@ -3757,8 +3411,9 @@ checkList = [
       "Id":"258",
       "Label":"Jabu Jabus Belly GS Lobby Basement Upper",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return HaveRequiredItem("253");
+		},
       "Tags":[
          "gs"
       ],
@@ -3768,8 +3423,9 @@ checkList = [
       "Id":"259",
       "Label":"Jabu Jabus Belly GS Near Boss",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return HaveRequiredItem("253");
+		},
       "Tags":[
          "gs"
       ],
@@ -3779,8 +3435,9 @@ checkList = [
       "Id":"260",
       "Label":"Jabu Jabus Belly Barinade Heart",
       "Requirements":function ()
-{letter,lullaby,boomerang
-},
+		{
+			return HaveRequiredItem("253");
+		},
       "Tags":[
          
       ],
@@ -3790,8 +3447,9 @@ checkList = [
       "Id":"261",
       "Label":"Bottom of the Well Front Left Fake Wall Chest",
       "Requirements":function ()
-{storm
-},
+		{
+			return accessBotw();
+		},
       "Tags":[
          
       ],
@@ -3801,8 +3459,9 @@ checkList = [
       "Id":"262",
       "Label":"Bottom of the Well Front Center Bombable Chest",
       "Requirements":function ()
-{storm,bomb
-},
+		{
+			return accessBotw() && obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -3812,8 +3471,9 @@ checkList = [
       "Id":"263",
       "Label":"Bottom of the Well Back Left Bombable Chest",
       "Requirements":function ()
-{storm,bomb
-},
+		{
+			return HaveRequiredItem("262");
+		},
       "Tags":[
          
       ],
@@ -3823,8 +3483,9 @@ checkList = [
       "Id":"264",
       "Label":"Bottom of the Well Underwater Left Chest",
       "Requirements":function ()
-{storm,lullaby
-},
+		{
+			return accessBotw() && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -3834,7 +3495,8 @@ checkList = [
       "Id":"265",
       "Label":"Bottom of the Well Freestanding Key",
       "Requirements":function ()
-{storm
+		{
+			return accessBotw();
 },
       "Tags":[
          
@@ -3845,8 +3507,9 @@ checkList = [
       "Id":"266",
       "Label":"Bottom of the Well Compass Chest",
       "Requirements":function ()
-{storm
-},
+		{
+			return accessBotw();
+		},
       "Tags":[
          
       ],
@@ -3856,8 +3519,9 @@ checkList = [
       "Id":"267",
       "Label":"Bottom of the Well Center Skulltula Chest",
       "Requirements":function ()
-{storm
-},
+		{
+			return accessBotw();
+		},
       "Tags":[
          
       ],
@@ -3867,8 +3531,9 @@ checkList = [
       "Id":"268",
       "Label":"Bottom of the Well Right Bottom Fake Wall Chest",
       "Requirements":function ()
-{storm
-},
+		{
+			return accessBotw();
+		},
       "Tags":[
          
       ],
@@ -3878,8 +3543,9 @@ checkList = [
       "Id":"269",
       "Label":"Bottom of the Well Fire Keese Chest",
       "Requirements":function ()
-{storm
-},
+		{
+			return accessBotw();
+		},
       "Tags":[
          
       ],
@@ -3889,8 +3555,9 @@ checkList = [
       "Id":"270",
       "Label":"Bottom of the Well Like Like Chest",
       "Requirements":function ()
-{storm,skBotw
-},
+		{
+			return accessBotw() && obtainedItems.skBotw;
+		},
       "Tags":[
          
       ],
@@ -3900,8 +3567,9 @@ checkList = [
       "Id":"271",
       "Label":"Bottom of the Well Map Chest",
       "Requirements":function ()
-{storm,bomb
-},
+		{
+			return HaveRequiredItem("262");
+		},
       "Tags":[
          
       ],
@@ -3911,8 +3579,9 @@ checkList = [
       "Id":"272",
       "Label":"Bottom of the Well Underwater Front Chest",
       "Requirements":function ()
-{storm,lullaby
-},
+		{
+			return HaveRequiredItem("264");
+		},
       "Tags":[
          
       ],
@@ -3922,8 +3591,9 @@ checkList = [
       "Id":"273",
       "Label":"Bottom of the Well Invisible Chest",
       "Requirements":function ()
-{storm,lullaby
-},
+		{
+			return HaveRequiredItem("264");
+		},
       "Tags":[
          
       ],
@@ -3933,8 +3603,9 @@ checkList = [
       "Id":"274",
       "Label":"Bottom of the Well Lens of Truth Chest",
       "Requirements":function ()
-{storm,lullaby
-},
+		{
+			return HaveRequiredItem("264");
+		},
       "Tags":[
          
       ],
@@ -3944,8 +3615,9 @@ checkList = [
       "Id":"275",
       "Label":"Bottom of the Well GS West Inner Room",
       "Requirements":function ()
-{storm,skBotw
-},
+		{
+			return accessBotw() && obtainedItems.skBotw;
+		},
       "Tags":[
          "gs"
       ],
@@ -3955,8 +3627,9 @@ checkList = [
       "Id":"276",
       "Label":"Bottom of the Well GS East Inner Room",
       "Requirements":function ()
-{storm,skBotw
-},
+		{
+			return accessBotw() && obtainedItems.skBotw;
+		},
       "Tags":[
          "gs"
       ],
@@ -3966,8 +3639,9 @@ checkList = [
       "Id":"277",
       "Label":"Bottom of the Well GS Like Like Cage",
       "Requirements":function ()
-{storm,skBotw
-},
+		{
+			return accessBotw() && obtainedItems.skBotw;
+		},
       "Tags":[
          "gs"
       ],
@@ -3977,8 +3651,9 @@ checkList = [
       "Id":"278",
       "Label":"Forest Temple First Room Chest",
       "Requirements":function ()
-{accessForestTemple
-},
+		{
+			return accessForestTemple()
+		},
       "Tags":[
          
       ],
@@ -3988,8 +3663,9 @@ checkList = [
       "Id":"279",
       "Label":"Forest Temple First Stalfos Chest",
       "Requirements":function ()
-{check:278
-},
+		{
+			return HaveRequiredItem("278");
+		},
       "Tags":[
          
       ],
@@ -3999,8 +3675,9 @@ checkList = [
       "Id":"280",
       "Label":"Forest Temple Raised Island Courtyard Chest",
       "Requirements":function ()
-{check:278,bow|hover|time
-},
+		{
+			return HaveRequiredItem("278") && (obtainedItems.bow || obtainedItems.hover || obtainedItems.time);
+		},
       "Tags":[
          
       ],
@@ -4010,8 +3687,9 @@ checkList = [
       "Id":"281",
       "Label":"Forest Temple Map Chest",
       "Requirements":function ()
-{check:280
-},
+		{
+			return (HaveRequiredItem("280") && obtainedItems.hover) || HaveRequiredItem("285");
+		},
       "Tags":[
          
       ],
@@ -4021,8 +3699,9 @@ checkList = [
       "Id":"282",
       "Label":"Forest Temple Well Chest",
       "Requirements":function ()
-{check:280
-},
+		{
+			return (HaveRequiredItem("280") && obtainedItems.iron) || HaveRequiredItem("281");
+		},
       "Tags":[
          
       ],
@@ -4032,8 +3711,9 @@ checkList = [
       "Id":"283",
       "Label":"Forest Temple Eye Switch Chest",
       "Requirements":function ()
-{check:278,skForest:1,bow
-},
+		{
+			return HaveRequiredItem("278") && obtainedItems.skForest && obtainedItems.bow && obtainedItems.strength;
+		},
       "Tags":[
          
       ],
@@ -4043,8 +3723,9 @@ checkList = [
       "Id":"284",
       "Label":"Forest Temple Boss Key Chest",
       "Requirements":function ()
-{check:278,skForest:2,bow,strength
-},
+		{
+			return HaveRequiredItem("278") && obtainedItems.skForest >= 2 && obtainedItems.bow && obtainedItems.strength;
+		},
       "Tags":[
          
       ],
@@ -4054,8 +3735,9 @@ checkList = [
       "Id":"285",
       "Label":"Forest Temple Floormaster Chest",
       "Requirements":function ()
-{check:284
-},
+		{
+			return HaveRequiredItem("284");
+		},
       "Tags":[
          
       ],
@@ -4065,8 +3747,9 @@ checkList = [
       "Id":"286",
       "Label":"Forest Temple Red Poe Chest",
       "Requirements":function ()
-{check:284,skForest:3
-},
+		{
+			return HaveRequiredItem("284") && obtainedItems.skForest >= 3;
+		},
       "Tags":[
          
       ],
@@ -4076,8 +3759,9 @@ checkList = [
       "Id":"287",
       "Label":"Forest Temple Bow Chest",
       "Requirements":function ()
-{check:278,skForest:3,strength
-},
+		{
+			return HaveRequiredItem("278") && obtainedItems.skForest >= 3 && obtainedItems.strength;
+		},
       "Tags":[
          
       ],
@@ -4087,7 +3771,8 @@ checkList = [
       "Id":"288",
       "Label":"Forest Temple Blue Poe Chest",
       "Requirements":function ()
-{check:286
+		{
+			return HaveRequiredItem("286");
 },
       "Tags":[
          
@@ -4098,8 +3783,9 @@ checkList = [
       "Id":"289",
       "Label":"Forest Temple Falling Ceiling Room Chest",
       "Requirements":function ()
-{check:286,skForest:5
-},
+		{
+			return HaveRequiredItem("286") && obtainedItems.skForest >= 5;
+		},
       "Tags":[
          
       ],
@@ -4109,8 +3795,9 @@ checkList = [
       "Id":"290",
       "Label":"Forest Temple Basement Chest",
       "Requirements":function ()
-{check:289
-},
+		{
+			return HaveRequiredItem("289");
+		},
       "Tags":[
          
       ],
@@ -4120,8 +3807,9 @@ checkList = [
       "Id":"291",
       "Label":"Forest Temple GS First Room",
       "Requirements":function ()
-{check:278
-},
+		{
+			return HaveRequiredItem("278");
+		},
       "Tags":[
          "gs"
       ],
@@ -4131,8 +3819,9 @@ checkList = [
       "Id":"292",
       "Label":"Forest Temple GS Lobby",
       "Requirements":function ()
-{check:278
-},
+		{
+			return HaveRequiredItem("278");
+		},
       "Tags":[
          "gs"
       ],
@@ -4142,8 +3831,9 @@ checkList = [
       "Id":"293",
       "Label":"Forest Temple GS Raised Island Courtyard",
       "Requirements":function ()
-{check:280
-},
+		{
+			return HaveRequiredItem("280");
+		},
       "Tags":[
          "gs"
       ],
@@ -4153,8 +3843,9 @@ checkList = [
       "Id":"294",
       "Label":"Forest Temple GS Level Island Courtyard",
       "Requirements":function ()
-{check:285
-},
+		{
+			return HaveRequiredItem("285");
+		},
       "Tags":[
          "gs"
       ],
@@ -4164,8 +3855,9 @@ checkList = [
       "Id":"295",
       "Label":"Forest Temple GS Basement",
       "Requirements":function ()
-{check:289
-},
+		{
+			return HaveRequiredItem("289");
+		},
       "Tags":[
          "gs"
       ],
@@ -4175,8 +3867,9 @@ checkList = [
       "Id":"296",
       "Label":"Forest Temple Phantom Ganon Heart",
       "Requirements":function ()
-{check:289
-},
+		{
+			return HaveRequiredItem("289");
+		},
       "Tags":[
          
       ],
@@ -4186,8 +3879,9 @@ checkList = [
       "Id":"297",
       "Label":"Fire Temple Near Boss Chest",
       "Requirements":function ()
-{hookshot|hover|bolero
-},
+		{
+			return accessFireTemple();
+		},
       "Tags":[
          
       ],
@@ -4197,8 +3891,9 @@ checkList = [
       "Id":"298",
       "Label":"Fire Temple Flare Dancer Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,hammer,skFire:1
-},
+		{
+			return accessFireTemple() && obtainedItems.hammer && obtainedItems.skFire >= 1;
+		},
       "Tags":[
          
       ],
@@ -4208,8 +3903,9 @@ checkList = [
       "Id":"299",
       "Label":"Fire Temple Boss Key Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,hammer,skFire:1
-},
+		{
+			return HaveRequiredItem("298");
+		},
       "Tags":[
          
       ],
@@ -4219,8 +3915,9 @@ checkList = [
       "Id":"300",
       "Label":"Fire Temple Big Lava Room Lower Open Door Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:1
-},
+		{
+			return accessFireTemple() && obtainedItems.skFire >= 1;
+		},
       "Tags":[
          
       ],
@@ -4230,8 +3927,9 @@ checkList = [
       "Id":"301",
       "Label":"Fire Temple Big Lava Room Blocked Door Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:1,bomb
-},
+		{
+			return HaveRequiredItem("300") && obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -4241,8 +3939,9 @@ checkList = [
       "Id":"302",
       "Label":"Fire Temple Boulder Maze Lower Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:4
-},
+		{
+			return HaveRequiredItem("300") && obtainedItems.skFire >= 3
+		},
       "Tags":[
          
       ],
@@ -4252,8 +3951,9 @@ checkList = [
       "Id":"303",
       "Label":"Fire Temple Boulder Maze Side Room Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:4
-},
+		{
+			return HaveRequiredItem("302");
+		},
       "Tags":[
          
       ],
@@ -4263,8 +3963,9 @@ checkList = [
       "Id":"304",
       "Label":"Fire Temple Map Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:5,bow
-},
+		{
+			return HaveRequiredItem("302") && obtainedItems.skFire >= 4 && obtainedItems.bow;
+		},
       "Tags":[
          
       ],
@@ -4274,8 +3975,9 @@ checkList = [
       "Id":"305",
       "Label":"Fire Temple Boulder Maze Shortcut Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:5,bomb
-},
+		{
+			return HaveRequiredItem("302") && obtainedItems.skFire >= 5 &&obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -4285,8 +3987,9 @@ checkList = [
       "Id":"306",
       "Label":"Fire Temple Boulder Maze Upper Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:5
-},
+		{
+			return HaveRequiredItem("302") && obtainedItems.skFire >= 5;
+		},
       "Tags":[
          
       ],
@@ -4296,8 +3999,9 @@ checkList = [
       "Id":"307",
       "Label":"Fire Temple Scarecrow Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:5,hookshot
-},
+		{
+			return HaveRequiredItem("306") && obtainedItems.hookshot;
+		},
       "Tags":[
          
       ],
@@ -4307,8 +4011,9 @@ checkList = [
       "Id":"308",
       "Label":"Fire Temple Compass Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:6
-},
+		{
+			return HaveRequiredItem("306") && obtainedItems.skFire >= 6;
+		},
       "Tags":[
          
       ],
@@ -4318,8 +4023,9 @@ checkList = [
       "Id":"309",
       "Label":"Fire Temple Megaton Hammer Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:6
-},
+		{
+			return HaveRequiredItem("308");
+		},
       "Tags":[
          
       ],
@@ -4329,8 +4035,9 @@ checkList = [
       "Id":"310",
       "Label":"Fire Temple Highest Goron Chest",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:6,time
-},
+		{
+			return HaveRequiredItem("308") && obtainedItems.time;
+		},
       "Tags":[
          
       ],
@@ -4340,8 +4047,9 @@ checkList = [
       "Id":"311",
       "Label":"Fire Temple GS Boss Key Loop",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:1,hammer
-},
+		{
+			return HaveRequiredItem("298");
+		},
       "Tags":[
          "gs"
       ],
@@ -4351,8 +4059,9 @@ checkList = [
       "Id":"312",
       "Label":"Fire Temple GS Song of Time Room",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:1,time
-},
+		{
+			return HaveRequiredItem("300") && obtainedItems.time;
+		},
       "Tags":[
          "gs"
       ],
@@ -4362,8 +4071,9 @@ checkList = [
       "Id":"313",
       "Label":"Fire Temple GS Boulder Maze",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:4,bomb
-},
+		{
+			return HaveRequiredItem("302") && obtainedItems.bomb;
+		},
       "Tags":[
          "gs"
       ],
@@ -4373,8 +4083,9 @@ checkList = [
       "Id":"314",
       "Label":"Fire Temple GS Scarecrow Climb",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:5,hookshot
-},
+		{
+			return HaveRequiredItem("307");
+		},
       "Tags":[
          "gs"
       ],
@@ -4384,8 +4095,9 @@ checkList = [
       "Id":"315",
       "Label":"Fire Temple GS Scarecrow Top",
       "Requirements":function ()
-{hookshot|hover|bolero,skFire:5,hookshot
-},
+		{
+			return HaveRequiredItem("307");
+		},
       "Tags":[
          "gs"
       ],
@@ -4395,8 +4107,9 @@ checkList = [
       "Id":"316",
       "Label":"Fire Temple Volvagia Heart",
       "Requirements":function ()
-{hookshot|hover|bolero,bkFire,hammer
-},
+		{
+			return accessFireTemple() && obtainedItems.hammer && obtainedItems.bkFire && (obtainedItems.hover || obtainedItems.skFire >= 6);
+		},
       "Tags":[
          
       ],
@@ -4406,7 +4119,8 @@ checkList = [
       "Id":"317",
       "Label":"Water Temple Compass Chest",
       "Requirements":function ()
-{hookshot,iron
+		{
+			return accessWaterTemple();
 },
       "Tags":[
          
@@ -4417,8 +4131,9 @@ checkList = [
       "Id":"318",
       "Label":"Water Temple Map Chest",
       "Requirements":function ()
-{hookshot,iron,bow,lullaby
-},
+		{
+			return accessWaterTemple() && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -4428,8 +4143,9 @@ checkList = [
       "Id":"319",
       "Label":"Water Temple Cracked Wall Chest",
       "Requirements":function ()
-{hookshot,iron,bomb,lullaby
-},
+		{
+			return HaveRequiredItem("318") && obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -4439,8 +4155,9 @@ checkList = [
       "Id":"320",
       "Label":"Water Temple Torches Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby,bow
-},
+		{
+			return HaveRequiredItem("318") &&  obtainedItems.bow;
+		},
       "Tags":[
          
       ],
@@ -4450,8 +4167,9 @@ checkList = [
       "Id":"321",
       "Label":"Water Temple Boss Key Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby
-},
+		{
+			return HaveRequiredItem("318") && obtainedItems.skWater >= 2;
+		},
       "Tags":[
          
       ],
@@ -4461,8 +4179,9 @@ checkList = [
       "Id":"322",
       "Label":"Water Temple Central Pillar Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby
-},
+		{
+			return HaveRequiredItem("318") && (obtainedItems.skWater >= 1 || obtainedItems.bow || (obtainedItems.magic && obtainedItems.dins));
+		},
       "Tags":[
          
       ],
@@ -4472,7 +4191,8 @@ checkList = [
       "Id":"323",
       "Label":"Water Temple Central Bow Target Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby,bow
+		{
+			return HaveRequiredItem("320") && obtainedItems.hookshot === 2;
 },
       "Tags":[
          
@@ -4483,8 +4203,9 @@ checkList = [
       "Id":"324",
       "Label":"Water Temple Longshot Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby,skWater:1
-},
+		{
+			return accessWaterTemple() && obtainedItems.skWater >= 2;
+		},
       "Tags":[
          
       ],
@@ -4494,8 +4215,9 @@ checkList = [
       "Id":"325",
       "Label":"Water Temple River Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby,skWater:2,time
-},
+		{
+			return HaveRequiredItem("324") && obtainedItems.time;
+		},
       "Tags":[
          
       ],
@@ -4505,8 +4227,9 @@ checkList = [
       "Id":"326",
       "Label":"Water Temple Dragon Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby
-},
+		{
+			return HaveRequiredItem("318");
+		},
       "Tags":[
          
       ],
@@ -4516,8 +4239,9 @@ checkList = [
       "Id":"327",
       "Label":"Water Temple GS Behind Gate",
       "Requirements":function ()
-{hookshot,iron,lullaby
-},
+		{
+			return HaveRequiredItem("318");
+		},
       "Tags":[
          "gs"
       ],
@@ -4527,8 +4251,9 @@ checkList = [
       "Id":"328",
       "Label":"Water Temple GS Near Boss Key Chest",
       "Requirements":function ()
-{hookshot,iron,lullaby
-},
+		{
+			return HaveRequiredItem("321");
+		},
       "Tags":[
          "gs"
       ],
@@ -4538,8 +4263,9 @@ checkList = [
       "Id":"329",
       "Label":"Water Temple GS Central Pillar",
       "Requirements":function ()
-{hookshot,iron,lullaby,skWater:1|bow,hookshot:2
-},
+		{
+			return HaveRequiredItem("322") && obtainedItems.hookshot === 2;
+		},
       "Tags":[
          "gs"
       ],
@@ -4549,8 +4275,9 @@ checkList = [
       "Id":"330",
       "Label":"Water Temple GS Falling Platform Room",
       "Requirements":function ()
-{hookshot,iron,lullaby,skWater:1,hookshot:2
-},
+		{
+			return accessWaterTemple() && obtainedItems.skWater >= 1 && obtainedItems.hookshot === 2;
+		},
       "Tags":[
          "gs"
       ],
@@ -4560,8 +4287,9 @@ checkList = [
       "Id":"331",
       "Label":"Water Temple GS River",
       "Requirements":function ()
-{hookshot,iron,lullaby,skWater:2,hookshot,time
-},
+		{
+			return HaveRequiredItem("325");
+		},
       "Tags":[
          "gs"
       ],
@@ -4571,8 +4299,9 @@ checkList = [
       "Id":"332",
       "Label":"Water Temple Morpha Heart",
       "Requirements":function ()
-{hookshot,iron,lullaby,hookshot:2,bkWater
-},
+		{
+			return accessWaterTemple() && obtainedItems.hookshot === 2 && obtainedItems.bkWater;
+		},
       "Tags":[
          
       ],
@@ -4582,8 +4311,9 @@ checkList = [
       "Id":"333",
       "Label":"Shadow Temple Map Chest",
       "Requirements":function ()
-{magic,dins,nocturne
-},
+		{
+			return accessShadowTemple();
+		},
       "Tags":[
          
       ],
@@ -4593,7 +4323,8 @@ checkList = [
       "Id":"334",
       "Label":"Shadow Temple Hover Boots Chest",
       "Requirements":function ()
-{magic,dins,nocturne
+		{
+			return HaveRequiredItem("333");
 },
       "Tags":[
          
@@ -4604,8 +4335,9 @@ checkList = [
       "Id":"335",
       "Label":"Shadow Temple Compass Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens
-},
+		{
+			return HaveRequiredItem("333") && obtainedItems.hover && obtainedItems.lens;
+		},
       "Tags":[
          
       ],
@@ -4615,7 +4347,8 @@ checkList = [
       "Id":"336",
       "Label":"Shadow Temple Early Silver Rupee Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,hookshot
+		{
+			return HaveRequiredItem("335");
 },
       "Tags":[
          
@@ -4626,8 +4359,9 @@ checkList = [
       "Id":"337",
       "Label":"Shadow Temple Invisible Blades Visible Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,bomb,skShadow:1
-},
+		{
+			return HaveRequiredItem("335") && obtainedItems.bomb && obtainedItems.skShadow >= 1;
+		},
       "Tags":[
          
       ],
@@ -4637,8 +4371,9 @@ checkList = [
       "Id":"338",
       "Label":"Shadow Temple Invisible Blades Invisible Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,bomb,skShadow:1
-},
+		{
+			return HaveRequiredItem("337");
+		},
       "Tags":[
          
       ],
@@ -4648,8 +4383,9 @@ checkList = [
       "Id":"339",
       "Label":"Shadow Temple Falling Spikes Lower Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:1
-},
+		{
+			return HaveRequiredItem("337");
+		},
       "Tags":[
          
       ],
@@ -4659,8 +4395,9 @@ checkList = [
       "Id":"340",
       "Label":"Shadow Temple Falling Spikes Upper Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:1
-},
+		{
+			return HaveRequiredItem("337");
+		},
       "Tags":[
          
       ],
@@ -4670,8 +4407,9 @@ checkList = [
       "Id":"341",
       "Label":"Shadow Temple Falling Spikes Switch Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:1
-},
+		{
+			return HaveRequiredItem("337");
+		},
       "Tags":[
          
       ],
@@ -4681,8 +4419,9 @@ checkList = [
       "Id":"342",
       "Label":"Shadow Temple Invisible Spikes Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:2
-},
+		{
+			return HaveRequiredItem("337") && obtainedItems.skShadow >= 2;
+		},
       "Tags":[
          
       ],
@@ -4692,8 +4431,9 @@ checkList = [
       "Id":"343",
       "Label":"Shadow Temple Freestanding Key",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:2
-},
+		{
+			return HaveRequiredItem("342");
+		},
       "Tags":[
          
       ],
@@ -4703,8 +4443,9 @@ checkList = [
       "Id":"344",
       "Label":"Shadow Temple Wind Hint Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:3,hookshot
-},
+		{
+			return HaveRequiredItem("342") && obtainedItems.skShadow >= 3 && obtainedItems.hookshot;
+		},
       "Tags":[
          
       ],
@@ -4714,8 +4455,9 @@ checkList = [
       "Id":"345",
       "Label":"Shadow Temple After Wind Enemy Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:3,hookshot
-},
+		{
+			return HaveRequiredItem("344");
+		},
       "Tags":[
          
       ],
@@ -4725,8 +4467,9 @@ checkList = [
       "Id":"346",
       "Label":"Shadow Temple After Wind Hidden Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:3,hookshot,bomb
-},
+		{
+			return HaveRequiredItem("344");
+		},
       "Tags":[
          
       ],
@@ -4736,8 +4479,9 @@ checkList = [
       "Id":"347",
       "Label":"Shadow Temple Spike Walls Left Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:4,hookshot
-},
+		{
+			return HaveRequiredItem("344") && obtainedItems.skShadow >= 4 && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -4747,8 +4491,9 @@ checkList = [
       "Id":"348",
       "Label":"Shadow Temple Boss Key Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:4,hookshot
-},
+		{
+			return HaveRequiredItem("347");
+		},
       "Tags":[
          
       ],
@@ -4758,7 +4503,8 @@ checkList = [
       "Id":"349",
       "Label":"Shadow Temple Invisible Floormaster Chest",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:4,hookshot
+		{
+			return HaveRequiredItem("347");
 },
       "Tags":[
          
@@ -4769,8 +4515,9 @@ checkList = [
       "Id":"350",
       "Label":"Shadow Temple GS Like Like Room",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens
-},
+		{
+			return HaveRequiredItem("335");
+		},
       "Tags":[
          "gs"
       ],
@@ -4780,8 +4527,9 @@ checkList = [
       "Id":"351",
       "Label":"Shadow Temple GS Falling Spikes Room",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:1
-},
+		{
+			return HaveRequiredItem("339");
+		},
       "Tags":[
          "gs"
       ],
@@ -4791,8 +4539,9 @@ checkList = [
       "Id":"352",
       "Label":"Shadow Temple GS Single Giant Pot",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:2
-},
+		{
+			return HaveRequiredItem("343");
+		},
       "Tags":[
          "gs"
       ],
@@ -4802,8 +4551,9 @@ checkList = [
       "Id":"353",
       "Label":"Shadow Temple GS Near Ship",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:3,hookshot:2
-},
+		{
+			return HaveRequiredItem("344") && obtainedItems.skShadow >= 4 && obtainedItems.hookshot === 2;
+		},
       "Tags":[
          "gs"
       ],
@@ -4813,8 +4563,9 @@ checkList = [
       "Id":"354",
       "Label":"Shadow Temple GS Triple Giant Pot",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:4,hookshot
-},
+		{
+			return HaveRequiredItem("347");
+		},
       "Tags":[
          "gs"
       ],
@@ -4824,8 +4575,9 @@ checkList = [
       "Id":"355",
       "Label":"Shadow Temple Bongo Bongo Heart",
       "Requirements":function ()
-{magic,dins,nocturne,hover,lens,skShadow:5,hookshot
-},
+		{
+			return HaveRequiredItem("347") && obtainedItems.skShadow >= 4 && obtainedItems.bkShadow;
+		},
       "Tags":[
          
       ],
@@ -4835,8 +4587,9 @@ checkList = [
       "Id":"356",
       "Label":"Spirit Temple Child Bridge Chest",
       "Requirements":function ()
-{requiem,boomerang|slingshot
-},
+		{
+			return accessSpiritTempleChild() && obtainedItems.boomerang || obtainedItems.slingshot;
+		},
       "Tags":[
          
       ],
@@ -4846,8 +4599,9 @@ checkList = [
       "Id":"357",
       "Label":"Spirit Temple Child Early Torches Chest",
       "Requirements":function ()
-{requiem,boomerang|slingshot
-},
+		{
+			return HaveRequiredItem("356");
+		},
       "Tags":[
          
       ],
@@ -4857,8 +4611,9 @@ checkList = [
       "Id":"358",
       "Label":"Spirit Temple Child Climb North Chest",
       "Requirements":function ()
-{requiem,skSpirit:1
-},
+		{
+			return accessSpiritTempleChild() && obtainedItems.skSpirit >= 1;
+		},
       "Tags":[
          
       ],
@@ -4868,8 +4623,9 @@ checkList = [
       "Id":"359",
       "Label":"Spirit Temple Child Climb East Chest",
       "Requirements":function ()
-{skSpirit:1
-},
+		{
+			return HaveRequiredItem("358");
+		},
       "Tags":[
          
       ],
@@ -4879,7 +4635,8 @@ checkList = [
       "Id":"360",
       "Label":"Spirit Temple Map Chest",
       "Requirements":function ()
-{skSpirit:1
+		{
+			return HaveRequiredItem("358");
 },
       "Tags":[
          
@@ -4890,7 +4647,8 @@ checkList = [
       "Id":"361",
       "Label":"Spirit Temple Sun Block Room Chest",
       "Requirements":function ()
-{skSpirit:1
+		{
+			return HaveRequiredItem("358");
 },
       "Tags":[
          
@@ -4901,8 +4659,9 @@ checkList = [
       "Id":"362",
       "Label":"Spirit Temple Silver Gauntlets Chest",
       "Requirements":function ()
-{skSpirit:2
-},
+		{
+			return HaveRequiredItem("358") && obtainedItems.skSpirit >= 2;
+		},
       "Tags":[
          
       ],
@@ -4912,8 +4671,9 @@ checkList = [
       "Id":"363",
       "Label":"Spirit Temple Compass Chest",
       "Requirements":function ()
-{strength:2,lullaby
-},
+		{
+			return accessSpiritTempleAdult() && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -4923,8 +4683,9 @@ checkList = [
       "Id":"364",
       "Label":"Spirit Temple Early Adult Right Chest",
       "Requirements":function ()
-{strength:2
-},
+		{
+			return accessSpiritTempleAdult();
+		},
       "Tags":[
          
       ],
@@ -4934,8 +4695,9 @@ checkList = [
       "Id":"365",
       "Label":"Spirit Temple First Mirror Left Chest",
       "Requirements":function ()
-{strength:2,skSpirit:1
-},
+		{
+			return HaveRequiredItem("364") && obtainedItems.skSpirit >= 1;
+		},
       "Tags":[
          
       ],
@@ -4945,8 +4707,9 @@ checkList = [
       "Id":"366",
       "Label":"Spirit Temple First Mirror Right Chest",
       "Requirements":function ()
-{strength:2,skSpirit:1
-},
+		{
+			return HaveRequiredItem("365");
+	},
       "Tags":[
          
       ],
@@ -4956,8 +4719,9 @@ checkList = [
       "Id":"367",
       "Label":"Spirit Temple Statue Room Northeast Chest",
       "Requirements":function ()
-{strength:2,skSpirit:1,lullaby
-},
+		{
+			return HaveRequiredItem("365") && obtainedItems.lullaby && obtainedItems.hookshot;
+		},
       "Tags":[
          
       ],
@@ -4967,8 +4731,9 @@ checkList = [
       "Id":"368",
       "Label":"Spirit Temple Statue Room Hand Chest",
       "Requirements":function ()
-{strength:2,skSpirit:1,lullaby
-},
+		{
+			return HaveRequiredItem("367");
+		},
       "Tags":[
          
       ],
@@ -4978,8 +4743,9 @@ checkList = [
       "Id":"369",
       "Label":"Spirit Temple Near Four Armos Chest",
       "Requirements":function ()
-{strength:2,skSpirit:2,mirror
-},
+		{
+			return HaveRequiredItem("365") && obtainedItems.skSpirit >= 2 && obtainedItems.mirror;
+		},
       "Tags":[
          
       ],
@@ -4989,8 +4755,9 @@ checkList = [
       "Id":"370",
       "Label":"Spirit Temple Hallway Right Invisible Chest",
       "Requirements":function ()
-{strength:2,skSpirit:2
-},
+		{
+			return HaveRequiredItem("365") && obtainedItems.skSpirit >= 2;
+		},
       "Tags":[
          
       ],
@@ -5000,7 +4767,8 @@ checkList = [
       "Id":"371",
       "Label":"Spirit Temple Hallway Left Invisible Chest",
       "Requirements":function ()
-{strength:2,skSpirit:2
+		{
+			return HaveRequiredItem("370");
 },
       "Tags":[
          
@@ -5011,8 +4779,9 @@ checkList = [
       "Id":"372",
       "Label":"Spirit Temple Mirror Shield Chest",
       "Requirements":function ()
-{strength:2,skSpirit:2
-},
+		{
+			return HaveRequiredItem("370");
+		},
       "Tags":[
          
       ],
@@ -5022,8 +4791,9 @@ checkList = [
       "Id":"373",
       "Label":"Spirit Temple Boss Key Chest",
       "Requirements":function ()
-{strength:2,skSpirit:3,hookshot,bow,lullaby
-},
+		{
+			return HaveRequiredItem("370") && obtainedItems.skSpirit >= 3 && obtainedItems.hookshot && obtainedItems.bow && obtainedItems.lullaby;
+		},
       "Tags":[
          
       ],
@@ -5033,8 +4803,9 @@ checkList = [
       "Id":"374",
       "Label":"Spirit Temple Topmost Chest",
       "Requirements":function ()
-{strength:2,skSpirit:3,mirror
-},
+		{
+			return HaveRequiredItem("370") && obtainedItems.skSpirit >= 3 && obtainedItems.mirror;
+		},
       "Tags":[
          
       ],
@@ -5044,8 +4815,9 @@ checkList = [
       "Id":"375",
       "Label":"Spirit Temple GS Metal Fence",
       "Requirements":function ()
-{skSpirit:1,boomerang|slingshot
-},
+		{
+			return HaveRequiredItem("356");
+		},
       "Tags":[
          "gs"
       ],
@@ -5055,8 +4827,9 @@ checkList = [
       "Id":"376",
       "Label":"Spirit Temple GS Sun on Floor Room",
       "Requirements":function ()
-{skSpirit:1
-},
+		{
+			return HaveRequiredItem("358");
+		},
       "Tags":[
          "gs"
       ],
@@ -5066,8 +4839,9 @@ checkList = [
       "Id":"377",
       "Label":"Spirit Temple GS Hall After Sun Block Room",
       "Requirements":function ()
-{skSpirit:1
-},
+		{
+			return HaveRequiredItem("358");
+		},
       "Tags":[
          "gs"
       ],
@@ -5077,8 +4851,9 @@ checkList = [
       "Id":"378",
       "Label":"Spirit Temple GS Lobby",
       "Requirements":function ()
-{skSpirit:1,hookshot:2
-},
+		{
+			return HaveRequiredItem("365") && obtainedItems.hookshot === 2;
+		},
       "Tags":[
          "gs"
       ],
@@ -5088,8 +4863,9 @@ checkList = [
       "Id":"379",
       "Label":"Spirit Temple GS Boulder Room",
       "Requirements":function ()
-{strength:2,time
-},
+		{
+			return accessSpiritTempleAdult() && obtainedItems.time;
+		},
       "Tags":[
          "gs"
       ],
@@ -5100,8 +4876,8 @@ checkList = [
       "Label":"Spirit Temple Twinrova Heart",
       "Requirements":function ()
 		{
-		
-},
+			return HaveRequiredItem("374");
+		},
       "Tags":[
          
       ],
@@ -5111,8 +4887,9 @@ checkList = [
       "Id":"381",
       "Label":"Ice Cavern Map Chest",
       "Requirements":function ()
-{emptyBottle,lullaby
-},
+		{
+			return accessFontain() && haveEmptyBottle();
+		},
       "Tags":[
          
       ],
@@ -5122,8 +4899,9 @@ checkList = [
       "Id":"382",
       "Label":"Ice Cavern Compass Chest",
       "Requirements":function ()
-{emptyBottle,lullaby
-},
+		{
+			return HaveRequiredItem("381");
+		},
       "Tags":[
          
       ],
@@ -5133,8 +4911,9 @@ checkList = [
       "Id":"383",
       "Label":"Ice Cavern Freestanding PoH",
       "Requirements":function ()
-{emptyBottle,lullaby
-},
+		{
+			return HaveRequiredItem("381");
+		},
       "Tags":[
          
       ],
@@ -5144,8 +4923,9 @@ checkList = [
       "Id":"384",
       "Label":"Ice Cavern Iron Boots Chest",
       "Requirements":function ()
-{emptyBottle,lullaby
-},
+		{
+			return HaveRequiredItem("381");
+		},
       "Tags":[
          
       ],
@@ -5155,8 +4935,9 @@ checkList = [
       "Id":"385",
       "Label":"Ice Cavern GS Spinning Scythe Room",
       "Requirements":function ()
-{emptyBottle,lullaby,hookshot
-},
+		{
+			return HaveRequiredItem("381") && obtainedItems.hookshot;
+		},
       "Tags":[
          "gs"
       ],
@@ -5166,8 +4947,9 @@ checkList = [
       "Id":"386",
       "Label":"Ice Cavern GS Heart Piece Room",
       "Requirements":function ()
-{emptyBottle,lullaby,hookshot
-},
+		{
+			return HaveRequiredItem("385");
+		},
       "Tags":[
          "gs"
       ],
@@ -5177,8 +4959,9 @@ checkList = [
       "Id":"387",
       "Label":"Ice Cavern GS Push Block Room",
       "Requirements":function ()
-{emptyBottle,lullaby,hookshot
-},
+		{
+			return HaveRequiredItem("385");
+		},
       "Tags":[
          "gs"
       ],
@@ -5188,7 +4971,8 @@ checkList = [
       "Id":"388",
       "Label":"Gerudo Training Ground Lobby Left Chest",
       "Requirements":function ()
-{gerudoCard,bow
+		{
+			return accessGtg() && obtainedItems.bow;
 },
       "Tags":[
          
@@ -5199,7 +4983,8 @@ checkList = [
       "Id":"389",
       "Label":"Gerudo Training Ground Lobby Right Chest",
       "Requirements":function ()
-{gerudoCard,bow
+		{
+			return HaveRequiredItem("388");
 },
       "Tags":[
          
@@ -5210,8 +4995,9 @@ checkList = [
       "Id":"390",
       "Label":"Gerudo Training Ground Stalfos Chest",
       "Requirements":function ()
-{gerudoCard
-},
+		{
+			return accessGtg();
+		},
       "Tags":[
          
       ],
@@ -5221,8 +5007,9 @@ checkList = [
       "Id":"391",
       "Label":"Gerudo Training Ground Before Heavy Block Chest",
       "Requirements":function ()
-{gerudoCard,hookshot
-},
+		{
+			return accessGtg() && obtainedItems.hookshot;
+		},
       "Tags":[
          
       ],
@@ -5232,8 +5019,9 @@ checkList = [
       "Id":"392",
       "Label":"Gerudo Training Ground Heavy Block First Chest",
       "Requirements":function ()
-{gerudoCard,strength:2
-},
+		{
+			return HaveRequiredItem("391") && obtainedItems.strength >= 2;
+		},
       "Tags":[
          
       ],
@@ -5243,8 +5031,9 @@ checkList = [
       "Id":"393",
       "Label":"Gerudo Training Ground Heavy Block Second Chest",
       "Requirements":function ()
-{gerudoCard,strength:2
-},
+		{
+			return HaveRequiredItem("392");
+		},
       "Tags":[
          
       ],
@@ -5254,8 +5043,9 @@ checkList = [
       "Id":"394",
       "Label":"Gerudo Training Ground Heavy Block Third Chest",
       "Requirements":function ()
-{gerudoCard,strength:2
-},
+		{
+			return HaveRequiredItem("392");
+		},
       "Tags":[
          
       ],
@@ -5265,8 +5055,9 @@ checkList = [
       "Id":"395",
       "Label":"Gerudo Training Ground Heavy Block Fourth Chest",
       "Requirements":function ()
-{gerudoCard,strength:2
-},
+		{
+			return HaveRequiredItem("392");
+		},
       "Tags":[
          
       ],
@@ -5276,8 +5067,9 @@ checkList = [
       "Id":"396",
       "Label":"Gerudo Training Ground Eye Statue Chest",
       "Requirements":function ()
-{gerudoCard,bow
-},
+		{
+			return obtainedItems.bow && (HaveRequiredItem("391") || HaveRequiredItem("399"));
+		},
       "Tags":[
          
       ],
@@ -5287,8 +5079,9 @@ checkList = [
       "Id":"397",
       "Label":"Gerudo Training Ground Near Scarecrow Chest",
       "Requirements":function ()
-{gerudoCard,bow,hammer
-},
+		{
+			return HaveRequiredItem("396") && obtainedItems.hookshot
+		},
       "Tags":[
          
       ],
@@ -5298,7 +5091,8 @@ checkList = [
       "Id":"398",
       "Label":"Gerudo Training Ground Hammer Room Clear Chest",
       "Requirements":function ()
-{gerudoCard
+		{
+			return accessGtg() && (obtainedItems.hookshot === 2 || obtainedItems.hover);
 },
       "Tags":[
          
@@ -5309,8 +5103,9 @@ checkList = [
       "Id":"399",
       "Label":"Gerudo Training Ground Hammer Room Switch Chest",
       "Requirements":function ()
-{gerudoCard,hammer
-},
+		{
+			return HaveRequiredItem("398") && obtainedItems.hammer;
+		},
       "Tags":[
          
       ],
@@ -5320,7 +5115,8 @@ checkList = [
       "Id":"400",
       "Label":"Gerudo Training Ground Freestanding Key",
       "Requirements":function ()
-{gerudoCard,skGtg:2
+		{
+			return accessGtg() && obtainedItems.skGtg >= 2
 },
       "Tags":[
          
@@ -5331,7 +5127,8 @@ checkList = [
       "Id":"401",
       "Label":"Gerudo Training Ground Maze Right Central Chest",
       "Requirements":function ()
-{gerudoCard,skGtg:2
+		{
+			return HaveRequiredItem("400");
 },
       "Tags":[
          
@@ -5342,7 +5139,8 @@ checkList = [
       "Id":"402",
       "Label":"Gerudo Training Ground Maze Right Side Chest",
       "Requirements":function ()
-{gerudoCard,skGtg:2
+		{
+			return HaveRequiredItem("400");
 },
       "Tags":[
          
@@ -5353,8 +5151,9 @@ checkList = [
       "Id":"403",
       "Label":"Gerudo Training Ground Underwater Silver Rupee Chest",
       "Requirements":function ()
-{gerudoCard,time,iron
-},
+		{
+			return accessGtg() && obtainedItems.time && obtainedItems.iron && obtainedItems.hover;
+		},
       "Tags":[
          
       ],
@@ -5364,8 +5163,9 @@ checkList = [
       "Id":"404",
       "Label":"Gerudo Training Ground Beamos Chest",
       "Requirements":function ()
-{gerudoCard,bomb
-},
+		{
+			return accessGtg() && obtainedItems.bomb;
+		},
       "Tags":[
          
       ],
@@ -5375,8 +5175,9 @@ checkList = [
       "Id":"405",
       "Label":"Gerudo Training Ground Hidden Ceiling Chest",
       "Requirements":function ()
-{gerudoCard,skGtg:1
-},
+		{
+			return accessGtg() && obtainedItems.skGtg >= 1;
+		},
       "Tags":[
          
       ],
@@ -5386,7 +5187,8 @@ checkList = [
       "Id":"406",
       "Label":"Gerudo Training Ground Maze Path First Chest",
       "Requirements":function ()
-{gerudoCard,skGtg:2
+		{
+			return accessGtg() && obtainedItems.skGtg >= 2
 },
       "Tags":[
          
@@ -5397,7 +5199,8 @@ checkList = [
       "Id":"407",
       "Label":"Gerudo Training Ground Maze Path Second Chest",
       "Requirements":function ()
-{gerudoCard,skGtg:4
+		{
+			return accessGtg() && obtainedItems.skGtg >= 4
 },
       "Tags":[
          
@@ -5408,7 +5211,8 @@ checkList = [
       "Id":"408",
       "Label":"Gerudo Training Ground Maze Path Third Chest",
       "Requirements":function ()
-{gerudoCard,skGtg:5
+		{
+			return accessGtg() && obtainedItems.skGtg >= 5
 },
       "Tags":[
          
@@ -5419,7 +5223,8 @@ checkList = [
       "Id":"409",
       "Label":"Gerudo Training Ground Maze Path Final Chest",
       "Requirements":function ()
-{gerudoCard,skGtg:7
+		{
+			return accessGtg() && obtainedItems.skGtg >= 7
 },
       "Tags":[
          
@@ -5431,8 +5236,8 @@ checkList = [
       "Label":"Ganons Castle Forest Trial Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -5443,8 +5248,8 @@ checkList = [
       "Label":"Ganons Castle Water Trial Left Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -5455,8 +5260,8 @@ checkList = [
       "Label":"Ganons Castle Water Trial Right Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -5466,8 +5271,9 @@ checkList = [
       "Id":"413",
       "Label":"Ganons Castle Shadow Trial Front Chest",
       "Requirements":function ()
-{hookshot
-},
+		{
+			return obtainedItems.hookshot;
+		},
       "Tags":[
          
       ],
@@ -5477,8 +5283,9 @@ checkList = [
       "Id":"414",
       "Label":"Ganons Castle Shadow Trial Golden Gauntlets Chest",
       "Requirements":function ()
-{hookshot,fireArrow,magic
-},
+		{
+			return obtainedItems.hookshot && obtainedItems.fireArrow && obtainedItems.magic;
+		},
       "Tags":[
          
       ],
@@ -5488,8 +5295,9 @@ checkList = [
       "Id":"415",
       "Label":"Ganons Castle Light Trial First Left Chest",
       "Requirements":function ()
-{strength:3
-},
+		{
+			return obtainedItems.strength === 3;
+		},
       "Tags":[
          
       ],
@@ -5499,7 +5307,8 @@ checkList = [
       "Id":"416",
       "Label":"Ganons Castle Light Trial Second Left Chest",
       "Requirements":function ()
-{strength:3
+		{
+			return HaveRequiredItem("415");
 },
       "Tags":[
          
@@ -5510,7 +5319,8 @@ checkList = [
       "Id":"417",
       "Label":"Ganons Castle Light Trial Third Left Chest",
       "Requirements":function ()
-{strength:3
+		{
+			return HaveRequiredItem("415");
 },
       "Tags":[
          
@@ -5521,7 +5331,8 @@ checkList = [
       "Id":"418",
       "Label":"Ganons Castle Light Trial First Right Chest",
       "Requirements":function ()
-{strength:3
+		{
+			return HaveRequiredItem("415");
 },
       "Tags":[
          
@@ -5532,7 +5343,8 @@ checkList = [
       "Id":"419",
       "Label":"Ganons Castle Light Trial Second Right Chest",
       "Requirements":function ()
-{strength:3
+		{
+			return HaveRequiredItem("415");
 },
       "Tags":[
          
@@ -5543,7 +5355,8 @@ checkList = [
       "Id":"420",
       "Label":"Ganons Castle Light Trial Third Right Chest",
       "Requirements":function ()
-{strength:3
+		{
+			return HaveRequiredItem("415");
 },
       "Tags":[
          
@@ -5554,7 +5367,8 @@ checkList = [
       "Id":"421",
       "Label":"Ganons Castle Light Trial Invisible Enemies Chest",
       "Requirements":function ()
-{strength:3
+		{
+			return HaveRequiredItem("415");
 },
       "Tags":[
          
@@ -5563,9 +5377,10 @@ checkList = [
    },
    {
       "Id":"422",
-      "Label":"Ganons Castle Light Trial Lullaby Chest",
+      "Label":"Ganons Castle Light Trial lullaby Chest",
       "Requirements":function ()
-{strength:3,bkGanon:1,lullaby
+		{
+			return HaveRequiredItem("415") && obtainedItems.skGanon >= 1 && obtainedItems.lullaby;
 },
       "Tags":[
          
@@ -5576,7 +5391,8 @@ checkList = [
       "Id":"423",
       "Label":"Ganons Castle Spirit Trial Crystal Switch Chest",
       "Requirements":function ()
-{hookshot
+		{
+			return obtainedItems.hookshot;
 },
       "Tags":[
          
@@ -5587,7 +5403,8 @@ checkList = [
       "Id":"424",
       "Label":"Ganons Castle Spirit Trial Invisible Chest",
       "Requirements":function ()
-{hookshot
+		{
+			return HaveRequiredItem("423");
 },
       "Tags":[
          
@@ -5599,8 +5416,8 @@ checkList = [
       "Label":"Ganons Castle Deku Scrub Left",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -5611,8 +5428,8 @@ checkList = [
       "Label":"Ganons Castle Deku Scrub Center-Left",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -5623,8 +5440,8 @@ checkList = [
       "Label":"Ganons Castle Deku Scrub Center-Right",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -5635,8 +5452,8 @@ checkList = [
       "Label":"Ganons Castle Deku Scrub Right",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          "scrub"
       ],
@@ -5647,8 +5464,8 @@ checkList = [
       "Label":"Ganons Tower Boss Key Chest",
       "Requirements":function ()
 		{
-		
-},
+			return true;
+		},
       "Tags":[
          
       ],
@@ -5658,8 +5475,28 @@ checkList = [
 
 locationList = [
 	{
+		"Id": "",
+		"Label": ""
+	},
+	{
+		"Id": "botw",
+		"Label": "Bottom of the Well"
+	},
+	{
+		"Id": "colossus",
+		"Label": "Colossus"
+	},
+	{
 		"Id": "deku",
 		"Label": "Deku tree"
+	},
+	{
+		"Id": "crater",
+		"Label": "Death montain crater"
+	},
+	{
+		"Id": "dmt",
+		"Label": "Death montain trail"
 	},
 	{
 		"Id": "dc",
@@ -5670,16 +5507,72 @@ locationList = [
 		"Label": "Jabu Jabus Belly"
 	},
 	{
+		"Id": "fire",
+		"Label": "Fire Temple"
+	},
+	{
 		"Id": "forest",
 		"Label": "Forest Temple"
 	},
 	{
-		"Id": "water",
-		"Label": "Water Temple"
+		"Id": "meadow",
+		"Label": "Forest meadow"
 	},
 	{
-		"Id": "fire",
-		"Label": "Fire Temple"
+		"Id": "ganon",
+		"Label": "Ganons castle"
+	},
+	{
+		"Id": "gtg",
+		"Label": "Gerudo Training Ground"
+	},
+	{
+		"Id": "valey",
+		"Label": "Gerudos valey"
+	},
+	{
+		"Id": "fortress",
+		"Label": "Gerudos fortress"
+	},
+	{
+		"Id": "goron",
+		"Label": "Goron city"
+	},
+	{
+		"Id": "field",
+		"Label": "Hyrule fields"
+	},
+	{
+		"Id": "ice",
+		"Label": "Ice Cavern"
+	},
+	{
+		"Id": "kak",
+		"Label": "Kakariko"
+	},
+	{
+		"Id": "kokiri",
+		"Label": "Kokiri forest"
+	},
+	{
+		"Id": "lake",
+		"Label": "Lake hylia"
+	},
+	{
+		"Id": "ranch",
+		"Label": "Lon lon ranch"
+	},
+	{
+		"Id": "wood",
+		"Label": "Lost wood"
+	},
+	{
+		"Id": "market",
+		"Label": "Market"
+	},
+	{
+		"Id": "outside",
+		"Label": "Outside Gannons castle"
 	},
 	{
 		"Id": "shadow",
@@ -5690,68 +5583,16 @@ locationList = [
 		"Label": "Spirit Temple"
 	},
 	{
-		"Id": "botw",
-		"Label": "Bottom of the Well"
-	},
-	{
-		"Id": "ice",
-		"Label": "Ice Cavern"
-	},
-	{
-		"Id": "gtg",
-		"Label": "Gerudo Training Ground"
-	},
-	{
-		"Id": "ganon",
-		"Label": "Ganons castle"
-	},
-	{
-		"Id": "outside",
-		"Label": "Outside Gannons castle"
-	},
-	{
-		"Id": "kokiri",
-		"Label": "Kokiri forest"
-	},
-	{
-		"Id": "wood",
-		"Label": "Lost wood"
-	},
-	{
-		"Id": "meadow",
-		"Label": "Forest meadow"
-	},
-	{
-		"Id": "field",
-		"Label": "Hyrule fields"
-	},
-	{
 		"Id": "tot",
 		"Label": "Temple of time"
 	},
 	{
-		"Id": "market",
-		"Label": "Market"
+		"Id": "wasteland",
+		"Label": "Wasteland"
 	},
 	{
-		"Id": "ranch",
-		"Label": "Lon lon ranch"
-	},
-	{
-		"Id": "kak",
-		"Label": "Kakariko"
-	},
-	{
-		"Id": "dmt",
-		"Label": "Death montain trail"
-	},
-	{
-		"Id": "goron",
-		"Label": "Goron city"
-	},
-	{
-		"Id": "crater",
-		"Label": "Death montain crater"
+		"Id": "water",
+		"Label": "Water Temple"
 	},
 	{
 		"Id": "river",
@@ -5764,28 +5605,56 @@ locationList = [
 	{
 		"Id": "fontain",
 		"Label": "Zora fontain"
-	},
-	{
-		"Id": "lake",
-		"Label": "Lake hylia"
-	},
-	{
-		"Id": "valey",
-		"Label": "Gerudos valey"
-	},
-	{
-		"Id": "fortress",
-		"Label": "Gerudos fortress"
-	},
-	{
-		"Id": "wasteland",
-		"Label": "Wasteland"
-	},
-	{
-		"Id": "colossus",
-		"Label": "Colossus"
 	}
 ];
 
-
-init();
+dungeonList = [
+	{
+		"Id": "",
+		"Label": ""
+	},
+	{
+		"Id": "botw",
+		"Label": "Bottom of the Well"
+	},
+	{
+		"Id": "deku",
+		"Label": "Deku tree"
+	},
+	{
+		"Id": "dc",
+		"Label": "Dodongos Cavern"
+	},
+	{
+		"Id": "forest",
+		"Label": "Forest Temple"
+	},
+	{
+		"Id": "fire",
+		"Label": "Fire Temple"
+	},
+	{
+		"Id": "gtg",
+		"Label": "Gerudo Training Ground"
+	},
+	{
+		"Id": "ice",
+		"Label": "Ice Cavern"
+	},
+	{
+		"Id": "jabu",
+		"Label": "Jabu Jabus Belly"
+	},
+	{
+		"Id": "shadow",
+		"Label": "Shadow Temple"
+	},
+	{
+		"Id": "spirit",
+		"Label": "Spirit Temple"
+	},
+	{
+		"Id": "water",
+		"Label": "Water Temple"
+	}
+];
