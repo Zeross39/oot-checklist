@@ -328,7 +328,7 @@ checkList = [
       "Label":"King Dodongo",
       "Requirements":function ()
 		{
-			return accessDc() && obtainedItems.bomb;
+			return accessDungeon("dc") && obtainedItems.bomb;
 		},
       "Tags":[
          "child", "adult"
@@ -340,7 +340,7 @@ checkList = [
       "Label":"Barinade",
       "Requirements":function ()
 		{
-			return accessJabu() && obtainedItems.boomerang;
+			return accessDungeon("jabu") && obtainedItems.boomerang;
 		},
       "Tags":[
          "child"
@@ -484,7 +484,7 @@ checkList = [
       "Label":"Sheik in Forest",
       "Requirements":function ()
 		{
-			return obtainedItems.saria || obtainedItems.minuet;
+			return accessMeadowAdult();
 		},
       "Tags":[
          "song", "adult"
@@ -496,7 +496,7 @@ checkList = [
       "Label":"Sheik in Crater",
       "Requirements":function ()
 		{
-			return obtainedItems.bolero || obtainedItems.hover || obtainedItems.hookshot;
+			return accessCrater();
 		},
       "Tags":[
          "song", "adult"
@@ -724,7 +724,7 @@ checkList = [
       "Label":"LW Near Shortcuts Grotto Chest",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb;
+			return obtainedItems.bomb || obtainedItems.hammer;
 		},
       "Tags":[
          "child", "adult"
@@ -808,7 +808,7 @@ checkList = [
       "Label":"LW Deku Scrub Grotto Front",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb;
+			return obtainedItems.bomb || obtainedItems.hammer;
 		},
       "Tags":[
          "scrub", "child", "adult"
@@ -820,7 +820,7 @@ checkList = [
       "Label":"LW Deku Scrub Grotto Rear",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb;
+			return obtainedItems.bomb || obtainedItems.hammer;
 		},
       "Tags":[
          "scrub", "child", "adult"
@@ -868,7 +868,7 @@ checkList = [
       "Label":"SFM Wolfos Grotto Chest",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb;
+			return obtainedItems.bomb || obtainedItems.hammer;
 		},
       "Tags":[
          "child", "adult"
@@ -1245,7 +1245,7 @@ checkList = [
       "Tags":[
          "child"
       ],
-      "Location":"market"
+      "Location":"castle"
    },
    {
       "Id":"78",
@@ -1257,7 +1257,7 @@ checkList = [
       "Tags":[
          "gs", "child"
       ],
-      "Location":"market"
+      "Location":"castle"
    },
    {
       "Id":"79",
@@ -1269,7 +1269,7 @@ checkList = [
       "Tags":[
          "gs", "child"
       ],
-      "Location":"market"
+      "Location":"castle"
    },
    {
       "Id":"80",
@@ -1564,7 +1564,7 @@ checkList = [
       "Label":"Kak GS Watchtower",
       "Requirements":function ()
 		{
-			return obtainedItems.slingshot && obtainedItems.boomerang;
+			return obtainedItems.slingshot || obtainedItems.boomerang;
 		},
       "Tags":[
          "gs", "child"
@@ -1903,7 +1903,7 @@ checkList = [
 			return obtainedItems.hammer;
 		},
       "Tags":[
-         "gs", "child", "adult"
+         "gs", "adult"
       ],
       "Location":"dmt"
    },
@@ -2056,7 +2056,7 @@ checkList = [
       "Label":"GC GS Boulder Maze",
       "Requirements":function ()
 		{
-			return obtainedItems.hammer || obtainedItems.bomb;
+			return obtainedItems.bomb;
 		},
       "Tags":[
          "gs", "child"
@@ -2068,7 +2068,7 @@ checkList = [
       "Label":"GC Shop Item 1",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb || obtainedItems.lullaby;
+			return obtainedItems.bomb || obtainedItems.bow || obtainedItems.lullaby;
 		},
       "Tags":[
          "shop", "child", "adult"
@@ -2080,7 +2080,7 @@ checkList = [
       "Label":"GC Shop Item 2",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb || obtainedItems.lullaby;
+			return HaveRequiredItem("146");
 		},
       "Tags":[
          "shop", "child", "adult"
@@ -2092,7 +2092,7 @@ checkList = [
       "Label":"GC Shop Item 3",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb || obtainedItems.lullaby;
+			return HaveRequiredItem("146");
 		},
       "Tags":[
          "shop", "child", "adult"
@@ -2104,7 +2104,7 @@ checkList = [
       "Label":"GC Shop Item 4",
       "Requirements":function ()
 		{
-			return obtainedItems.bomb || obtainedItems.lullaby;
+			return HaveRequiredItem("146");
 		},
       "Tags":[
          "shop", "child", "adult"
@@ -2224,7 +2224,7 @@ checkList = [
       "Label":"DMC GS Bean Patch",
       "Requirements":function ()
 		{
-			return obtainedItems.bolero && haveEmptyBottle();
+			return songWarpTo("crater") && haveEmptyBottle();
 		},
       "Tags":[
          "gs", "child"
@@ -2608,7 +2608,7 @@ checkList = [
       "Label":"LH Sun",
       "Requirements":function ()
 		{
-			return obtainedItems.bow && checkedList.indexOf("5") > -1;
+			return obtainedItems.bow && $("#checkMark5")[0].innerText !== "";
 		},
       "Tags":[
          "adult"
@@ -2779,7 +2779,7 @@ checkList = [
 			return obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs", "adult"
+         "gs", "child"
       ],
       "Location":"valey"
    },
@@ -2791,7 +2791,7 @@ checkList = [
 			return haveEmptyBottle();
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"valey"
    },
@@ -3004,7 +3004,7 @@ checkList = [
       "Label":"OGC GS",
       "Requirements":function ()
 		{
-			return obtainedItems.hookshot;
+			return true;
 		},
       "Tags":[
          "gs", "adult"
@@ -3016,7 +3016,7 @@ checkList = [
       "Label":"Deku Tree Map Chest",
       "Requirements":function ()
 		{
-			return accessDeku();
+			return accessDungeon("deku");
 		},
       "Tags":[
          "child"
@@ -3148,7 +3148,7 @@ checkList = [
       "Label":"Dodongos Cavern Map Chest",
       "Requirements":function ()
 		{
-			return accessDc() && obtainedItems.bomb || obtainedItems.strength || obtainedItems.hammer;
+			return accessDungeon("dc") && (obtainedItems.bomb || obtainedItems.strength || obtainedItems.hammer);
 		},
       "Tags":[
          "child", "adult"
@@ -3340,7 +3340,7 @@ checkList = [
       "Label":"Jabu Jabus Belly boomerang Chest",
       "Requirements":function ()
 		{
-			return accessJabu();
+			return accessDungeon("jabu");
 		},
       "Tags":[
          "child"
@@ -3352,7 +3352,7 @@ checkList = [
       "Label":"Jabu Jabus Belly Map Chest",
       "Requirements":function ()
 		{
-			return accessJabu() && obtainedItems.boomerang;
+			return accessDungeon("jabu") && obtainedItems.boomerang;
 		},
       "Tags":[
          "child"
@@ -3448,7 +3448,7 @@ checkList = [
       "Label":"Bottom of the Well Front Left Fake Wall Chest",
       "Requirements":function ()
 		{
-			return accessBotw();
+			return accessDungeon("botw");
 		},
       "Tags":[
          "child"
@@ -3460,7 +3460,7 @@ checkList = [
       "Label":"Bottom of the Well Front Center Bombable Chest",
       "Requirements":function ()
 		{
-			return accessBotw() && obtainedItems.bomb;
+			return accessDungeon("botw") && obtainedItems.bomb;
 		},
       "Tags":[
          "child"
@@ -3484,7 +3484,7 @@ checkList = [
       "Label":"Bottom of the Well Underwater Left Chest",
       "Requirements":function ()
 		{
-			return accessBotw() && obtainedItems.lullaby;
+			return accessDungeon("botw") && obtainedItems.lullaby;
 		},
       "Tags":[
          "child"
@@ -3496,7 +3496,7 @@ checkList = [
       "Label":"Bottom of the Well Freestanding Key",
       "Requirements":function ()
 		{
-			return accessBotw();
+			return accessDungeon("botw");
 },
       "Tags":[
          "child"
@@ -3508,7 +3508,7 @@ checkList = [
       "Label":"Bottom of the Well Compass Chest",
       "Requirements":function ()
 		{
-			return accessBotw();
+			return accessDungeon("botw");
 		},
       "Tags":[
          "child"
@@ -3520,7 +3520,7 @@ checkList = [
       "Label":"Bottom of the Well Center Skulltula Chest",
       "Requirements":function ()
 		{
-			return accessBotw();
+			return accessDungeon("botw");
 		},
       "Tags":[
          "child"
@@ -3532,7 +3532,7 @@ checkList = [
       "Label":"Bottom of the Well Right Bottom Fake Wall Chest",
       "Requirements":function ()
 		{
-			return accessBotw();
+			return accessDungeon("botw");
 		},
       "Tags":[
          "child"
@@ -3544,7 +3544,7 @@ checkList = [
       "Label":"Bottom of the Well Fire Keese Chest",
       "Requirements":function ()
 		{
-			return accessBotw();
+			return accessDungeon("botw") && obtainedItems.skBotw;
 		},
       "Tags":[
          "child"
@@ -3556,7 +3556,7 @@ checkList = [
       "Label":"Bottom of the Well Like Like Chest",
       "Requirements":function ()
 		{
-			return accessBotw() && obtainedItems.skBotw;
+			return accessDungeon("botw") && obtainedItems.skBotw;
 		},
       "Tags":[
          "child"
@@ -3616,7 +3616,7 @@ checkList = [
       "Label":"Bottom of the Well GS West Inner Room",
       "Requirements":function ()
 		{
-			return accessBotw() && obtainedItems.skBotw;
+			return accessDungeon("botw") && obtainedItems.skBotw;
 		},
       "Tags":[
          "gs", "child"
@@ -3628,7 +3628,7 @@ checkList = [
       "Label":"Bottom of the Well GS East Inner Room",
       "Requirements":function ()
 		{
-			return accessBotw() && obtainedItems.skBotw;
+			return accessDungeon("botw") && obtainedItems.skBotw;
 		},
       "Tags":[
          "gs", "child"
@@ -3640,7 +3640,7 @@ checkList = [
       "Label":"Bottom of the Well GS Like Like Cage",
       "Requirements":function ()
 		{
-			return accessBotw() && obtainedItems.skBotw;
+			return accessDungeon("botw") && obtainedItems.skBotw;
 		},
       "Tags":[
          "gs", "child"
@@ -3652,7 +3652,7 @@ checkList = [
       "Label":"Forest Temple First Room Chest",
       "Requirements":function ()
 		{
-			return accessForestTemple()
+			return accessDungeon("forest")
 		},
       "Tags":[
          "adult"
@@ -3880,7 +3880,7 @@ checkList = [
       "Label":"Fire Temple Near Boss Chest",
       "Requirements":function ()
 		{
-			return accessFireTemple();
+			return accessDungeon("fire");
 		},
       "Tags":[
          "adult"
@@ -3892,7 +3892,7 @@ checkList = [
       "Label":"Fire Temple Flare Dancer Chest",
       "Requirements":function ()
 		{
-			return accessFireTemple() && obtainedItems.hammer && obtainedItems.skFire >= 1;
+			return accessDungeon("fire") && obtainedItems.hammer && obtainedItems.skFire >= 1;
 		},
       "Tags":[
          "adult"
@@ -3916,7 +3916,7 @@ checkList = [
       "Label":"Fire Temple Big Lava Room Lower Open Door Chest",
       "Requirements":function ()
 		{
-			return accessFireTemple() && obtainedItems.skFire >= 1;
+			return accessDungeon("fire") && obtainedItems.skFire >= 1;
 		},
       "Tags":[
          "adult"
@@ -4108,7 +4108,7 @@ checkList = [
       "Label":"Fire Temple Volvagia Heart",
       "Requirements":function ()
 		{
-			return accessFireTemple() && obtainedItems.hammer && obtainedItems.bkFire && (obtainedItems.hover || obtainedItems.skFire >= 6);
+			return accessDungeon("fire") && obtainedItems.hammer && obtainedItems.bkFire && (obtainedItems.hover || obtainedItems.skFire >= 6);
 		},
       "Tags":[
          "adult"
@@ -4120,7 +4120,7 @@ checkList = [
       "Label":"Water Temple Compass Chest",
       "Requirements":function ()
 		{
-			return accessWaterTemple();
+			return accessDungeon("water");
 },
       "Tags":[
          "adult"
@@ -4132,7 +4132,7 @@ checkList = [
       "Label":"Water Temple Map Chest",
       "Requirements":function ()
 		{
-			return accessWaterTemple() && obtainedItems.lullaby;
+			return accessDungeon("water") && obtainedItems.lullaby;
 		},
       "Tags":[
          "adult"
@@ -4168,7 +4168,7 @@ checkList = [
       "Label":"Water Temple Boss Key Chest",
       "Requirements":function ()
 		{
-			return HaveRequiredItem("318") && obtainedItems.skWater >= 2;
+			return HaveRequiredItem("328") && obtainedItems.skWater >= 2;
 		},
       "Tags":[
          "adult"
@@ -4204,7 +4204,7 @@ checkList = [
       "Label":"Water Temple Longshot Chest",
       "Requirements":function ()
 		{
-			return accessWaterTemple() && obtainedItems.skWater >= 2;
+			return accessDungeon("water") && obtainedItems.skWater >= 2;
 		},
       "Tags":[
          "adult"
@@ -4252,7 +4252,7 @@ checkList = [
       "Label":"Water Temple GS Near Boss Key Chest",
       "Requirements":function ()
 		{
-			return HaveRequiredItem("321");
+			return HaveRequiredItem("318") && obtainedItems.hookshot === 2 && obtainedItems.skWater >= 1;
 		},
       "Tags":[
          "gs", "adult"
@@ -4276,7 +4276,7 @@ checkList = [
       "Label":"Water Temple GS Falling Platform Room",
       "Requirements":function ()
 		{
-			return accessWaterTemple() && obtainedItems.skWater >= 1 && obtainedItems.hookshot === 2;
+			return accessDungeon("water") && obtainedItems.skWater >= 1 && obtainedItems.hookshot === 2;
 		},
       "Tags":[
          "gs", "adult"
@@ -4300,7 +4300,7 @@ checkList = [
       "Label":"Water Temple Morpha Heart",
       "Requirements":function ()
 		{
-			return accessWaterTemple() && obtainedItems.hookshot === 2 && obtainedItems.bkWater;
+			return accessDungeon("water") && obtainedItems.hookshot === 2 && obtainedItems.bkWater;
 		},
       "Tags":[
          "adult"
@@ -4312,7 +4312,7 @@ checkList = [
       "Label":"Shadow Temple Map Chest",
       "Requirements":function ()
 		{
-			return accessShadowTemple();
+			return accessDungeon("shadow") && (obtainedItems.hookshot || obtainedItems.hover);
 		},
       "Tags":[
          "adult"
@@ -4480,7 +4480,7 @@ checkList = [
       "Label":"Shadow Temple Spike Walls Left Chest",
       "Requirements":function ()
 		{
-			return HaveRequiredItem("344") && obtainedItems.skShadow >= 4 && obtainedItems.lullaby;
+			return HaveRequiredItem("344") && obtainedItems.skShadow >= 4 && obtainedItems.lullaby && obtainedItems.dins && obtainedItems.magic;
 		},
       "Tags":[
          "adult"
@@ -4576,7 +4576,7 @@ checkList = [
       "Label":"Shadow Temple Bongo Bongo Heart",
       "Requirements":function ()
 		{
-			return HaveRequiredItem("347") && obtainedItems.skShadow >= 4 && obtainedItems.bkShadow;
+			return HaveRequiredItem("347") && obtainedItems.skShadow >= 5 && obtainedItems.bkShadow;
 		},
       "Tags":[
          "adult"
@@ -4588,7 +4588,7 @@ checkList = [
       "Label":"Spirit Temple Child Bridge Chest",
       "Requirements":function ()
 		{
-			return accessSpiritTempleChild() && obtainedItems.boomerang || obtainedItems.slingshot;
+			return accessDungeon("spirit", "child") && (obtainedItems.boomerang || obtainedItems.slingshot);
 		},
       "Tags":[
          "child"
@@ -4612,7 +4612,7 @@ checkList = [
       "Label":"Spirit Temple Child Climb North Chest",
       "Requirements":function ()
 		{
-			return accessSpiritTempleChild() && obtainedItems.skSpirit >= 1;
+			return accessDungeon("spirit", "child") && obtainedItems.skSpirit >= 1 && (obtainedItems.boomerang || obtainedItems.slingshot || obtainedItems.bomb);
 		},
       "Tags":[
          "child"
@@ -4672,7 +4672,7 @@ checkList = [
       "Label":"Spirit Temple Compass Chest",
       "Requirements":function ()
 		{
-			return accessSpiritTempleAdult() && obtainedItems.lullaby;
+			return accessDungeon("spirit", "adult") && obtainedItems.lullaby && obtainedItems.strength > 1;
 		},
       "Tags":[
          "adult"
@@ -4684,7 +4684,7 @@ checkList = [
       "Label":"Spirit Temple Early Adult Right Chest",
       "Requirements":function ()
 		{
-			return accessSpiritTempleAdult();
+			return accessDungeon("spirit", "adult") && obtainedItems.strength > 1;
 		},
       "Tags":[
          "adult"
@@ -4816,10 +4816,10 @@ checkList = [
       "Label":"Spirit Temple GS Metal Fence",
       "Requirements":function ()
 		{
-			return HaveRequiredItem("356");
+			return HaveRequiredItem("356") && obtainedItems.boomerang;
 		},
       "Tags":[
-         "gs"
+         "gs", "child"
       ],
       "Location":"spirit"
    },
@@ -4831,7 +4831,7 @@ checkList = [
 			return HaveRequiredItem("358");
 		},
       "Tags":[
-         "gs", "adult"
+         "gs", "child"
       ],
       "Location":"spirit"
    },
@@ -4864,7 +4864,7 @@ checkList = [
       "Label":"Spirit Temple GS Boulder Room",
       "Requirements":function ()
 		{
-			return accessSpiritTempleAdult() && obtainedItems.time;
+			return accessDungeon("spirit", "adult") && obtainedItems.time;
 		},
       "Tags":[
          "gs", "adult"
@@ -4888,7 +4888,7 @@ checkList = [
       "Label":"Ice Cavern Map Chest",
       "Requirements":function ()
 		{
-			return accessFontain() && haveEmptyBottle();
+			return accessDungeon("ice") && haveEmptyBottle();
 		},
       "Tags":[
          "adult"
@@ -4972,7 +4972,7 @@ checkList = [
       "Label":"Gerudo Training Ground Lobby Left Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.bow;
+			return accessDungeon("gtg") && obtainedItems.bow;
 },
       "Tags":[
          "adult"
@@ -4996,7 +4996,7 @@ checkList = [
       "Label":"Gerudo Training Ground Stalfos Chest",
       "Requirements":function ()
 		{
-			return accessGtg();
+			return accessDungeon("gtg");
 		},
       "Tags":[
          "adult"
@@ -5008,7 +5008,7 @@ checkList = [
       "Label":"Gerudo Training Ground Before Heavy Block Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.hookshot;
+			return accessDungeon("gtg") && obtainedItems.hookshot;
 		},
       "Tags":[
          "adult"
@@ -5092,7 +5092,7 @@ checkList = [
       "Label":"Gerudo Training Ground Hammer Room Clear Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && (obtainedItems.hookshot === 2 || obtainedItems.hover);
+			return accessDungeon("gtg") && (obtainedItems.hookshot === 2 || obtainedItems.hover);
 		},
       "Tags":[
          "adult"
@@ -5116,7 +5116,7 @@ checkList = [
       "Label":"Gerudo Training Ground Freestanding Key",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.skGtg >= 2
+			return accessDungeon("gtg") && obtainedItems.skGtg >= 2
 		},
       "Tags":[
          "adult"
@@ -5152,7 +5152,7 @@ checkList = [
       "Label":"Gerudo Training Ground Underwater Silver Rupee Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.time && obtainedItems.iron && obtainedItems.hover;
+			return accessDungeon("gtg") && obtainedItems.time && obtainedItems.iron && obtainedItems.hover;
 		},
       "Tags":[
          "adult"
@@ -5164,7 +5164,7 @@ checkList = [
       "Label":"Gerudo Training Ground Beamos Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.bomb;
+			return accessDungeon("gtg") && obtainedItems.bomb;
 		},
       "Tags":[
          "adult"
@@ -5176,7 +5176,7 @@ checkList = [
       "Label":"Gerudo Training Ground Hidden Ceiling Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.skGtg >= 1;
+			return accessDungeon("gtg") && obtainedItems.skGtg >= 1;
 		},
       "Tags":[
          "adult"
@@ -5188,7 +5188,7 @@ checkList = [
       "Label":"Gerudo Training Ground Maze Path First Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.skGtg >= 2
+			return accessDungeon("gtg") && obtainedItems.skGtg >= 2
 		},
       "Tags":[
          "adult"
@@ -5200,7 +5200,7 @@ checkList = [
       "Label":"Gerudo Training Ground Maze Path Second Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.skGtg >= 4
+			return accessDungeon("gtg") && obtainedItems.skGtg >= 4
 		},
       "Tags":[
          "adult"
@@ -5212,7 +5212,7 @@ checkList = [
       "Label":"Gerudo Training Ground Maze Path Third Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.skGtg >= 5
+			return accessDungeon("gtg") && obtainedItems.skGtg >= 5
 		},
       "Tags":[
          "adult"
@@ -5224,7 +5224,7 @@ checkList = [
       "Label":"Gerudo Training Ground Maze Path Final Chest",
       "Requirements":function ()
 		{
-			return accessGtg() && obtainedItems.skGtg >= 7
+			return accessDungeon("gtg") && obtainedItems.skGtg >= 7
 		},
       "Tags":[
          "adult"
@@ -5535,8 +5535,16 @@ locationList = [
 		"Label": "Gerudos fortress"
 	},
 	{
+		"Id": "graveyard",
+		"Label": "Graveyard nocturn pad"
+	},
+	{
 		"Id": "goron",
 		"Label": "Goron city"
+	},
+	{
+		"Id": "castle",
+		"Label": "Hyrule castle"
 	},
 	{
 		"Id": "field",

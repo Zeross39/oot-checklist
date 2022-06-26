@@ -4,64 +4,151 @@ var woh = [];
 var startingItems = [];
 var obtainedItems = {};
 
-function accessForestTemple()
+function songWarpTo(loc)
 {
-	return (obtainedItems.saria || obtainedItems.minuet) && obtainedItems.hookshot;
+	var warpKnown = false;
+	var warpSelect;
+	$(".warpDestinationList").each(function (i, obj) {
+		var sel = obj.value;
+		if(sel && sel === loc)
+		{
+			warpKnown = true;
+			warpSelect = obj;
+		}
+	});
+	if(!warpKnown)
+	{
+		return false;
+	}
+	
+	switch (warpSelect.id)
+	{
+		case "minuetWarpDestination": 
+			return obtainedItems.minuet;
+		case "boleroWarpDestination":
+			return obtainedItems.bolero;
+		case "serenadeWarpDestination":
+			return obtainedItems.serenade;
+		case "requiemWarpDestination": 
+			return obtainedItems.requiem;
+		case "nocturneWarpDestination": 
+			return obtainedItems.nocturne;
+		case "preludeWarpDestination": 
+			return obtainedItems.prelude;
+		default: 
+			console.log("Cant find warp for "+loc+" / "+age);
+			return false;
+	}
 }
 
-function accessWaterTemple()
+function accessEntrance(loc, age)
 {
-	return (obtainedItems.iron && obtainedItems.hookshot) || obtainedItems.hookshot === 2;
+	switch (loc)
+	{
+		case "forest": 
+			return (obtainedItems.saria || songWarpTo("meadow")) && obtainedItems.hookshot;
+		case "water":
+			return (obtainedItems.iron && obtainedItems.hookshot) || obtainedItems.hookshot === 2;
+		case "fire":
+			return songWarpTo("crater") || obtainedItems.hookshot || obtainedItems.hover;
+		case "spirit": 
+			if (age === "child")
+			{
+				return songWarpTo("colossus");
+			}
+			else
+			{
+				return accessColossus() || $("#checkmark362").innerText !== "";
+			}
+		case "shadow": 
+			return songWarpTo("graveyard") && obtainedItems.magic && obtainedItems.dins;
+		case "botw": 
+			return obtainedItems.storm;
+		case "gtg": 
+			return obtainedItems.gerudoCard && accessGerudoFortress();
+		case "deku": 
+			return true;
+		case "dc": 
+			return true;
+		case "jabu": 
+			if(age === "child")
+			{
+				return accessDomain() && obtainedItems.letter;
+			}
+			else
+			{
+				return false;
+			}
+		case "ice": 
+			if(age === "child")
+			{
+				return false;
+			}
+			else
+			{
+				return accessFontain();
+			}
+		default: 
+			console.log("Cant find access for "+loc+" / "+age);
+			return false;
+	}	
 }
 
-function accessFireTemple()
+function accessDungeon(loc, age)
 {
-	return obtainedItems.bolero || obtainedItems.hookshot || obtainedItems.hover;
+	var locationKnown = false;
+	var trueLocation;
+	$(".dungeonErSelection").each(function (i, obj) {
+		var sel = obj.value;
+		if(sel && sel === loc)
+		{
+			locationKnown = true;
+			trueLocation = obj;
+		}
+	});
+	if(!locationKnown)
+	{
+		return false;
+	}
+	
+	switch (trueLocation.id)
+	{
+		case "dekuIs": 
+			return accessEntrance("deku", age);
+		case "waterIs":
+			return accessEntrance("water", age);
+		case "dcIs":
+			return accessEntrance("dc", age);
+		case "fireIs": 
+			return accessEntrance("fire", age);
+		case "jabuIs": 
+			return accessEntrance("jabu", age);
+		case "spiritIs": 
+			return accessEntrance("spirit", age);
+		case "forestIs": 
+			return accessEntrance("forest", age);
+		case "shadowIs": 
+			return accessEntrance("shadow", age);
+		case "botwIs": 
+			return accessEntrance("botw", age);
+		case "gtgIs": 
+			return accessEntrance("gtg", age);
+		case "iceIs": 
+			return accessEntrance("ice", age);
+		default: 
+			console.log("Cant find dungon for "+loc+" / "+age);
+			return false;
+	}
 }
 
-function accessSpiritTempleChild()
+function accessCrater()
 {
-	return obtainedItems.requiem;
-}
-
-function accessSpiritTempleAdult()
-{
-	return accessColossus() && obtainedItems.strength > 1;
-}
-
-function accessShadowTemple()
-{
-	return obtainedItems.nocturne && obtainedItems.magic && obtainedItems.dins;
-}
-
-function accessBotw()
-{
-	return obtainedItems.storm;
-}
-
-function accessGtg()
-{
-	return obtainedItems.gerudoCard && accessGerudoFortress();
-}
-
-function accessDeku()
-{
-	return true;
-}
-
-function accessDc()
-{
-	return true;
-}
-
-function accessJabu()
-{
-	return accessDomain() && obtainedItems.letter;
+	return songWarpTo("crater") || obtainedItems.hookshot || obtainedItems.hover;
 }
 
 function accessMeadowAdult()
 {
-	return true;
+	return obtainedItems.saria || songWarpTo("meadow");
 }
 
 function accessGerudoFortress()
@@ -71,27 +158,27 @@ function accessGerudoFortress()
 
 function accessWasteland()
 {
-	return accessGerudoFortress() && obtainedItems.gerudoCard;
+	return (accessGerudoFortress() && obtainedItems.gerudoCard) || songWarpTo("wasteland");
 }
 
 function accessDomain()
 {
-	return accessRiver() && obtainedItems.lullaby;
+	return (accessRiver() && obtainedItems.lullaby) || songWarpTo("domain");
 }
 
 function accessRiver()
 {
-	return obtainedItems.bomb || obtainedItems.scale;
+	return (obtainedItems.bomb || obtainedItems.scale) || songWarpTo("river");
 }
 
 function accessColossus()
 {
-	return obtainedItems.requiem || (accessWasteland() && obtainedItems.lens && obtainedItems.magic);
+	return songWarpTo("colossus") || (accessWasteland() && obtainedItems.lens && obtainedItems.magic);
 }
 
 function accessFontain()
 {
-	return accessDomain();
+	return accessDomain() || songWarpTo("fontain");
 }
 
 function haveEmptyBottle()
@@ -159,6 +246,10 @@ function init()
 	
 	$("[name='ageFilter']").each(function (i, obj) {
 	obj.addEventListener("change", changeFilterAge);
+	});
+	
+	$(".dungeonErSelection").each(function (i, obj) {
+		obj.addEventListener("change", refreshList);
 	});
 
 	$("#filterLocationList")[0].addEventListener("change", changeFilterLocation);

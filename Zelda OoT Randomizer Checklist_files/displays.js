@@ -122,10 +122,13 @@ function createWohList()
 		option.value = locationList[i].Id;
 		option.text = locationList[i].Label;
 		barrenList.appendChild(option);
-		option = document.createElement("option");
-		option.value = locationList[i].Id;
-		option.text = locationList[i].Label;
-		filterLocationList.appendChild(option);
+		if(i>0)
+		{
+			option = document.createElement("option");
+			option.value = locationList[i].Id;
+			option.text = locationList[i].Label;
+			filterLocationList.appendChild(option);
+		}
 	}
 }
 
